@@ -20,7 +20,7 @@ class Structures extends Partners
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $store_name;
+    private $storeName;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -74,12 +74,12 @@ class Structures extends Partners
 
     public function getStoreName(): ?string
     {
-        return $this->store_name;
+        return $this->storeName;
     }
 
-    public function setStoreName(string $store_name): self
+    public function setStoreName(string $storeName): self
     {
-        $this->store_name = $store_name;
+        $this->storeName = $storeName;
 
         return $this;
     }

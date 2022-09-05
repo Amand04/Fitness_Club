@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Structures
+{% endblock %}
+{% block body %}
+	<div class="container-fluid justify-content-center">
+		<h3 class="justify-content-center mt-5" id="title_category">Les Structures
+			{% if is_granted('ROLE_ADMIN')  %}
+				<a href="{{path('app_registerStructure')}}">
+					<i class="fas fa-plus" id="partner_plus"></i>
+				</a>
+			{% endif %}
+		</h3>
+	</div>
+	<div class="container-fluid d-flex flex-wrap justify-content-center">
+		{% for structure in structures %}
+			<div class="card-group">
+
+				<div class="card m-3" style="width: 36rem;" id="card_presentation">
+					<img class="card-img-top" src="" alt="Card image cap">
+					<div class="card-body m-1">
+						<h5 class="card-title">{{structure.storeName}}</h5>
+						<p class="card-text">{{structure.description}}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">{{structure.email}}</li>
+						<li class="list-group-item">{{structure.country}}</li>
+						<li class="list-group-item">{{ structure.phone }}</li>
+					</ul>
+
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
+{% endblock %}

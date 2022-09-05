@@ -1,21 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
 
-    <h1>Register</h1>
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+	<div class="d-flex justify-content-center align-items-center container" id="div_logo">
+		<div class="row ">
+			<form method="post">
+				<img src="logoFITNESS2.png" alt="image of fitness-club logo" class="logo">
+
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.lastname) }}
+				{{ form_row(registrationForm.firstname) }}
+				{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+				{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+				<button type="submit" class="btn btn-lg btn-m-3" id="btn_register">Enregistrer</button>
+
+				{{ form_end(registrationForm) }}
+			</div>
+		</div>
+	</form>
+
 {% endblock %}

@@ -1,0 +1,64 @@
+@media screen and (min-width: 740px) {
+  #div_logo {
+    width: 950px;
+    height: 950px;
+  }
+
+  #div_logo_register {
+    width: 950px;
+    height: 950px;
+  }
+
+  #inputEmail_logo {
+    color: #cb6ce6;
+    margin-top: 125px;
+    font-size: x-large;
+    font-weight: bold;
+  }
+  #inputPassword_logo {
+    color: #cb6ce6;
+    margin-top: 25px;
+    font-size: x-large;
+    font-weight: bold;
+  }
+  #inputEmail {
+    height: 55px;
+    font-size: x-large;
+  }
+  #inputPassword {
+    height: 55px;
+    font-size: x-large;
+  }
+  #card_presentation {
+    width: 1050px;
+    height: 450px;
+    font-size: x-large;
+    background-color: #eee3f1;
+  }
+}
+
+#btn_login {
+  background-color: #cb6ce6;
+}
+#partner_plus {
+  color: #cb6ce6;
+}
+#navbar_font {
+  font-size: x-large;
+}
+
+#title_category {
+  color: #cb6ce6;
+}
+#connect_mail {
+  font-style: italic;
+}
+
+#deconnect_link {
+  color: #cb6ce6;
+  font-style: italic;
+}
+
+#btn_register {
+  background-color: #cb6ce6;
+}
