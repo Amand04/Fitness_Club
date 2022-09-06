@@ -52,7 +52,7 @@ class StructuresController extends AbstractController
     }
 
     /**
-     * @Route("admin/structures/update/{id}", name="update_structure")
+     * @Route("admin/structures/update/{id}", name="app_updateStructures")
      */
     public function update(Structures $structure, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -73,7 +73,7 @@ class StructuresController extends AbstractController
     }
 
     /**
-     * @Route("admin/structures/delete/{id}", name="delete_structures")
+     * @Route("admin/structures/delete/{id}", name="app_deleteStructures")
      */
     public function delete(Structures $structure, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -89,7 +89,7 @@ class StructuresController extends AbstractController
     public function read(Structures $structure): Response
     {
         return $this->render(
-            "admin/structures/detailsStructure.html.twig",
+            "admin/structures/detailsStructures.html.twig",
             [
                 "structure" => $structure
             ]

@@ -2,14 +2,15 @@
 {% block title %}Les Structures
 {% endblock %}
 {% block body %}
-	<section class="container my-3">
-		<div class="row">
-			<div class="col-7">
-				<h1>Modifier une Structure</h1>
-				<fieldset>
-					{{ form_start(form) }}
-					{{ form_row(form.lastname, {'label': 'Nom'}) }}
-					{{ form_row(form.firstname, {'label': 'Prénom'}) }}
+<section class="container my-3">
+	<div class="row">
+		<div class="col-7">
+			<h1>Modifier une Structure</h1>
+			<fieldset>
+				{{ form_start(form) }}
+				{{ form_row(form.partners, {'label': 'ID du Partenaire'}) }}
+				{{ form_row(form.store_name, {'label': 'Nom de l\'entreprise'}) }}
+				{{ form_row(form.director_name, {'label': 'Nom dudirigeant'}) }}
 					{{ form_row(form.email) }}
 					{{ form_row(form.adress, {'label': 'Adresse'}) }}
 					{{ form_row(form.country, {'label': 'Pays'}) }}
@@ -17,13 +18,6 @@
 					{{ form_row(form.phone, {'label': 'Téléphone'}) }}
 					{{ form_row(form.image, {'label': 'Logo'}) }}
 					{{ form_row(form.is_active) }}
-					{{ form_row(form.permission_newsletter) }}
-					{{ form_row(form.permission_planning) }}
-					{{ form_row(form.permission_promote) }}
-					{{ form_row(form.permission_products) }}
-					{{ form_row(form.permission_statistics) }}
-					{{ form_row(form.permission_evenements) }}
-					{{ form_row(form.permission_digicode) }}
 				</fieldset>
 				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
 			</div>

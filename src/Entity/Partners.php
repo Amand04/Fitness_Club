@@ -22,7 +22,7 @@ class Partners
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $storeName;
+    private $store_name;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -122,12 +122,12 @@ class Partners
 
     public function getStoreName(): ?string
     {
-        return $this->storeName;
+        return $this->store_name;
     }
 
-    public function setStoreName(string $storeName): self
+    public function setStoreName(string $store_name): self
     {
-        $this->storeName = $storeName;
+        $this->store_name = $store_name;
 
         return $this;
     }

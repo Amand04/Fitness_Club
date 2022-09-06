@@ -17,16 +17,29 @@
 
 				<div class="card m-3" style="width: 36rem;" id="card_presentation">
 					<img class="card-img-top" src="" alt="Card image cap">
-					<div class="card-body m-1">
-						<h5 class="card-title">{{structure.storeName}}</h5>
-						<p class="card-text">{{structure.description}}</p>
+					<div class="card-body m-1">ID Partenaire
+						{% for partners in structure.partners %}
+							{{ partners.id
+						 }}
+						{% endfor %}
+						<h5 class="card-title">{{ structure.storeName }}</h5>
+						<a href="{{path('app_updateStructures', {id: structure.id})}}">
+							<i class="fas fa-edit" id="update_icon"></i>
+						</a>
+						<a href="{{path('app_deleteStructures', {id: structure.id})}}">
+							<i class="fas fa-trash" id="delete_icon"></i>
+						</a>
+						<p class="card-text">{{ structure.description }}</p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">{{structure.email}}</li>
-						<li class="list-group-item">{{structure.country}}</li>
+						<li class="list-group-item">{{ structure.email }}</li>
+						<li class="list-group-item">{{ structure.country }}</li>
 						<li class="list-group-item">{{ structure.phone }}</li>
-					</ul>
 
+						<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+							<i class="fas fa-eye" id="eye_icon"></i>
+						</a>
+					</ul>
 				</div>
 			</div>
 

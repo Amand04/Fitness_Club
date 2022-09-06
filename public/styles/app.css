@@ -35,13 +35,19 @@
     font-size: x-large;
     background-color: #eee3f1;
   }
+  #card_presentation_details {
+    width: auto;
+    height: auto;
+    font-size: x-large;
+    background-color: #eee3f1;
+  }
 }
 
 #btn_login {
   background-color: #cb6ce6;
 }
 #partner_plus {
-  color: #cb6ce6;
+  color: #8605b4;
 }
 #navbar_font {
   font-size: x-large;
@@ -61,4 +67,12 @@
 
 #btn_register {
   background-color: #cb6ce6;
+}
+
+#update_icon {
+  color: #cb6ce6;
+}
+
+#delete_icon {
+  color: #cb6ce6;
 }

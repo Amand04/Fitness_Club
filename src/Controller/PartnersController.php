@@ -52,7 +52,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("admin/partners/update/{id}", name="update_partner")
+     * @Route("admin/partners/update/{id}", name="app_updatePartner")
      */
     public function update(Partners $partner, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -73,7 +73,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("admin/partners/delete/{id}", name="delete_partner")
+     * @Route("admin/partners/delete/{id}", name="app_deletePartner")
      */
     public function delete(Partners $partner, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -84,7 +84,7 @@ class PartnersController extends AbstractController
     }
 
     /**
-     * @Route("partners/detailsPartner/{id}", name="app_detailsPartner")
+     * @Route("admin/partners/detailsPartner/{id}", name="app_detailsPartner")
      */
     public function read(Partners $partner): Response
     {
