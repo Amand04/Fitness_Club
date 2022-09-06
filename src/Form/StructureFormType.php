@@ -28,7 +28,14 @@ class StructureFormType extends AbstractType
             ->add('description')
             ->add('phone')
             ->add('image')
-            ->add('is_active');
+            ->add('is_active')
+            ->add('permission_newsletter')
+            ->add('permission_planning')
+            ->add('permission_promote')
+            ->add('permission_products')
+            ->add('permission_statistics')
+            ->add('permission_evenements')
+            ->add('permission_digicode');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
