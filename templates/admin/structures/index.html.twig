@@ -23,22 +23,18 @@
 						 }}
 						{% endfor %}
 						<h5 class="card-title">{{ structure.storeName }}</h5>
-						<a href="{{path('app_updateStructures', {id: structure.id})}}">
-							<i class="fas fa-edit" id="update_icon"></i>
-						</a>
-						<a href="{{path('app_deleteStructures', {id: structure.id})}}">
-							<i class="fas fa-trash" id="delete_icon"></i>
-						</a>
+
+
 						<p class="card-text">{{ structure.description }}</p>
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">{{ structure.email }}</li>
 						<li class="list-group-item">{{ structure.country }}</li>
 						<li class="list-group-item">{{ structure.phone }}</li>
-
 						<a href="{{path('app_detailsStructure', {id: structure.id})}}">
 							<i class="fas fa-eye" id="eye_icon"></i>
 						</a>
+
 					</ul>
 				</div>
 			</div>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Form\StructureFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,13 +19,17 @@ class StructuresController extends AbstractController
      */
     public function registerStructure(Request $request, EntityManagerInterface $entityManager): Response
     {
+
         $structure = new Structures();
+        $permission = new Permissions();
 
         $form = $this->createForm(StructureFormType::class, $structure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $form->getData();
+
+
+
             $entityManager->persist($structure);
             $entityManager->flush();
 

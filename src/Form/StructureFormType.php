@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Partners;
+use App\Entity\Permissions;
 use App\Entity\Structures;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -21,6 +22,7 @@ class StructureFormType extends AbstractType
                 'label' => 'ID du partenaire',
             ])
             ->add('store_name')
+
             ->add('director_name')
             ->add('email')
             ->add('adress')
@@ -29,13 +31,13 @@ class StructureFormType extends AbstractType
             ->add('phone')
             ->add('image')
             ->add('is_active')
-            ->add('permission_newsletter')
-            ->add('permission_planning')
-            ->add('permission_promote')
-            ->add('permission_products')
-            ->add('permission_statistics')
-            ->add('permission_evenements')
-            ->add('permission_digicode');
+            ->add('permissions', EntityType::class, [
+                'class' => Permissions::class, 'choice_label' => function ($permissions) {
+                    return $permissions->getId() . ' ' . $permissions->getName();
+                },
+                'disabled' => true, 'multiple' => true,
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

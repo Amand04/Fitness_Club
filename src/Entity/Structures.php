@@ -3,13 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\StructuresRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Annotation\Column;
 
 /**
  * @ORM\Entity(repositoryClass=StructuresRepository::class)
  */
 class Structures
 {
+
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -62,45 +67,25 @@ class Structures
      */
     private $is_active;
 
+
+
+
     /**
      * @ORM\ManyToOne(targetEntity=Partners::class, inversedBy="structures")
      */
     private $partners;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", length=50)
      */
-    private $permission_newsletter;
+    public $permissions;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_planning;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_promote;
+    public function __construct()
+    {
+        $this->is_active = true;
+    }
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_products;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_statistics;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_evenements;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $permission_digicode;
 
     public function getId(): ?int
     {
@@ -215,6 +200,9 @@ class Structures
         return $this;
     }
 
+
+
+
     public function getPartners(): ?Partners
     {
         return $this->partners;
@@ -223,90 +211,6 @@ class Structures
     public function setPartners(?Partners $partners): self
     {
         $this->partners = $partners;
-
-        return $this;
-    }
-
-    public function isPermissionNewsletter(): ?bool
-    {
-        return $this->permission_newsletter;
-    }
-
-    public function setPermissionNewsletter(bool $permission_newsletter): self
-    {
-        $this->permission_newsletter = $permission_newsletter;
-
-        return $this;
-    }
-
-    public function isPermissionPlanning(): ?bool
-    {
-        return $this->permission_planning;
-    }
-
-    public function setPermissionPlanning(bool $permission_planning): self
-    {
-        $this->permission_planning = $permission_planning;
-
-        return $this;
-    }
-
-    public function isPermissionPromote(): ?bool
-    {
-        return $this->permission_promote;
-    }
-
-    public function setPermissionPromote(bool $permission_promote): self
-    {
-        $this->permission_promote = $permission_promote;
-
-        return $this;
-    }
-
-    public function isPermissionProducts(): ?bool
-    {
-        return $this->permission_products;
-    }
-
-    public function setPermissionProducts(bool $permission_products): self
-    {
-        $this->permission_products = $permission_products;
-
-        return $this;
-    }
-
-    public function isPermissionStatistics(): ?bool
-    {
-        return $this->permission_statistics;
-    }
-
-    public function setPermissionStatistics(bool $permission_statistics): self
-    {
-        $this->permission_statistics = $permission_statistics;
-
-        return $this;
-    }
-
-    public function isPermissionEvenements(): ?bool
-    {
-        return $this->permission_evenements;
-    }
-
-    public function setPermissionEvenements(bool $permission_evenements): self
-    {
-        $this->permission_evenements = $permission_evenements;
-
-        return $this;
-    }
-
-    public function isPermissionDigicode(): ?bool
-    {
-        return $this->permission_digicode;
-    }
-
-    public function setPermissionDigicode(bool $permission_digicode): self
-    {
-        $this->permission_digicode = $permission_digicode;
 
         return $this;
     }

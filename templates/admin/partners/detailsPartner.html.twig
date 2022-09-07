@@ -31,13 +31,17 @@
 						<li class="list-group-item">{{ partner.phone }}</li>
 						<li class="list-group-item">{{ partner.image }}</li>
 						<li class="list-group-item">{{ partner.isActive }}</li>
-						<li class="list-group-item">{{ partner.permissionNewsletter }}</li>
-						<li class="list-group-item">{{ partner.permissionPlanning }}</li>
-						<li class="list-group-item">{{ partner.permissionPromote }}</li>
-						<li class="list-group-item">{{ partner.permissionProducts }}</li>
-						<li class="list-group-item">{{ partner.permissionStatistics }}</li>
-						<li class="list-group-item">{{ partner.permissionEvenements }}</li>
-						<li class="list-group-item">{{ partner.permissionDigicode }}</li>
+
+						{% for permissions in partner.permissions %}
+							<div class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input" id="customSwitch1">
+								<label class="custom-control-label" for="customSwitch1">
+									{{permissions.name}}
+								</label>
+							</div>
+
+						{% endfor %}
+
 					</ul>
 				</div>
 			</div>

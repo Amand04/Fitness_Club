@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Partners;
+use App\Entity\Permissions;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,14 +24,18 @@ class PartnerFormType extends AbstractType
             ->add('phone')
             ->add('image')
             ->add('is_active')
-            ->add('permission_newsletter')
-            ->add('permission_planning')
-            ->add('permission_promote')
-            ->add('permission_products')
-            ->add('permission_statistics')
-            ->add('permission_evenements')
-            ->add('permission_digicode')
-        ;
+            ->add(
+                'permissions',
+                EntityType::class,
+                [
+                    'class' => Permissions::class,
+                    'choice_label' => function ($permissions) {
+                        return $permissions->getName();
+                    },
+                    'multiple' => true, 'expanded' => true
+
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
