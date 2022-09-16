@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Permissions
+{% endblock %}
+{% block body %}
+	<div class="container md-3">
+		<h3 class="justify-content-center mt-5" id="title_category">Ajouter une permission à une Structure
+			{% if is_granted('ROLE_ADMIN')  %}
+				<a href="{{path('app_registerPermission')}}">
+					<i class="fas fa-plus m-3" id="partner_plus"></i>
+				</a>
+			{% endif %}
+		</h3>
+	</div>
+	<div class="text-center m-5">
+		<table class="table table-striped table-hover table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">n° Partenaire</th>
+					<th scope="col">Permission</th>
+					<th scope="col">Active</th>
+					<th scope="col">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for permission in permissions %}
+					<tr>
+						{#<td>{{ permission.partners.id }}</td>#}
+						<td>{{ permission.perms }}</td>
+						<td>{{ permission.active }}</td>
+						<td>
+							<a href="{{path('app_deletePermissions', {id: permission.id})}}">
+								<i class="fas fa-trash m-3" id="delete_icon"></i>
+							</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

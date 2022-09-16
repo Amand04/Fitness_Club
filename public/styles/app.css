@@ -1,4 +1,51 @@
-@media screen and (min-width: 740px) {
+#card_presentation {
+  width: auto;
+  height: 255px;
+  font-size: x-large;
+  background-color: #eee3f1;
+  border-color: #eee3f1;
+}
+
+#card_presentationPartners {
+  width: auto;
+  height: auto;
+  font-size: x-large;
+  background-color: #eee3f1;
+  border-color: #eee3f1;
+}
+
+#card_presentationStructures {
+  width: auto;
+  height: auto;
+  font-size: x-large;
+  background-color: #eee3f1;
+  border-color: #eee3f1;
+}
+
+#list_partner {
+  background-color: #eee3f1;
+}
+
+#div_logo {
+  margin-top: 255px;
+}
+
+.image_structure {
+  width: 225px;
+  height: 225px;
+}
+
+#actif {
+  background-color: #cb6ce6;
+  border: #cb6ce6;
+}
+
+#inactif {
+  background-color: #cb6ce6;
+  border: #cb6ce6;
+}
+
+@media (min-width: 250px) and (max-width: 959px) {
   #div_logo {
     width: 950px;
     height: 950px;
@@ -29,17 +76,10 @@
     height: 55px;
     font-size: x-large;
   }
-  #card_presentation {
-    width: 1050px;
-    height: 450px;
+
+  #update_font {
     font-size: x-large;
-    background-color: #eee3f1;
-  }
-  #card_presentation_details {
-    width: auto;
     height: auto;
-    font-size: x-large;
-    background-color: #eee3f1;
   }
 }
 
@@ -75,4 +115,12 @@
 
 #delete_icon {
   color: #cb6ce6;
+}
+
+#eye_icon {
+  color: #cb6ce6;
+}
+
+#button_perm {
+  background-color: #cb6ce6;
 }

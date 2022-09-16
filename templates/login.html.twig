@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="mixed-vinyl-container p-3 text-center">
+	<div class="mixed-vinyl-container p-3 text-center" id="div_login">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
@@ -17,7 +17,7 @@
 			</div>
 		{% else %}
 			<div class="d-flex justify-content-center align-items-center container" id="div_logo">
-				<div class="row ">
+				<div class="row " id="div_login">
 					<form method="post">
 						<img src="logoFITNESS2.png" alt="image of fitness-club logo" class="logo">
 						<div class="form-group">

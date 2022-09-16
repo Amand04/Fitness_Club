@@ -20,22 +20,30 @@ class Permissions
     private $id;
 
 
+
     /**
-     * @ORM\ManyToMany(targetEntity=Partners::class, mappedBy="permissions")
+     * @ORM\Column(type="string", length=30)
+     */
+    private $perms;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Partners::class, cascade={"persist", "remove"})
      */
     private $partners;
 
-
+    /**
+     * @ORM\ManyToOne(targetEntity=Structures::class, inversedBy="permissions")
+     */
+    private $structures;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="boolean")
      */
-    private $name;
+    private $active;
 
-    public function __construct()
-    {
-        $this->partners = new ArrayCollection();
-    }
+
+
+
 
 
     public function getId(): ?int
@@ -43,42 +51,55 @@ class Permissions
         return $this->id;
     }
 
-    public function getName(): ?string
+
+
+    public function getPerms(): ?string
     {
-        return $this->name;
+        return $this->perms;
     }
 
-    public function setName(string $name): self
+    public function setPerms(string $perms): self
     {
-        $this->name = $name;
+        $this->perms = $perms;
 
         return $this;
     }
 
 
-    /**
-     * @return Collection<int, Partners>
-     */
-    public function getPartners(): Collection
+
+
+    public function getPartners(): ?Partners
     {
         return $this->partners;
     }
 
-    public function addPartner(Partners $partner): self
+    public function setPartners(?Partners $partners): self
     {
-        if (!$this->partners->contains($partner)) {
-            $this->partners[] = $partner;
-            $partner->addPermission($this);
-        }
+        $this->partners = $partners;
 
         return $this;
     }
 
-    public function removePartner(Partners $partner): self
+    public function getStructures(): ?Structures
     {
-        if ($this->partners->removeElement($partner)) {
-            $partner->removePermission($this);
-        }
+        return $this->structures;
+    }
+
+    public function setStructures(?Structures $structures): self
+    {
+        $this->structures = $structures;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

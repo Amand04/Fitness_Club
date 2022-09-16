@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Partners;
-use App\Form\PartnerFormType;
+use App\Entity\Permissions;
+use App\Form\PartnersFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class PartnersController extends AbstractController
     {
         $partner = new Partners();
 
-        $form = $this->createForm(PartnerFormType::class, $partner);
+        $form = $this->createForm(PartnersFormType::class, $partner);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,11 +42,14 @@ class PartnersController extends AbstractController
      */
     public function index(Request $request, ManagerRegistry $doctrine)
     {
+        $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
         return $this->renderForm(
             'admin/partners/index.html.twig',
             [
+
+                "permissions" => $permissions,
                 "partners" => $partners,
             ]
         );
@@ -56,7 +60,7 @@ class PartnersController extends AbstractController
      */
     public function update(Partners $partner, Request $request, ManagerRegistry $doctrine): Response
     {
-        $form = $this->createForm(PartnerFormType::class, $partner);
+        $form = $this->createForm(PartnersFormType::class, $partner);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -88,6 +92,10 @@ class PartnersController extends AbstractController
      */
     public function read(Partners $partner): Response
     {
+
+
+
+
         return $this->render(
             "admin/partners/detailsPartner.html.twig",
             [

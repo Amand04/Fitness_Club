@@ -2,26 +2,19 @@
 {% block title %}Les Structures
 {% endblock %}
 {% block body %}
-<section class="container my-3">
-	<div class="row">
-		<div class="col-7">
-			<h1>Modifier une Structure</h1>
-			<fieldset>
-				{{ form_start(form) }}
-				{{ form_row(form.partners, {'label': 'ID du Partenaire'}) }}
-				{{ form_row(form.store_name, {'label': 'Nom de l\'entreprise'}) }}
-				{{ form_row(form.director_name, {'label': 'Nom dudirigeant'}) }}
-					{{ form_row(form.email) }}
-					{{ form_row(form.adress, {'label': 'Adresse'}) }}
-					{{ form_row(form.country, {'label': 'Pays'}) }}
-					{{ form_row(form.description, {'label': 'Description'}) }}
-					{{ form_row(form.phone, {'label': 'Téléphone'}) }}
-					{{ form_row(form.image, {'label': 'Logo'}) }}
-					{{ form_row(form.is_active) }}
-				</fieldset>
-				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
-			</div>
-			{{ form_end(form) }}
-		</div>
-	</tbody>
-</table>{% endblock %}
+	<section class="container my-3">
+
+
+		<h3 class="justify-content-center mt-5" id="title_category">
+			Modifier la Structure
+			<p>{{ structure.storeName }}</p>
+		</h3>
+		<fieldset>
+			{{ form_start(form) }}
+			{{form_widget(form)}}
+		</fieldset>
+		<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+	</div>
+	{{ form_end(form) }}
+
+</div></ssection>{% endblock %}

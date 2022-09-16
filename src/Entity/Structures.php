@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Repository\StructuresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,11 +29,6 @@ class Structures
     private $store_name;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $director_name;
-
-    /**
      * @ORM\Column(type="string", length=180)
      */
     private $email;
@@ -48,44 +44,64 @@ class Structures
     private $country;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $description;
-
-    /**
      * @ORM\Column(type="string", length=25)
      */
     private $phone;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $image;
+
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer")
      */
-    private $is_active;
+    private $newsletter;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $promote;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $planning;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $statistics;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $products;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $digicode;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Permissions::class, mappedBy="structures")
+     */
+    private $permissions;
 
     /**
      * @ORM\ManyToOne(targetEntity=Partners::class, inversedBy="structures")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $partners;
 
     /**
-     * @ORM\Column(type="boolean", length=50)
+     * @ORM\Column(type="boolean")
      */
-    public $permissions;
+    private $active;
+
 
 
     public function __construct()
     {
-        $this->is_active = true;
+        $this->permissions = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -100,18 +116,6 @@ class Structures
     public function setStoreName(string $store_name): self
     {
         $this->store_name = $store_name;
-
-        return $this;
-    }
-
-    public function getDirectorName(): ?string
-    {
-        return $this->director_name;
-    }
-
-    public function setDirectorName(string $director_name): self
-    {
-        $this->director_name = $director_name;
 
         return $this;
     }
@@ -152,18 +156,6 @@ class Structures
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getPhone(): ?string
     {
         return $this->phone;
@@ -176,33 +168,6 @@ class Structures
         return $this;
     }
 
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function isIsActive(): ?bool
-    {
-        return $this->is_active;
-    }
-
-    public function setIsActive(bool $is_active): self
-    {
-        $this->is_active = $is_active;
-
-        return $this;
-    }
-
-
-
-
     public function getPartners(): ?Partners
     {
         return $this->partners;
@@ -211,6 +176,130 @@ class Structures
     public function setPartners(?Partners $partners): self
     {
         $this->partners = $partners;
+
+        return $this;
+    }
+
+    public function getNewsletter(): ?int
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(int $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    public function getPromote(): ?int
+    {
+        return $this->promote;
+    }
+
+    public function setPromote(int $promote): self
+    {
+        $this->promote = $promote;
+
+        return $this;
+    }
+
+    public function getPlanning(): ?int
+    {
+        return $this->planning;
+    }
+
+    public function setPlanning(int $planning): self
+    {
+        $this->planning = $planning;
+
+        return $this;
+    }
+
+    public function getStatistics(): ?int
+    {
+        return $this->statistics;
+    }
+
+    public function setStatistics(int $statistics): self
+    {
+        $this->statistics = $statistics;
+
+        return $this;
+    }
+
+    public function getProducts(): ?int
+    {
+        return $this->products;
+    }
+
+    public function setProducts(int $products): self
+    {
+        $this->products = $products;
+
+        return $this;
+    }
+
+    public function getDigicode(): ?int
+    {
+        return $this->digicode;
+    }
+
+    public function setDigicode(int $digicode): self
+    {
+        $this->digicode = $digicode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permissions>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permissions $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions[] = $permission;
+            $permission->setStructures($this);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permissions $permission): self
+    {
+        if ($this->permissions->removeElement($permission)) {
+            // set the owning side to null (unless already changed)
+            if ($permission->getStructures() === $this) {
+                $permission->setStructures(null);
+            }
+        }
+
+        return $this;
+    }
+    public function displayPartners()
+    {
+        $permissionsPartners = $this->partners;
+        $partnersList = [];
+
+        foreach ($permissionsPartners as $partner) {
+            $partnersList = $partner->getId();
+        }
+        return $partnersList;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }

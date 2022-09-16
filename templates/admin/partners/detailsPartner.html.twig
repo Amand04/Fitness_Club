@@ -4,47 +4,41 @@
 {% endblock %}
 {% block body %}
 	{% if is_granted('ROLE_ADMIN')  %}
+
 		<div class="container-fluid justify-content-center">
 			<h3 class="justify-content-center mt-5" id="title_category">Le Partenaire n°
 				{{ partner.id }}</h3>
 		</div>
-		<div class="container-fluid d-flex flex-wrap justify-content-center">
-			<div class="card-group">
-				<div class="card m-3" style="width: 56rem;" id="card_presentation_details">
-					<img class="card-img-top" src="" alt="Card image cap">
-					<div class="card-body m-1">
-						<h5 class="card-title">{{ partner.storeName }}</h5>
+		<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
+			<div class="card bg-light border-secondary mb-3" style="width: 56rem; height: 36rem;" id="card_presentationPartners">
+				<img class="card-img-top ms-5" src="" alt="Card image cap">
+				<div class="card-body m-1">
+					<h5 class="card-title">{{ partner.name }}</h5>
+					<h5 class="card-title">{{ partner.email }}</h5>
+					<h5 class="card-title">{{ partner.active }}</h5>
+					<h5 class="card-title">{{ partner.shortDescription }}</h5>
+					<h5 class="card-title">{{ partner.longDescription }}</h5>
+					<h5 class="card-title">{{ partner.logo }}</h5>
+					<h5 class="card-title">{{ partner.url }}</h5>
+					<h5 class="card-title">{{ partner.technicalContact }}</h5>
+					<h5 class="card-title">{{ partner.commercialContact }}</h5>
+					<div class="container-fluid d-flex flex-wrap justify-content-end">
 						<a href="{{path('app_updatePartner', {id: partner.id})}}">
-							<i class="fas fa-edit" id="update_icon"></i>
+							<i class="fas fa-edit m-3" id="update_icon"></i>
 						</a>
 						<a href="{{path('app_deletePartner', {id: partner.id})}}">
-							<i class="fas fa-trash" id="delete_icon"></i>
+							<i class="fas fa-trash m-3" id="delete_icon"></i>
 						</a>
-						<p class="card-text">{{ partner.description }}</p>
 					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">{{ partner.lastname }}</li>
-						<li class="list-group-item">{{ partner.firstname }}</li>
-						<li class="list-group-item">{{ partner.email }}</li>
-						<li class="list-group-item">{{ partner.country }}</li>
-						<li class="list-group-item">{{ partner.description }}</li>
-						<li class="list-group-item">{{ partner.phone }}</li>
-						<li class="list-group-item">{{ partner.image }}</li>
-						<li class="list-group-item">{{ partner.isActive }}</li>
+					<ul class="list-group list-group-flush">{#<li class="list-group m-3">#}
+						{#<div class="form-check form-switch ml-3">
+												  <input class="form-check-input" type="checkbox" onclick="sendData({test:'ok'})" role="switch" id="flexSwitchCheckChecked" checked>
+												  <label class="form-check-label" for="flexSwitchCheckChecked">Newsletter
+																			{{ partner.newsletter }}</label>
+												</div></li>#}
+					</div>
 
-						{% for permissions in partner.permissions %}
-							<div class="custom-control custom-switch">
-								<input type="checkbox" class="custom-control-input" id="customSwitch1">
-								<label class="custom-control-label" for="customSwitch1">
-									{{permissions.name}}
-								</label>
-							</div>
-
-						{% endfor %}
-
-					</ul>
 				</div>
-			</div>
-		{% endif %}
-	</div>
-{% endblock %}
+			{% endif %}
+		</div>
+	{% endblock %}

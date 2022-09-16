@@ -3,45 +3,34 @@
 	{{ structure.id }}
 {% endblock %}
 {% block body %}
-	{% if is_granted('ROLE_ADMIN')  %}
-		<div class="container-fluid justify-content-center">
-			<h3 class="justify-content-center mt-5" id="title_category">La Structure n°
-				{{ structure.id }}</h3>
-		</div>
-		<div class="container-fluid d-flex flex-wrap justify-content-center">
-			<div class="card-group">
-				<div class="card m-3" style="width: 56rem;" id="card_presentation_details">
-					<img class="card-img-top" src="" alt="Card image cap">
-					<div class="card-body m-1">
-						<h5 class="card-title">{{ structure.storeName }}</h5>
-						<a href="{{path('app_updateStructures', {id: structure.id})}}">
-							<i class="fas fa-edit" id="update_icon"></i>
-						</a>
-						<a href="{{path('app_deleteStructures', {id: structure.id})}}">
-							<i class="fas fa-trash" id="delete_icon"></i>
-						</a>
-						<p class="card-text">{{ structure.description }}</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						{% for partners in structure %}
-							<li class="list-group-item">{{ structure.partners }}</li>
-						{% endfor %}
-						<li class="list-group-item">{{ structure.storeName }}</li>
-						<li class="list-group-item">{{ structure.directorName }}</li>
-						<li class="list-group-item">{{ structure.email }}</li>
-						<li class="list-group-item">{{ structure.adress }}</li>
-						<li class="list-group-item">{{ structure.country }}</li>
-						<li class="list-group-item">{{ structure.description }}</li>
-						<li class="list-group-item">{{ structure.phone }}</li>
-						<li class="list-group-item">{{ structure.image }}</li>
-						<li class="list-group-item">{{ structure.isActive }}</li>
-						{% for permissions in structure.permissions %}
-							<li class="list-group-item">{{ permissions.name }}</li>
-
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-		{% endif %}
+{% if is_granted('ROLE_ADMIN')  %}
+	<div class="container-fluid justify-content-center">
+		<h3 class="justify-content-center mt-5" id="title_category">{{ structure.storeName }}{{ structure.active }}</h3>
+		<h5 class="justify-content-center mt-5" id="title_category">La Structure n°
+			{{ structure.id }}</h5>
 	</div>
-{% endblock %}
+	<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
+		<div class="card bg-light border-secondary mb-3" style="width: 56rem; height: 56rem;" id="card_presentationStructures">
+			<div class="card-body m-1">
+				<p class="card-text">Partenaire n°{{ structure.partners.id }}</p>
+				<p class="card-title"></p>
+				<p class="card-text">{{ structure.adress }}<br>{{ structure.country }}<br>{{ structure.phone }}<br>{{ structure.email }}</p>
+				{#{{for partner.newsletter ==0}}#}
+				<p class="card-text">{{ structure.newsletter }}</p>
+				<p class="card-text">{{ structure.promote }}</p>
+				<p class="card-text">{{ structure.planning }}</p>
+				<p class="card-text">{{ structure.statistics }}</p>
+				<p class="card-text">{{ structure.products }}</p>
+				<p class="card-text">{{ structure.digicode }}</p>
+				<div class="container-fluid d-flex flex-wrap justify-content-end">
+					<a href="{{path('app_updateStructures', {id: structure.id})}}">
+						<i class="fas fa-edit m-3" id="update_icon"></i>
+					</a>
+					<a href="{{path('app_deleteStructures', {id: structure.id})}}">
+						<i class="fas fa-trash m-3" id="delete_icon"></i>
+					</a>
+				</div>
+			</li>
+		</p>
+	</div>
+</div></div>{% endif %}</div>{% endblock %}
