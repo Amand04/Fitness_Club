@@ -13,7 +13,7 @@
 	</div>
 	<div class="container">
 		<button class="btn btn-primary btn-lg my-5" id="actif" type="submit" value="1" placeholder="Search..">Actif</button>
-		<button class="btn btn-primary btn-lg my-5" id="inactif" type="submit" value="1" placeholder="Search..">Inactif</button>
+		<button class="btn btn-primary btn-lg my-5" id="inactif" type="submit" value="0" placeholder="Search..">Inactif</button>
 	</div>
 	<div class="m-5 ">
 		<input class="form-control" id="myInputStructures" type="text" placeholder="Chercher..">
@@ -34,7 +34,16 @@
 					<tr>
 						<th scope="row">{{ structure.id }}</th>
 						<td>{{ structure.storeName }}</td>
-						<td>{{ structure.active }}</td>
+						<td>
+
+							{% if structure.active == 1 %}
+								<p>1</p>
+							{% else %}
+								<p>0</p>
+							{% endif %}
+
+
+						</td>
 						<td>{{ structure.email }}</td>
 						<td>{{ structure.country }}</td>
 						<td>{{ structure.phone }}</td>
@@ -49,13 +58,12 @@
 		</table>
 	</div>
 
-
 	<script>
 		$(document).ready(function () {
 $("#actif").on("click", function () {
-let value = $(this).val().toLowerCase();
+let value = $(this).val();
 $("#myTableStructures tr").filter(function () {
-$(this).toggle($(this).text().toLowerCase().indexOf(value) > 0)
+$(this).toggle($(this).text().indexOf(value - 1) < 1)
 });
 });
 });
@@ -64,16 +72,12 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > 0)
 	<script>
 		$(document).ready(function () {
 $("#inactif").on("click", function () {
-let value = $(this).val().toLowerCase();
+let value = $(this).val();
 $("#myTableStructures tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value) < 1)
+$(this).toggle($(this).text().indexOf(value) > 1)
 });
 });
 });
-	</script>
-
-	<script>
-		$(document).ready(function () {});
 	</script>
 
 	<script>
@@ -87,8 +91,4 @@ $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 });
 	</script>
 
-
-	<script>
-		new Tablesort(document.getElementById('tableStructures'));
-	</script>
 {% endblock %}
