@@ -15,6 +15,16 @@
 				<p class="card-text">Partenaire n°{{ structure.partners.id }}</p>
 				<p class="card-title"></p>
 				<p class="card-text">{{ structure.adress }}<br>{{ structure.country }}<br>{{ structure.phone }}<br>{{ structure.email }}</p>
+				<div class="container-fluid d-flex flex-wrap justify-content-end">
+					<a href="{{path('app_updateStructures', {id: structure.id})}}">
+						<i class="fas fa-edit m-3" id="update_icon"></i>
+					</a>
+					<a href="{{path('app_deleteStructures', {id: structure.id})}}">
+						<i class="fas fa-trash m-3" id="delete_icon"></i>
+					</a>
+				</div>
+
+
 				{#{{for partner.newsletter ==0}}#}
 				<p class="card-text">{{ structure.newsletter }}</p>
 				<p class="card-text">{{ structure.promote }}</p>

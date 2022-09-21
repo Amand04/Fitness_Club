@@ -5,12 +5,15 @@ namespace App\Controller;
 use App\Entity\Partners;
 use App\Entity\Permissions;
 use App\Form\PartnersFormType;
+use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class PartnersController extends AbstractController
 {
@@ -65,7 +68,7 @@ class PartnersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $partners = $doctrine->getManager()->flush();
+            $partner = $doctrine->getManager()->flush();
 
             return $this->redirectToRoute("app_adminPartnersIndex");
         }
@@ -89,17 +92,27 @@ class PartnersController extends AbstractController
 
     /**
      * @Route("admin/partners/detailsPartner/{id}", name="app_detailsPartner")
+     *
      */
-    public function read(Partners $partner): Response
+    public function read(Partners $partner, Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
 
+        if ($request->isXmlHttpRequest()) {
 
+            $id = $_POST["id"];
+            $active = $_POST["active"];
+            $partner = $_POST["id"] + $_POST["active"];
 
+            $partner = $doctrine->getManager()->flush();
+
+            return new JsonResponse([$id => 'id', $active => 'active']);
+        }
 
         return $this->render(
             "admin/partners/detailsPartner.html.twig",
             [
                 "partner" => $partner
+
             ]
         );
     }

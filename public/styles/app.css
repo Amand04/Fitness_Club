@@ -38,11 +38,13 @@
 #actif {
   background-color: #cb6ce6;
   border: #cb6ce6;
+  font-size: 30px;
 }
 
 #inactif {
   background-color: #cb6ce6;
   border: #cb6ce6;
+  font-size: 30px;
 }
 
 @media (min-width: 250px) and (max-width: 959px) {
@@ -86,23 +88,30 @@
 #btn_login {
   background-color: #cb6ce6;
 }
-#partner_plus {
-  color: #8605b4;
+#btn_plus {
+  color: #cb6ce6;
 }
 #navbar_font {
   font-size: x-large;
 }
 
 #title_category {
+  font-family: "Satisfy", cursive;
   color: #cb6ce6;
+  font-size: 46px;
+}
+
+#navbar-font {
+  font-family: "Exo 2", sans-serif;
 }
 #connect_mail {
-  font-style: italic;
+  font-family: "Exo 2", sans-serif;
 }
 
 #deconnect_link {
   color: #cb6ce6;
-  font-style: italic;
+  font-weight: 800;
+  font-family: "Satisfy", cursive;
 }
 
 #btn_register {
@@ -123,4 +132,8 @@
 
 #button_perm {
   background-color: #cb6ce6;
+}
+
+#container_table {
+  font-family: "Roboto", sans-serif;
 }

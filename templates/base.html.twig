@@ -12,19 +12,21 @@
 		{% block stylesheets %}
 			<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
+			<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"/>
+			<style>
+				@import url('https://fonts.googleapis.com/css2?family=Exo + 2 &family=Roboto:wght@300&family=Satisfy&display=swap');
+			</style>
 			<link rel="stylesheet" href="{{ asset('styles/app.css') }}">
 
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
 
 		{% block javascripts %}
-			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
 			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-			<script src='tablesort.min.js'></script>
-			<script src="{{ asset('script.js') }}"></script>
-
+			<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
@@ -40,7 +42,7 @@
 					{% endif %}
 					{% if is_granted('ROLE_ADMIN')  %}
 
-						<ul class="navbar-nav mr-auto">
+						<ul class="navbar-nav mr-auto" id="navbar-font">
 							<li class="nav-item">
 								<a class="nav-link" href="/admin/partners/index">Les Partenaires</a>
 							</li>
@@ -66,7 +68,7 @@
 					{% endif %}
 				</nav>
 			</div>
-			{% block body %}{% endblock %}
 		</body>
 	</body>
-</html></body></html>
+</html>
+{% block body %}{% endblock %}

@@ -2,6 +2,7 @@
 {% block title %}Détails du Partenaire
 	{{ partner.id }}
 {% endblock %}
+
 {% block body %}
 	{% if is_granted('ROLE_ADMIN')  %}
 
@@ -13,32 +14,85 @@
 			<div class="card bg-light border-secondary mb-3" style="width: 56rem; height: 36rem;" id="card_presentationPartners">
 				<img class="card-img-top ms-5" src="" alt="Card image cap">
 				<div class="card-body m-1">
-					<h5 class="card-title">{{ partner.name }}</h5>
+					<h5 class="card-title">{{ partner.name }}{{ partner.active }}</h5>
 					<h5 class="card-title">{{ partner.email }}</h5>
-					<h5 class="card-title">{{ partner.active }}</h5>
-					<h5 class="card-title">{{ partner.shortDescription }}</h5>
-					<h5 class="card-title">{{ partner.longDescription }}</h5>
-					<h5 class="card-title">{{ partner.logo }}</h5>
-					<h5 class="card-title">{{ partner.url }}</h5>
-					<h5 class="card-title">{{ partner.technicalContact }}</h5>
-					<h5 class="card-title">{{ partner.commercialContact }}</h5>
-					<div class="container-fluid d-flex flex-wrap justify-content-end">
-						<a href="{{path('app_updatePartner', {id: partner.id})}}">
-							<i class="fas fa-edit m-3" id="update_icon"></i>
-						</a>
-						<a href="{{path('app_deletePartner', {id: partner.id})}}">
-							<i class="fas fa-trash m-3" id="delete_icon"></i>
-						</a>
-					</div>
-					<ul class="list-group list-group-flush">{#<li class="list-group m-3">#}
-						{#<div class="form-check form-switch ml-3">
-												  <input class="form-check-input" type="checkbox" onclick="sendData({test:'ok'})" role="switch" id="flexSwitchCheckChecked" checked>
-												  <label class="form-check-label" for="flexSwitchCheckChecked">Newsletter
-																			{{ partner.newsletter }}</label>
-												</div></li>#}
+
+					<form id="target" method="post">
+
+						<div class="ajax-results">
+							<p>Actif</p>
+
+							{% if partner.active == 1 %}
+
+								<div class="form-check form-switch ml-4">
+									<input class="form-check-input" type="checkbox" value="1" id="flexSwitchCheckChecked" checked>
+									<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+								</div>
+							{% else %}
+								<div class="form-check form-switch ml-4">
+									<input class="form-check-input" type="checkbox" value="0" id="flexSwitchCheckChecked">
+									<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+								</div>
+							{% endif %}
+
+
+						</form>
+
+
+						<h5 class="card-title">{{ partner.shortDescription }}</h5>
+						<h5 class="card-title">{{ partner.longDescription }}</h5>
+						<h5 class="card-title">{{ partner.logo }}</h5>
+						<h5 class="card-title">{{ partner.url }}</h5>
+						<h5 class="card-title">{{ partner.technicalContact }}</h5>
+						<h5 class="card-title">{{ partner.commercialContact }}</h5>
+						<div class="container-fluid d-flex flex-wrap justify-content-end">
+							<a href="{{path('app_updatePartner', {id: partner.id})}}">
+								<i class="fas fa-edit m-3" id="update_icon"></i>
+							</a>
+							<a href="{{path('app_deletePartner', {id: partner.id})}}">
+								<i class="fas fa-trash m-3" id="delete_icon"></i>
+							</a>
+						</div>
+
 					</div>
 
 				</div>
-			{% endif %}
+			</div>
 		</div>
-	{% endblock %}
+	{% endif %}
+
+	<script>
+		document.getElementById('flexSwitchCheckChecked').addEventListener("change", mySubmit);
+
+function mySubmit() {
+id = {{ partner.id }}
+active = {{ partner.active }}
+-1
+
+
+console.log(active);
+
+$.ajax({
+url: "{{ path('app_detailsPartner', {id: partner.id}) }}",
+data: {
+'id': id,
+'active': active
+},
+dataType: 'json',
+type: 'POST'
+
+
+}).done(function (response) {
+let id = JSON.stringify(response);
+let active = JSON.stringify(response);
+$("div#flexSwitchCheckChecked").append(id, active);
+console.log(id, active);
+}).fail(function (error) {
+alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
+})
+
+// Ce code sera exécuté que la requête soit un succès ou un échec.always(function () {
+alert("Etes-vous sur de vouloir modifier cette");
+};
+	</script>
+{% endblock %}
