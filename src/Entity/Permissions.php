@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass=PermissionsRepository::class)
  */
@@ -26,20 +27,37 @@ class Permissions
      */
     private $perms;
 
-    /**
-     * @ORM\OneToOne(targetEntity=Partners::class, cascade={"persist", "remove"})
-     */
-    private $partners;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Structures::class, inversedBy="permissions")
-     */
-    private $structures;
+
+
+
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $active;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Partners::class, inversedBy="permissions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $partners;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -68,29 +86,9 @@ class Permissions
 
 
 
-    public function getPartners(): ?Partners
-    {
-        return $this->partners;
-    }
 
-    public function setPartners(?Partners $partners): self
-    {
-        $this->partners = $partners;
 
-        return $this;
-    }
 
-    public function getStructures(): ?Structures
-    {
-        return $this->structures;
-    }
-
-    public function setStructures(?Structures $structures): self
-    {
-        $this->structures = $structures;
-
-        return $this;
-    }
 
     public function isActive(): ?bool
     {
@@ -100,6 +98,18 @@ class Permissions
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getPartners(): ?Partners
+    {
+        return $this->partners;
+    }
+
+    public function setPartners(?Partners $partners): self
+    {
+        $this->partners = $partners;
 
         return $this;
     }

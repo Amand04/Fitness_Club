@@ -39,36 +39,72 @@
 					</button>
 
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					{% endif %}
-					{% if is_granted('ROLE_ADMIN')  %}
 
-						<ul class="navbar-nav mr-auto" id="navbar-font">
-							<li class="nav-item">
-								<a class="nav-link" href="/admin/partners/index">Les Partenaires</a>
-							</li>
-							<li class=" nav-item">
-								<a class="nav-link" href="/admin/structures/index">Les Structures</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/admin/permissions/index">Les permissions</a>
-							</li>
+
+						{% if is_granted('ROLE_ADMIN')  %}
+
+							<ul class="navbar-nav mr-auto" id="navbar-font">
+								<li class="nav-item">
+									<a class="nav-link" href="/admin/partners/index">Les Partenaires</a>
+								</li>
+								<li class=" nav-item">
+									<a class="nav-link" href="/admin/structures/index">Les Structures</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/register">Créer un compte utilisateur</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/admin/permissions/index">Les permissions</a>
+								</li>
+							{% endif %}
+							{% if is_granted('ROLE_STRUCTURE')  %}
+								<ul class="navbar-nav mr-auto" id="navbar-font">
+
+									<li class="nav-item">
+										{% for structure in structures %}
+											{% if structure.email == app.user.email %}
+												<a class="nav-link" href="{{ path('app_structure', {'id': structure.id}) }}">Accés Structure</a>
+											{% endif %}
+										{% endfor %}
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path('app_welcomePage')}}">Retour accueil</a>
+									</li>
+								</ul>
+							{% endif %}
+							{% if is_granted('ROLE_PARTNER')  %}
+								<ul class="navbar-nav mr-auto" id="navbar-font">
+									<li class="nav-item">
+										{% for partner in partners %}
+
+											{% if partner.email == app.user.email %}
+												<a class="nav-link" href="{{ path('app_partner', {'id': partner.id}) }}">Accés Partenaire</a>
+											{% endif %}
+										{% endfor %}
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ path('app_welcomePage')}}">Retour accueil</a>
+									</li>
+
+								</ul>
+							{% endif %}
+
 						</ul>
 
-					{% endif %}
-					{% if app.user %}
-						<div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<ul class="navbar-nav position-absolute bottom-0 end-0 m-2 mb-lg-2">
-								<li class="nav-item me-5" id="connect_mail">
+
+						<div class="collapse navbar-collapse m-4" id="navbarSupportedContent">
+
+							<ul class="navbar-nav position-absolute mb-5 end-0 mb-lg-2">
+								<li class="nav-item me-5">
 									{{ app.user.userIdentifier }}
 									<a href="{{ path('app_logout') }}" id="deconnect_link">Déconnexion</a>
 								</li>
 							</ul>
-
 						</div>
 					{% endif %}
+
 				</nav>
 			</div>
 		</body>
 	</body>
-</html>
-{% block body %}{% endblock %}
+</html></body></html></body></html>{% block body %}{% endblock %}

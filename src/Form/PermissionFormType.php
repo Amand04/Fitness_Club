@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Partners;
 use App\Entity\Permissions;
-use App\Entity\Structures;
+use App\Repository\PartnersRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,27 +33,16 @@ class PermissionFormType extends AbstractType
             )
             ->add('active')
             ->add(
-                'structures',
-                EntityType::class,
-                [
-                    'class' => Structures::class,
-                    'choice_label' => function ($structures) {
-                        return $structures->getId();
-                    },
-                    'label' => 'Structure',
-                    'multiple' => true, 'expanded' => true, 'mapped' => false,
-                ]
-            )
-            ->add(
-                'structures',
+                'partners',
                 EntityType::class,
                 [
                     'class' => Partners::class,
-                    'choice_label' => function ($structures) {
-                        return $structures->getId(); // . implode(",", $structures->displayStructures()) . ")"//
+                    'choice_label' => function ($partner) {
+                        return $partner->getId();
                     },
-                    'label' => 'Structure',
-                    'multiple' => true, 'expanded' => true, 'mapped' => false,
+                    'label' => 'Partenaire',
+                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+
                 ]
             );
     }

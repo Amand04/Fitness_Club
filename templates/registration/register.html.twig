@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register
+{% block title %}Créer un compte Utilisateur
 {% endblock %}
 
 {% block body %}
@@ -9,10 +9,9 @@
 		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 	{% endfor %}
 
-	<div class="d-flex justify-content-center align-items-center container" id="div_logo">
+	<div class="d-flex justify-content-center align-items-center container" id="div_logo_register">
 		<div class="row ">
 			<form method="post">
-				<img src="logoFITNESS2.png" alt="image of fitness-club logo" class="logo">
 
 				{{ form_start(registrationForm) }}
 				{{ form_row(registrationForm.email) }}
@@ -21,6 +20,7 @@
 				{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+				{{ form_row(registrationForm.Roles) }}
 				{{ form_row(registrationForm.agreeTerms) }}
 
 				<button type="submit" class="btn btn-lg btn-m-3" id="btn_register">Enregistrer</button>

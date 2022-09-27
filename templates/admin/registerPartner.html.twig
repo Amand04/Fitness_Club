@@ -8,6 +8,8 @@
 				<h3>Enregistrer un Partenaire</h3>
 				<fieldset>
 					{{ form_start(form) }}
+					{{form_row(form.user)}}
+
 					{{form_widget(form)}}
 					<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
 				</div>

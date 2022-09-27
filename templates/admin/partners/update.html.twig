@@ -10,10 +10,43 @@
 				</h3>
 				<fieldset>
 					{{ form_start(form) }}
+
 					{{form_widget(form)}}
 				</fieldset>
-				<button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
-				{{ form_end(form)}}
+
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" id="modalButton" data-toggle="modal" data-target="#exampleModalCenter">
+					Enregistrer
+				</button>
+				<!-- Modal -->
+				<div class="container">
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">{{ partner.name }}</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									Etes-vous sur de vouloir enregistrer la modification apportée ?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+									<button type="submit" class="btn btn-primary">Confirmer</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
+		{{ form_end(form)}}
+		<script>
+			$('#modalButton').on('shown.bs.modal', function () {
+$('#myInput').trigger('focus')
+})
+		</script>
 	{% endblock %}

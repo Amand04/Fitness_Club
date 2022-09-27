@@ -12,6 +12,7 @@
   font-size: x-large;
   background-color: #eee3f1;
   border-color: #eee3f1;
+  border-radius: 15px;
 }
 
 #card_presentationStructures {
@@ -20,14 +21,20 @@
   font-size: x-large;
   background-color: #eee3f1;
   border-color: #eee3f1;
+  border-radius: 15px;
+  box-shadow: 6px 6px 6px rgb(145, 142, 142);
 }
 
 #list_partner {
   background-color: #eee3f1;
 }
-
+#div_logo_register {
+  width: 950px;
+  height: 950px;
+}
 #div_logo {
-  margin-top: 255px;
+  width: 950px;
+  height: 950px;
 }
 
 .image_structure {
@@ -48,16 +55,6 @@
 }
 
 @media (min-width: 250px) and (max-width: 959px) {
-  #div_logo {
-    width: 950px;
-    height: 950px;
-  }
-
-  #div_logo_register {
-    width: 950px;
-    height: 950px;
-  }
-
   #inputEmail_logo {
     color: #cb6ce6;
     margin-top: 125px;
@@ -98,7 +95,7 @@
 #title_category {
   font-family: "Satisfy", cursive;
   color: #cb6ce6;
-  font-size: 46px;
+  font-size: 56px;
 }
 
 #navbar-font {
@@ -136,4 +133,73 @@
 
 #container_table {
   font-family: "Roboto", sans-serif;
+}
+
+#table_permissions {
+  border-radius: 15px;
+}
+
+---modal--- .modal {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: white;
+  max-width: 90vw;
+  margin: auto;
+  flex: 1;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding-left: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.modal-body {
+  padding: 15px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 15px;
+  border-top: 1px solid #ddd;
+  text-align: right;
+}
+
+#btn_modal_valid {
+  padding: 15px;
+  background-color: #cb6ce6;
+  color: white;
+  text-decoration: none;
+  margin: 15px;
+}
+
+#btn_modal_close {
+  background-color: rgb(39, 184, 116);
+  padding: 15px;
+  margin: 15px;
 }

@@ -4,7 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Partners;
 use App\Entity\Permissions;
+use App\Entity\Structures;
+use App\Entity\User;
 use App\Form\PartnersFormType;
+use App\Repository\PermissionsRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -96,6 +100,7 @@ class PartnersController extends AbstractController
      */
     public function read(Partners $partner, Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
 
         if ($request->isXmlHttpRequest()) {
 
@@ -111,8 +116,30 @@ class PartnersController extends AbstractController
         return $this->render(
             "admin/partners/detailsPartner.html.twig",
             [
-                "partner" => $partner
+                "partner" => $partner,
+                "structures" => $structures
 
+            ]
+        );
+    }
+
+
+    /**
+     * @Route("partner/partner/{id}", name="app_partner")
+     */
+    public function readPartner(PermissionsRepository $permissionsRepository, UserRepository $userRepository, Partners $partners, ManagerRegistry $doctrine): Response
+    {
+        $permissions = $doctrine->getRepository(Permissions::class)->findAll();
+        $user = $doctrine->getRepository(User::class)->findAll();
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
+
+        return $this->render(
+            "partner/partner.html.twig",
+            [
+                "permissions" => $permissions,
+                "user" => $user,
+                "partners" => $partners,
+                "structures" => $structures
             ]
         );
     }

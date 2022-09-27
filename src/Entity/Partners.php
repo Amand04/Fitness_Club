@@ -66,6 +66,33 @@ class Partners
      */
     private $active;
 
+
+
+    /**
+     * @ORM\OneToMany(targetEntity=Structures::class, mappedBy="partners", orphanRemoval=true)
+     */
+    private $structures;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="partners")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Permissions::class, mappedBy="partners", orphanRemoval=true)
+     */
+    private $permissions;
+
+    public function __construct()
+    {
+        $this->structures = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
+    }
+
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -191,6 +218,79 @@ class Partners
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection<int, Structures>
+     */
+    public function getStructures(): Collection
+    {
+        return $this->structures;
+    }
+
+    public function addStructure(Structures $structure): self
+    {
+        if (!$this->structures->contains($structure)) {
+            $this->structures[] = $structure;
+            $structure->setPartners($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStructure(Structures $structure): self
+    {
+        if ($this->structures->removeElement($structure)) {
+            // set the owning side to null (unless already changed)
+            if ($structure->getPartners() === $this) {
+                $structure->setPartners(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permissions>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permissions $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions[] = $permission;
+            $permission->setPartners($this);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permissions $permission): self
+    {
+        if ($this->permissions->removeElement($permission)) {
+            // set the owning side to null (unless already changed)
+            if ($permission->getPartners() === $this) {
+                $permission->setPartners(null);
+            }
+        }
 
         return $this;
     }

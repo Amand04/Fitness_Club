@@ -80,10 +80,11 @@ class Structures
      */
     private $digicode;
 
+
     /**
-     * @ORM\OneToMany(targetEntity=Permissions::class, mappedBy="structures")
+     * @ORM\Column(type="boolean")
      */
-    private $permissions;
+    private $active;
 
     /**
      * @ORM\ManyToOne(targetEntity=Partners::class, inversedBy="structures")
@@ -92,16 +93,22 @@ class Structures
     private $partners;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="structures")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $active;
+    private $user;
 
 
 
-    public function __construct()
-    {
-        $this->permissions = new ArrayCollection();
-    }
+
+
+
+
+
+
+
+
+
 
     public function getId(): ?int
     {
@@ -164,18 +171,6 @@ class Structures
     public function setPhone(string $phone): self
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getPartners(): ?Partners
-    {
-        return $this->partners;
-    }
-
-    public function setPartners(?Partners $partners): self
-    {
-        $this->partners = $partners;
 
         return $this;
     }
@@ -252,45 +247,17 @@ class Structures
         return $this;
     }
 
-    /**
-     * @return Collection<int, Permissions>
-     */
-    public function getPermissions(): Collection
-    {
-        return $this->permissions;
-    }
 
-    public function addPermission(Permissions $permission): self
-    {
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions[] = $permission;
-            $permission->setStructures($this);
-        }
-
-        return $this;
-    }
-
-    public function removePermission(Permissions $permission): self
-    {
-        if ($this->permissions->removeElement($permission)) {
-            // set the owning side to null (unless already changed)
-            if ($permission->getStructures() === $this) {
-                $permission->setStructures(null);
-            }
-        }
-
-        return $this;
-    }
-    public function displayPartners()
-    {
-        $permissionsPartners = $this->partners;
-        $partnersList = [];
-
-        foreach ($permissionsPartners as $partner) {
-            $partnersList = $partner->getId();
-        }
-        return $partnersList;
-    }
+    //public function displayPartners()
+    // {
+    //   $permissionsPartners = $this->partners;
+    //  $partnersList = [];
+    //
+    //      foreach ($permissionsPartners as $partner) {
+    //        $partnersList = $partner->getId();
+    //  }
+    //return $partnersList;
+    //}
 
     public function isActive(): ?bool
     {
@@ -300,6 +267,30 @@ class Structures
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getPartners(): ?Partners
+    {
+        return $this->partners;
+    }
+
+    public function setPartners(?Partners $partners): self
+    {
+        $this->partners = $partners;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

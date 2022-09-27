@@ -6,15 +6,14 @@
 {% block body %}
 	{% if is_granted('ROLE_ADMIN')  %}
 
-		<div class="container-fluid justify-content-center">
-			<h3 class="justify-content-center mt-5" id="title_category">Le Partenaire n°
-				{{ partner.id }}</h3>
-		</div>
 		<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
-			<div class="card bg-light border-secondary mb-3" style="width: 56rem; height: 36rem;" id="card_presentationPartners">
-				<img class="card-img-top ms-5" src="" alt="Card image cap">
+			<div class="card bg-light border-secondary m-3" style="width: 56rem; height: 36rem;" id="card_presentationStructures">
 				<div class="card-body m-1">
-					<h5 class="card-title">{{ partner.name }}{{ partner.active }}</h5>
+					<div class="container m-4">
+						<h5 class="justify-content-center mt-5" id="title_category">Le Partenaire n°
+							{{ partner.id }}</h3>
+					</div>
+					<h5 class="justify-content-center mt-5" id="title_category">{{ partner.name }}{{ partner.active }}</h5>
 					<h5 class="card-title">{{ partner.email }}</h5>
 
 					<form id="target" method="post">
@@ -23,46 +22,74 @@
 							<p>Actif</p>
 
 							{% if partner.active == 1 %}
-
-								<div class="form-check form-switch ml-4">
-									<input class="form-check-input" type="checkbox" value="1" id="flexSwitchCheckChecked" checked>
-									<label class="form-check-label" for="flexSwitchCheckChecked"></label>
-								</div>
-							{% else %}
-								<div class="form-check form-switch ml-4">
-									<input class="form-check-input" type="checkbox" value="0" id="flexSwitchCheckChecked">
-									<label class="form-check-label" for="flexSwitchCheckChecked"></label>
+								<div class="container m-4">
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
+									</div>
+								{% else %}
+									<div class="container m-4">
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+										</div>
+									</div>
 								</div>
 							{% endif %}
-
-
-						</form>
-
-
-						<h5 class="card-title">{{ partner.shortDescription }}</h5>
-						<h5 class="card-title">{{ partner.longDescription }}</h5>
-						<h5 class="card-title">{{ partner.logo }}</h5>
-						<h5 class="card-title">{{ partner.url }}</h5>
-						<h5 class="card-title">{{ partner.technicalContact }}</h5>
-						<h5 class="card-title">{{ partner.commercialContact }}</h5>
-						<div class="container-fluid d-flex flex-wrap justify-content-end">
-							<a href="{{path('app_updatePartner', {id: partner.id})}}">
-								<i class="fas fa-edit m-3" id="update_icon"></i>
-							</a>
-							<a href="{{path('app_deletePartner', {id: partner.id})}}">
-								<i class="fas fa-trash m-3" id="delete_icon"></i>
-							</a>
 						</div>
+					</div>
+
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
+		<div class="card bg-light border-secondary m-3" style="width: 56rem; height: 33rem;" id="card_presentationStructures">
+			<div class="card-body m-1">
+
+				<div class="container m-4">
+
+					<h5 class="card-title">{{ partner.longDescription }}</h5>
+					<h5 class="card-title">{{ partner.logo }}</h5>
+					<h5 class="card-title">{{ partner.url }}</h5>
+					<h5 class="card-title">{{ partner.technicalContact }}</h5>
+					<h5 class="card-title">{{ partner.commercialContact }}</h5>
+					<div>
+						{% for partners in structures %}
+							{{ partners.id}}
+						{% endfor %}
+
+						{% for partners in permissions %}
+							{{permissions.perms }}
+						{% endfor %}
+
+						{% for structure in structures %}
+
+
+							<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+								<i class="fas fa-eye m-2" id="eye_icon"></i>
+							</a>
+						{% endfor %}
+
 
 					</div>
 
-				</div>
-			</div>
-		</div>
-	{% endif %}
+					<div class="container-fluid d-flex flex-wrap justify-content-end">
+						<a href="{{path('app_updatePartner', {id: partner.id})}}">
+							<i class="fas fa-edit m-3" id="update_icon"></i>
+						</a>
+						<a href="{{path('app_deletePartner', {id: partner.id})}}">
+							<i class="fas fa-trash m-3" id="delete_icon"></i>
+						</a>
+					</div>
 
-	<script>
-		document.getElementById('flexSwitchCheckChecked').addEventListener("change", mySubmit);
+				</div>
+			{% endif %}
+
+			<script>
+				document.getElementById('flexSwitchCheckChecked').addEventListener("change", mySubmit);
 
 function mySubmit() {
 id = {{ partner.id }}
@@ -94,5 +121,5 @@ alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error))
 // Ce code sera exécuté que la requête soit un succès ou un échec.always(function () {
 alert("Etes-vous sur de vouloir modifier cette");
 };
-	</script>
-{% endblock %}
+			</script>
+		{% endblock %}

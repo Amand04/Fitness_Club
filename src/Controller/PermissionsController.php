@@ -69,6 +69,8 @@ class PermissionsController extends AbstractController
      */
     public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine): Response
     {
+        $partners = $doctrine->getRepository(Partners::class)->findAll();
+
         $form = $this->createForm(PermissionFormType::class, $permission);
         $form->handleRequest($request);
 
@@ -81,7 +83,8 @@ class PermissionsController extends AbstractController
 
         return $this->renderForm("admin/permissions/update.html.twig", [
             "form" => $form,
-            "permission" => $permission
+            "permission" => $permission,
+            "partners" => $partners
         ]);
     }
 

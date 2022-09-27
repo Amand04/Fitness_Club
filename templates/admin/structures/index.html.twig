@@ -26,6 +26,7 @@
 					<th scope="col" role="columnheader" aria-sort="ascending">Email</th>
 					<th scope="col" role="columnheader" aria-sort="ascending">Ville</th>
 					<th scope="col" role="columnheader" aria-sort="ascending">Téléphone</th>
+					<th scope="col" role="columnheader" aria-sort="ascending">Identifiant utilisateur</th>
 					<th scope="col" role="columnheader" aria-sort="ascending">Détails</th>
 				</tr>
 			</thead>
@@ -35,18 +36,23 @@
 						<th scope="row">{{ structure.id }}</th>
 						<td>{{ structure.storeName }}</td>
 						<td>
-
-							{% if structure.active == 1 %}
-								<p>1</p>
-							{% else %}
-								<p>0</p>
-							{% endif %}
-
+							<form id="target" method="post">
+								{% if structure.active == 1 %}
+									<p>
+										1
+									</p>
+								{% else %}
+									<p>
+										0
+									</p>
+								{% endif %}
+							</form>
 
 						</td>
 						<td>{{ structure.email }}</td>
 						<td>{{ structure.country }}</td>
 						<td>{{ structure.phone }}</td>
+						<td>{{ structure.user.id}}</td>
 						<td>
 							<a href="{{path('app_detailsStructure', {id: structure.id})}}">
 								<i class="fas fa-eye m-2" id="eye_icon"></i>

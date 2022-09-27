@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Partners;
 use App\Entity\Structures;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,7 +39,20 @@ class StructuresFormType extends AbstractType
                     'multiple' => false, 'expanded' => true, 'mapped' => true,
 
                 ]
-            );;
+            )
+            ->add(
+                'user',
+                EntityType::class,
+                [
+                    'class' => User::class,
+                    'choice_label' => function ($user) {
+                        return $user->getId();
+                    },
+                    'label' => 'user_id',
+                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

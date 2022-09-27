@@ -4,15 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Permissions;
 use App\Entity\Structures;
+use App\Entity\User;
 use App\Form\StructuresFormType;
 use App\Repository\PartnersRepository;
 use App\Repository\PermissionsRepository;
+use App\Repository\StructuresRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class StructuresController extends AbstractController
 {
@@ -106,6 +110,40 @@ class StructuresController extends AbstractController
                 "permission" => $permissionsRepository->findAll(),
                 "permissions" => $permissionsRepository->findAll(),
                 "structure" => $structure
+            ]
+        );
+    }
+
+    /**
+     * @Route("structure/structure/{id}/", name="app_structure")
+     */
+    public function readStructure(PermissionsRepository $permissionsRepository, UserRepository $userRepository, Structures $structures, ManagerRegistry $doctrine): Response
+    {
+        $user = $doctrine->getRepository(User::class)->findAll();
+
+        return $this->render(
+            "structure/structure.html.twig",
+            [
+                "permissions" => $permissionsRepository->findAll(),
+                "user" => $user,
+                "structures" => $structures
+            ]
+        );
+    }
+
+    /**
+     * @Route("/welcomePage", name="app_welcomePage")
+     */
+    public function welcome(PartnersRepository $partnersRepository, UserRepository $userRepository, Request $request, ManagerRegistry $doctrine)
+    {
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
+
+        return $this->renderForm(
+            'welcomePage.html.twig',
+            [
+                "user" => $userRepository->findAll(),
+                "partners" => $partnersRepository->findAll(),
+                "structures" => $structures,
             ]
         );
     }
