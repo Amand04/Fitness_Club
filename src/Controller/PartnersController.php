@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,10 +48,16 @@ class PartnersController extends AbstractController
     /**
      * @Route("admin/partners/index", name="app_adminPartnersIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine)
+    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
+
+        $partners = $paginator->paginate(
+            $partners,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->renderForm(
             'admin/partners/index.html.twig',
@@ -101,6 +108,8 @@ class PartnersController extends AbstractController
     public function read(Partners $partner, Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
+        $permissions = $doctrine->getRepository(Permissions::class)->findAll();
+
 
         if ($request->isXmlHttpRequest()) {
 
@@ -117,7 +126,8 @@ class PartnersController extends AbstractController
             "admin/partners/detailsPartner.html.twig",
             [
                 "partner" => $partner,
-                "structures" => $structures
+                "structures" => $structures,
+                "permissions" => $permissions,
 
             ]
         );

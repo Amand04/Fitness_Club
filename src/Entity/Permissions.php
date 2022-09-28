@@ -20,17 +20,10 @@ class Permissions
      */
     private $id;
 
-
-
     /**
      * @ORM\Column(type="string", length=30)
      */
     private $perms;
-
-
-
-
-
 
     /**
      * @ORM\Column(type="boolean")
@@ -43,33 +36,10 @@ class Permissions
      */
     private $partners;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
 
     public function getPerms(): ?string
     {
@@ -82,13 +52,6 @@ class Permissions
 
         return $this;
     }
-
-
-
-
-
-
-
 
     public function isActive(): ?bool
     {

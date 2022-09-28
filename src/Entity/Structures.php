@@ -7,10 +7,12 @@ use App\Repository\StructuresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Annotation\Column;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=StructuresRepository::class)
+ * @UniqueEntity("email", message="Un compte utilise déjà cette adresse email")
  */
 class Structures
 {
@@ -25,6 +27,15 @@ class Structures
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le titre ne peut pas contenir de chiffre."
+     * )
      */
     private $store_name;
 
@@ -35,11 +46,19 @@ class Structures
 
     /**
      * @ORM\Column(type="string", length=70)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 70)
      */
     private $adress;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50)
      */
     private $country;
 
@@ -97,18 +116,6 @@ class Structures
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
-
-
-
-
-
-
-
-
-
-
-
 
     public function getId(): ?int
     {

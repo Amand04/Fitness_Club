@@ -12,6 +12,7 @@ use App\Repository\StructuresRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,9 +55,15 @@ class StructuresController extends AbstractController
     /**
      * @Route("admin/structures/index", name="app_adminStructuresIndex")
      */
-    public function index(PartnersRepository $partnersRepository, Request $request, ManagerRegistry $doctrine)
+    public function index(PartnersRepository $partnersRepository, Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
+
+        $structures = $paginator->paginate(
+            $structures,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->renderForm(
             'admin/structures/index.html.twig',

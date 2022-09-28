@@ -5,37 +5,37 @@
 
 {% block body %}
 
-	<div class="mixed-vinyl-container p-3 text-center" id="div_login">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
+	<div class="container-fluid d-flex flex-wrap justify-content-center mt-2">
+		<div class="col-8">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-		{% if app.user %}
-			<div class="mb-3">
-				Vous êtes connecté en tant que
-				{{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Déconnexion</a>
-			</div>
-		{% else %}
-			<div class="d-flex justify-content-center align-items-center container" id="div_logo">
-				<div class="row " id="div_login">
-					<form method="post">
-						<img src="logoFITNESS2.png" alt="image of fitness-club logo" class="logo">
-						<div class="form-group">
-
-							<label for="inputEmail" id="inputEmail_logo">Email</label>
-							<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-						</div>
-						<div class="form-group">
-							<label for="inputPassword" id="inputPassword_logo">Mot de passe</label>
-							<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-						</div>
-						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-						<button class="btn btn-lg btn- m-3" id="btn_login" type="submit">
-							Connexion
-						</button>
+			{% if app.user %}
+				<div class="mb-3">
+					Vous êtes connecté en tant que
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Déconnexion</a>
+				</div>
+			{% else %}
+				<div class="container-fluid d-flex flex-wrap justify-content-center " id="div_logo">
+					<img src="logoFITNESS2.png" alt="image of fitness-club logo" class="logo m-5">
+					<div class="col-12">
+						<form method="post">
+							<div class="form-group">
+								<label for="inputEmail">Email</label>
+								<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword">Mot de passe</label>
+								<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+							</div>
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<button class="btn btn mt-4" id="btn_login" type="submit">Se connecter</button>
+						</form>
 					</div>
 				</div>
-			</form>
-		{% endif %}
-	{% endblock %}
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

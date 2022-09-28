@@ -27,6 +27,8 @@ class PermissionFormType extends AbstractType
                         'Promote' =>  'Promote',
                         'Planning' => 'Planning',
                         'Statistics' => 'Statistics',
+                        'Products' => 'Products',
+                        'Digicode' => 'Digicode'
 
                     ]
                 ]

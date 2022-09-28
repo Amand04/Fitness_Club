@@ -1,205 +1,173 @@
-#card_presentation {
-  width: auto;
-  height: 255px;
-  font-size: x-large;
-  background-color: #eee3f1;
-  border-color: #eee3f1;
+body {
+  background-color: #3d3d3d;
+  color: #eee3f1;
+}
+.navbar-toggler-icon {
+  width: 25px;
+  height: 25px;
+  box-shadow: 3px 3px 3px rgb(145, 142, 142);
+}
+#navbar_font {
+  font-size: large;
+  font-family: "Exo 2", sans-serif;
+  padding: 0px;
 }
 
 #card_presentationPartners {
-  width: auto;
-  height: auto;
-  font-size: x-large;
-  background-color: #eee3f1;
+  display: flex;
+  justify-content: stretch;
+  font-size: 15px;
   border-color: #eee3f1;
-  border-radius: 15px;
+  border-radius: 5px;
+  color: #525053;
 }
-
 #card_presentationStructures {
+  display: flex;
+  justify-content: stretch;
   width: auto;
   height: auto;
-  font-size: x-large;
+  font-size: 15px;
   background-color: #eee3f1;
   border-color: #eee3f1;
-  border-radius: 15px;
-  box-shadow: 6px 6px 6px rgb(145, 142, 142);
+  border-radius: 5px;
+  color: #525053;
+}
+#card {
+  background-color: #f8f6f8;
+}
+#at_icon {
+  color: #ffa500;
+}
+#comment_icon {
+  color: #ffa500;
+}
+#mobile_icon {
+  color: #ffa500;
+}
+#building_icon {
+  color: #ffa500;
+}
+#title_category {
+  font-family: "Roboto", cursive;
+  font-style: italic;
+  font-weight: 600;
+  color: #319da0;
+  font-size: 30px;
+}
+#actif {
+  background-color: #319da0;
+  border: #319da0;
+  font-size: 20px;
+}
+#inactif {
+  background-color: #319da0;
+  border: #319da0;
+  font-size: 20px;
+}
+#container_table {
+  font-family: "Roboto", sans-serif;
+  margin: 15px;
+  background-color: #f8f6f8;
+  color: #319da0;
+}
+.table {
+  color: #525053;
+}
+#tableStructures {
+  background-color: #f8f6f8;
+}
+#tablePartners {
+  background-color: #f8f6f8;
+}
+#tablePermissions {
+  background-color: #f8f6f8;
+}
+.card-text {
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
+  color: #525053;
+}
+#affiliate {
+  font-family: "Roboto", cursive;
+  font-style: italic;
+  color: #319da0;
+}
+.card-title {
+  font-family: "Exo 2", sans-serif;
+  font-size: 15px;
 }
 
-#list_partner {
-  background-color: #eee3f1;
+#update_font {
+  font-size: 15px;
+  height: auto;
 }
-#div_logo_register {
-  width: 950px;
-  height: 950px;
+#section_update {
+  color: #fbf9fc;
 }
-#div_logo {
-  width: 950px;
-  height: 950px;
+.logo {
+  width: 210px;
+  height: 80px;
+  margin-top: 35px;
 }
-
+#logo_partners {
+  width: 90px;
+  height: 90px;
+}
+.register_div {
+  width: 650px;
+}
 .image_structure {
   width: 225px;
   height: 225px;
 }
-
-#actif {
-  background-color: #cb6ce6;
-  border: #cb6ce6;
-  font-size: 30px;
-}
-
-#inactif {
-  background-color: #cb6ce6;
-  border: #cb6ce6;
-  font-size: 30px;
-}
-
-@media (min-width: 250px) and (max-width: 959px) {
-  #inputEmail_logo {
-    color: #cb6ce6;
-    margin-top: 125px;
-    font-size: x-large;
-    font-weight: bold;
-  }
-  #inputPassword_logo {
-    color: #cb6ce6;
-    margin-top: 25px;
-    font-size: x-large;
-    font-weight: bold;
-  }
-  #inputEmail {
-    height: 55px;
-    font-size: x-large;
-  }
-  #inputPassword {
-    height: 55px;
-    font-size: x-large;
-  }
-
-  #update_font {
-    font-size: x-large;
-    height: auto;
-  }
-}
-
 #btn_login {
-  background-color: #cb6ce6;
+  background-color: #319da0;
+  color: #fbf9fc;
 }
 #btn_plus {
-  color: #cb6ce6;
-}
-#navbar_font {
-  font-size: x-large;
-}
-
-#title_category {
-  font-family: "Satisfy", cursive;
-  color: #cb6ce6;
-  font-size: 56px;
-}
-
-#navbar-font {
-  font-family: "Exo 2", sans-serif;
+  color: #319da0;
 }
 #connect_mail {
   font-family: "Exo 2", sans-serif;
 }
-
 #deconnect_link {
-  color: #cb6ce6;
+  color: #319da0;
   font-weight: 800;
-  font-family: "Satisfy", cursive;
+  font-family: "Roboto", cursive;
+  font-style: italic;
 }
-
+#deconnect_link_mail {
+  color: rgb(145, 142, 142);
+}
+#div_login {
+  font-family: "Roboto", cursive;
+}
 #btn_register {
-  background-color: #cb6ce6;
+  background-color: #319da0;
+  border: #319da0;
 }
-
 #update_icon {
-  color: #cb6ce6;
+  color: #319da0;
 }
-
 #delete_icon {
-  color: #cb6ce6;
+  color: #319da0;
 }
-
 #eye_icon {
-  color: #cb6ce6;
+  color: #319da0;
 }
-
-#button_perm {
-  background-color: #cb6ce6;
+#modalButton {
+  background-color: #319da0;
+  border: #319da0;
 }
-
-#container_table {
-  font-family: "Roboto", sans-serif;
+.modal-title {
+  color: #525053;
 }
-
-#table_permissions {
-  border-radius: 15px;
-}
-
----modal--- .modal {
-  background-color: rgba(0, 0, 0, 0.75);
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s;
-}
-
-.modal.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal-content {
-  background-color: white;
-  max-width: 90vw;
-  margin: auto;
-  flex: 1;
-  position: relative;
-}
-
-.modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.modal-header {
-  padding-left: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
 .modal-body {
-  padding: 15px;
-  max-height: 80vh;
-  overflow-y: auto;
+  color: #525053;
 }
-
-.modal-footer {
-  padding: 15px;
-  border-top: 1px solid #ddd;
-  text-align: right;
+.form {
+  color: green;
 }
-
-#btn_modal_valid {
-  padding: 15px;
-  background-color: #cb6ce6;
-  color: white;
-  text-decoration: none;
-  margin: 15px;
-}
-
-#btn_modal_close {
-  background-color: rgb(39, 184, 116);
-  padding: 15px;
-  margin: 15px;
+#footer {
+  margin-top: 950px;
 }

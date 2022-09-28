@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>
 			{% block title %}Fitness-Club
 			{% endblock %}
@@ -67,9 +68,6 @@
 											{% endif %}
 										{% endfor %}
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="{{ path('app_welcomePage')}}">Retour accueil</a>
-									</li>
 								</ul>
 							{% endif %}
 							{% if is_granted('ROLE_PARTNER')  %}
@@ -82,29 +80,24 @@
 											{% endif %}
 										{% endfor %}
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="{{ path('app_welcomePage')}}">Retour accueil</a>
-									</li>
-
 								</ul>
 							{% endif %}
-
 						</ul>
+						<ul class="navbar-nav mr-auto" id="deconnect_link_mail">
+							<li class="nav-item">
+								{{ app.user.userIdentifier }}
+								<a href="{{ path('app_logout') }}" id="deconnect_link">Déconnexion</a>
+							</li>
+						</ul>
+					</div>
+				{% endif %}
 
-
-						<div class="collapse navbar-collapse m-4" id="navbarSupportedContent">
-
-							<ul class="navbar-nav position-absolute mb-5 end-0 mb-lg-2">
-								<li class="nav-item me-5">
-									{{ app.user.userIdentifier }}
-									<a href="{{ path('app_logout') }}" id="deconnect_link">Déconnexion</a>
-								</li>
-							</ul>
-						</div>
-					{% endif %}
-
-				</nav>
+			</nav>
+		</div>
+		{% block body %}{% endblock %}
+		<footer>
+			<div class="container-fluid d-flex flex-wrap justify-content-center" id="footer">Fitness Club Copyright | 2022
 			</div>
-		</body>
+		</footer>
 	</body>
-</html></body></html></body></html>{% block body %}{% endblock %}
+</html></body></html>

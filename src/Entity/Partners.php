@@ -6,9 +6,12 @@ use App\Repository\PartnersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=PartnersRepository::class)
+ * @UniqueEntity("email", message="Un compte utilise déjà cette adresse email")
  */
 class Partners
 {
@@ -26,6 +29,15 @@ class Partners
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Le titre ne peut pas contenir de chiffre."
+     * )
      */
     private $name;
 
@@ -33,11 +45,29 @@ class Partners
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 15,
+     *      max = 150)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="La description ne peut pas contenir de chiffre."
+     * )
      */
     private $short_description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 15,
+     *      max = 150)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="La description ne peut pas contenir de chiffre."
+     * )
      */
     private $long_description;
 

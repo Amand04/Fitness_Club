@@ -6,7 +6,8 @@
 		<div class="row">
 			<div class="col">
 				<h3 class="justify-content-center mt-5" id="title_category">
-					Modifier le Partenaire{{ partner.name }}
+					Modifier le Partenaire
+					{{ partner.name }}
 				</h3>
 				<fieldset>
 					{{ form_start(form) }}
@@ -26,15 +27,15 @@
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">{{ partner.name }}</span>
+										<span aria-hidden="true"></span>
 									</button>
 								</div>
 								<div class="modal-body">
 									Etes-vous sur de vouloir enregistrer la modification apportée ?
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-									<button type="submit" class="btn btn-primary">Confirmer</button>
+									<button type="button" class="btn btn-secondary" id="modalButton" data-dismiss="modal">Fermer</button>
+									<button type="submit" class="btn btn-primary" id="modalButton">Confirmer</button>
 								</div>
 							</div>
 						</div>

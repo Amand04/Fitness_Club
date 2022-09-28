@@ -9,6 +9,7 @@ use App\Repository\PermissionsRepository;
 use App\Repository\StructuresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,10 +50,16 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/permissions/index", name="app_adminPermissionsIndex")
      */
-    public function index(StructuresRepository $structuresRepository, PermissionsRepository $permissionsRepository, Request $request, ManagerRegistry $doctrine)
+    public function index(StructuresRepository $structuresRepository, PermissionsRepository $permissionsRepository, Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
+
+        $permissions = $paginator->paginate(
+            $permissions,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->renderForm(
             'admin/permissions/index.html.twig',

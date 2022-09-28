@@ -2,7 +2,7 @@
 {% block title %}Les Structures
 {% endblock %}
 {% block body %}
-	<section class="container my-3">
+	<section class="container my-3" id="section_update">
 		<h3 class="justify-content-center mt-5" id="title_category">
 			Modifier la Structure
 			<p>{{ structure.storeName }}</p>
@@ -34,8 +34,8 @@
 					Etes-vous sur de vouloir enregistrer la modification apportée ?
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-					<button type="submit" class="btn btn-primary">Confirmer</button>
+					<button type="button" class="btn btn-secondary" id="modalButton" data-dismiss="modal">Fermer</button>
+					<button type="submit" class="btn btn-primary" id="modalButton">Confirmer</button>
 				</div>
 			</div>
 		</div>
