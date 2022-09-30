@@ -5,7 +5,7 @@
 	<section class="container my-3" id="update_font">
 		<div class="row">
 			<div class="col">
-				<h3 class=" justify-content-center mt-5" id=" title_category">
+				<h3 class=" justify-content-center mt-5" id="title_category">
 					Modifier la Permission
 					{{ permission.perms }}
 					pour le Partenaire
@@ -40,7 +40,8 @@
 		</div>
 	</div>
 </div>
-{{ form_end(form) }}<script>
+{{form_end(form)}}
+<script>
 	$('#modalButton').on('shown.bs.modal', function () {
 $('#myInput').trigger('focus')
 })

@@ -64,7 +64,7 @@
 									<li class="nav-item">
 										{% for structure in structures %}
 											{% if structure.email == app.user.email %}
-												<a class="nav-link" href="{{ path('app_structure', {'id': structure.id}) }}">Accés Structure</a>
+												<a class="nav-link" href="{{ path('app_structure', {'id': structure.id}) }}">Votre fiche Structure</a>
 											{% endif %}
 										{% endfor %}
 									</li>
@@ -76,7 +76,7 @@
 										{% for partner in partners %}
 
 											{% if partner.email == app.user.email %}
-												<a class="nav-link" href="{{ path('app_partner', {'id': partner.id}) }}">Accés Partenaire</a>
+												<a class="nav-link" href="{{ path('app_partner', {'id': partner.id}) }}">Votre fiche Partenaire</a>
 											{% endif %}
 										{% endfor %}
 									</li>
@@ -100,4 +100,4 @@
 			</div>
 		</footer>
 	</body>
-</html></body></html>
+</html></body></html></body></html>

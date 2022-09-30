@@ -4,64 +4,52 @@
 {% endblock %}
 
 {% block body %}
-	{% if is_granted('ROLE_ADMIN')  %}
-		<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
-			<div class="card bg-light border-secondary" style="width: 56rem; height: 32rem;" id="card_presentationPartners">
-				<div class="card-body">
-					<div class="container">
-						<h5 class="justify-content-center mt-1" id="title_category">Partenaire n°
-							{{ partner.id }}</h3>
-					</div>
+{% if is_granted('ROLE_ADMIN')  %}
+	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+		<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationPartners">
+			<div class="card-body">
+				<div class="container">
+					<h5 class="justify-content-center mt-1" id="title_category">Partenaire n°
+						{{ partner.id }}</h3>
+				</div>
 
-					<div class="container m-1">
-						{% if partner.active == 1 %}
-							<div class="container m-4 ">
+				<div class="container m-1">
+					{% if partner.active == 1 %}
+						<div class="container m-4 ">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+								<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">{{ partner.name }}</label>
+							</div>
+						{% else %}
+
+							<div class="container m-4">
 								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-									<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">{{ partner.name }}</label>
-								</div>
-							{% else %}
-
-								<div class="container m-4">
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">{{ partner.name }}</p>
-									</label>
-								</div>
+									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+									<label class="form-check-label" for="flexSwitchCheckDisabled">{{ partner.name }}</p>
+								</label>
 							</div>
 						</div>
-					{% endif %}
-					<div class="container-fluid d-flex flex-wrap justify-content-end">
-						<img src="{{ asset('images/' ~ partner.logo) }}" alt="image of a logo" id="logo_partners"/>
 					</div>
-					<h5 class="card-title ms-3">
-						<i class="fas fa-at ms-2 me-2" id="at_icon"></i>
-						{{ partner.email }}</h5>
-					<h5 class="card-title ms-3">
-						<i class="far fa-comment ms-2 me-2" id="comment_icon"></i>
-						{{ partner.longDescription }}</h5>
-					<h5 class="card-title ms-5">
-						{{ partner.logo }}</h5>
-					<h5 class="card-title ms-5">
-						{{ partner.url }}</h5>
-					<h5 class="card-title ms-3">
-						<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
-						{{ partner.technicalContact }}</h5>
-					<h5 class="card-title ms-3">
-						<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
-						{{ partner.commercialContact }}</h5>
-					<h5 class="card-title ms-3">
-						<i class="far fa-building ms-2 me-2" id="building_icon"></i>
-						{% for partners in structures %}
-							structure
-							{{ partners.id}}
-						{% endfor %}
-						{% for structure in structures %}
-							<a href="{{path('app_detailsStructure', {id: structure.id})}}">
-								<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
-							</a>
-						{% endfor %}
-					</h5>
+				{% endif %}
+				<h5 class="card-title ms-3">
+					<i class="fas fa-at ms-2 me-2" id="at_icon"></i>
+					{{ partner.email }}</h5>
+				<h5 class="card-title ms-3">
+					<i class="far fa-comment ms-2 me-2" id="comment_icon"></i>
+					{{ partner.longDescription }}</h5>
+				<h5 class="card-title ms-5">
+					{{ partner.logo }}</h5>
+				<h5 class="card-title ms-5">
+					{{ partner.url }}</h5>
+				<h5 class="card-title ms-3">
+					<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+					{{ partner.technicalContact }}</h5>
+				<h5 class="card-title ms-3">
+					<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+					{{ partner.commercialContact }}</h5>
+
+
+				{% if is_granted('ROLE_ADMIN')  %}
 					<div class="container-fluid d-flex flex-wrap justify-content-end">
 						<a href="{{path('app_updatePartner', {id: partner.id})}}">
 							<i class="fas fa-edit m-3 fa-1x" id="update_icon"></i>
@@ -70,74 +58,52 @@
 							<i class="fas fa-trash m-3 fa-1x" id="delete_icon"></i>
 						</a>
 					</div>
-				</div>
-
+				{% endif %}
 			</div>
 		</div>
 	</div>
-</div>
-<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
-	<div class="card bg-light border-secondary" style="width: 25rem; height: 13rem;" id="card_presentationPartners">
-		<div class="card-body">
-			<div class="container m-1">
-				{% for partner in permissions %}
-					{% if partner.active == 1 %}
-						<div class="container ms-4">
+</div></div><div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
+	<div class="card-body">
+		<div class="container m-1">
+			{% for partner in permissions %}
+				{% if partner.active == 1 %}
+					<div class="container ms-4">
 
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-								<label class="form-check-label" for="flexSwitchCheckChecked">
-									<p class="card-text">{{partner.perms}}</p>
-								</label>
-							</div>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+							<label class="form-check-label" for="flexSwitchCheckChecked">
+								<p class="card-text">{{partner.perms}}</p>
+							</label>
 						</div>
-					{% else %}
-						<div class="container ms-4">
+					</div>
+				{% else %}
+					<div class="container ms-4">
 
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-								<label class="form-check-label" for="flexSwitchChecked">
-									<p class="card-text">{{partner.perms}}</p>
-								</label>
-							</div>
+						<div class="form-check form-switch">
+							<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+							<label class="form-check-label" for="flexSwitchChecked">
+								<p class="card-text">{{partner.perms}}</p>
+							</label>
 						</div>
-					{% endif %}
-				{% endfor %}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</h5>
+	</div>
+</div></div></div><div class="container-fluid d-flex flex-wrap justify-content-center mt-3"><div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
+<div class="card-body">
+	<div class="container m-1">
+		<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
+		{% for structure in structures %}
+			<h5 class="card-title ms-3">
+				<i class="far fa-building ms-2 me-2" id="building_icon"></i>Structure
+				{{structure.storename}},
+				{{structure.adress}},
+				{{structure.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+					<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
+				</a>
 			</h5>
-		</div>
-	{% endif %}
-	<script>
-		document.getElementById('flexSwitchCheckChecked').addEventListener("change", mySubmit);
-
-function mySubmit() {
-id = {{ partner.id }}
-active = {{ partner.active }}
--1
-
-
-console.log(active);
-
-$.ajax({
-url: "{{ path('app_detailsPartner', {id: partner.id}) }}",
-data: {
-'id': id,
-'active': active
-},
-dataType: 'json',
-type: 'POST'
-
-
-}).done(function (response) {
-let id = JSON.stringify(response);
-let active = JSON.stringify(response);
-$("div#flexSwitchCheckChecked").append(id, active);
-console.log(id, active);
-}).fail(function (error) {
-alert("La requête s'est terminée en échec. Infos : " + JSON.stringify(error));
-})
-
-// Ce code sera exécuté que la requête soit un succès ou un échec.always(function () {
-alert("Etes-vous sur de vouloir modifier cette");
-};
-	</script>
-{% endblock %}
+		{% endfor %}
+	</div>
+</div></div></div>{% endif %}{% endblock %}

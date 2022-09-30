@@ -109,14 +109,16 @@ class StructuresController extends AbstractController
     /**
      * @Route("structures/detailsStructure/{id}", name="app_detailsStructure")
      */
-    public function read(PermissionsRepository $permissionsRepository, Structures $structure): Response
+    public function read(PermissionsRepository $permissionsRepository, PartnersRepository $partnerRepository, Structures $structure): Response
     {
         return $this->render(
             "admin/structures/detailsStructures.html.twig",
             [
                 "permission" => $permissionsRepository->findAll(),
                 "permissions" => $permissionsRepository->findAll(),
-                "structure" => $structure
+                "partners" => $partnerRepository->findAll(),
+                "structure" => $structure,
+
             ]
         );
     }

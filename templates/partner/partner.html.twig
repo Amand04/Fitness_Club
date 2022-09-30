@@ -6,54 +6,106 @@
 		{% if is_granted('ROLE_PARTNER')  %}
 
 			<a class="nav-link" href="{{ path('app_welcomePage')}}">
-				<i class="fas fa-arrow-left" id="arrow_icon"></i>
+				<i class="fas fa-arrow-left fa-2x" id="arrow_icon"></i>
 			</a>
 
-			<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
-				<div class="card bg-light border-secondary m-3" style="width: 56rem; height: 46rem;" id="card_presentationPartners">
-					<div class="card-body m-1">
-						<div class="container m-4">
-							<a class="nav-link" href="{{ path('app_welcomePage')}}">Retour accueil</a>
-							<h5 class="justify-content-center mt-5" id="title_category">Le Partenaire n°
-								{{ app.user.email }}</h5>
+			<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+				<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
+					<div class="card-body m-1" id="card">
+						<div class="container">
+							<h5 class="justify-content-center mt-3" id="title_category">Identifiant n°
+								{{ partners.id }}</h5>
 
-							{% for structure in structures %}
-
-								<a href="{{path('app_detailsStructure', {id: structure.id})}}">
-									<i class="fas fa-eye m-2" id="eye_icon"></i>
-								</a>
-							{% endfor %}
 
 							<h5 class="justify-content-center mt-5" id="title_category">{{ partners.name }}</h5>
-							{% if partners.active == 1 %}
-								<div class="container m-4">
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled"></label>
-									</div>
-								{% else %}
-									<div class="container m-4">
+							<div class="container m-1">
+								{% if partners.active == 1 %}
+									<div class="container m-4 ">
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-											<label class="form-check-label" for="flexSwitchCheckDisabled"></label>
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Actif</label>
+										</div>
+									{% else %}
+
+										<div class="container m-2">
+											<div class="form-check form-switch">
+												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+												<label class="form-check-label" for="flexSwitchCheckDisabled">Inactif</p>
+											</label>
 										</div>
 									</div>
 								</div>
 							{% endif %}
-							<div class="container m-4">
-								<p class="card-text">{{ partners.longDescription }}<br>{{ partners.logo }}<br>{{ partners.url }}<br>{{ partners.technicalContact }}<br>{{ partners.commercialContact }}</p>
-							</div>
 						</div>
+						<h5 class="card-title ms-3">
+							<i class="far fa-address-card ms-2 me-2" id="comment_icon"></i>
+							{{ partners.longDescription }}</h5>
+						<h5 class="card-title ms-3">
+							{{ partners.logo }}
+						</h5>
+						<h5 class="card-title ms-3">
+							{{ partners.url }}
+						</h5>
+						<h5 class="card-title ms-3">
+							<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+							{{ partners.technicalContact }}
+						</h5>
+						<h5 class="card-title ms-3">
+							<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+							{{ partners.commercialContact }}
+						</h5>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+		<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
+			<div class="card-body">
+				<div class="container m-1">
+					{% for partner in permissions %}
+						{% if partner.active == 1 %}
+							<div class="container ms-4">
 
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+									<label class="form-check-label" for="flexSwitchCheckChecked">
+										<p class="card-text">{{partner.perms}}</p>
+									</label>
+								</div>
+							</div>
+						{% else %}
+							<div class="container ms-4">
 
-			<div class="container-fluid d-flex flex-wrap justify-content-center m-5">
-				<div class="card bg-light border-secondary m-3" style="width: 56rem; height: 26rem;" id="card_presentationStructures">
-					<div class="card-body m-1"></div>
-				</div>
+								<div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+									<label class="form-check-label" for="flexSwitchChecked">
+										<p class="card-text">{{partner.perms}}</p>
+									</label>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</h5>
 			</div>
 		</div>
-	{% endif %}
-</section>{% endblock %}
+	</div>
+</div>
+<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+	<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
+		<div class="card-body">
+			<div class="container m-1">
+				<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
+				{% for structure in structures %}
+					<h5 class="card-title ms-3">Structure
+						{{structure.storename}},
+						{{structure.adress}},
+						{{structure.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+							<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
+						</a>
+					</h5>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endif %}</section>{% endblock %}

@@ -71,11 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $partners;
 
-    public function __construct()
-    {
-        $this->structures = new ArrayCollection();
-        $this->partners = new ArrayCollection();
-    }
+
 
 
 
