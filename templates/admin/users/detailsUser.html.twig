@@ -21,21 +21,15 @@
 				<div class="container">
 					<h5 class="justify-content-center mt-3" id="title_category">Utilisateur n°
 						{{ user.id }}</h5>
-					<h5 class="justify-content-center mt-5" id="title_category">
-						{{ user.lastname }}</h5>
-					<h5 class="justify-content-center mt-5" id="title_category">
-						{{ user.firstname }}</h5>
-					<h5 class="justify-content-center mt-5" id="title_category">
-						{{ user.email }}</h5>
-					<h5 class="justify-content-center mt-5" id="title_category">
-						{{ user.createdAt }}</h5>
-					<h5 class="justify-content-center mt-5" id="title_category">
-						{{ user.isVerified}}</h5>
-
-
+					<p class="card-text">{{ user.lastname }}
+					</p>
+					<p class="card-text">{{ user.firstname }}
+					</p>
+					<p class="card-text">{{ user.email }}
+					</p>
+					<p class="card-text">{{ user.createdAt|date('Y-m-d') }}
+					</p>
 				</div>
-
-
 				{% if is_granted('ROLE_ADMIN')  %}
 					<div class="container-fluid d-flex flex-wrap justify-content-end">
 						<a href="{{path('app_updateUser', {id: user.id})}}">

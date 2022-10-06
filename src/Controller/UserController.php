@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UsersFormType;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +18,15 @@ class UserController extends AbstractController
     /**
      * @Route("admin/users/index", name="app_adminUsersIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine)
+    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $users = $doctrine->getRepository(User::class)->findAll();
 
-
+        $users = $paginator->paginate(
+            $users,
+            $request->query->getInt('page', 1),
+            6
+        );
 
         return $this->renderForm(
             'admin/users/index.html.twig',
@@ -45,7 +50,7 @@ class UserController extends AbstractController
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
-                )
+                ),
             );
 
             $user = $doctrine->getManager()->flush();

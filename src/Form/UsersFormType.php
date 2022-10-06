@@ -36,8 +36,7 @@ class UsersFormType extends AbstractType
                 ],
             ])
             ->add('lastname')
-            ->add('firstname')
-            ->add('isVerified');
+            ->add('firstname');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

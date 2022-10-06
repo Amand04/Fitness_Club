@@ -34,7 +34,7 @@ class PartnersFormType extends AbstractType
                         return $user->getId();
                     },
                     'label' => 'user_id',
-                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+                    'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
             );

@@ -52,7 +52,7 @@ body {
   font-style: italic;
   font-weight: 600;
   color: #319da0;
-  font-size: 30px;
+  font-size: 25px;
 }
 #actif {
   background-color: #319da0;
@@ -158,6 +158,19 @@ body {
 }
 #confirm_icon {
   color: #319da0;
+}
+#delete_icon {
+  color: #f80828;
+}
+#delete_iconPerm {
+  color: #f8f5f5;
+}
+#btn_perm {
+  color: #f80828;
+}
+#warning {
+  background-color: #fdfcfd;
+  border: #fdfcfd;
 }
 #arrow_iconMail {
   color: #319da0;

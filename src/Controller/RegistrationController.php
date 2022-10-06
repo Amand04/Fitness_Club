@@ -9,6 +9,7 @@ use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,29 +50,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            //generate a signed url and email it to the user
-            //$this->emailVerifier->sendEmailConfirmation(
-            //    'app_verify_email',
-            //    $user,
-            //    $email = (new TemplatedEmail())
-            //        ->from('amandinejeanjules@free.fr')
-            //        ->to($user->getEmail())
-            //        ->subject('Please Confirm your Email')
-            //        ->htmlTemplate('registration/confirmation_email.html.twig')
-            //);
+
             // do anything else you need here, like send an email
             //$mailer->send($email);
 
-            // On envoie un mail
-            // $mail->send(
-            //   'no-reply@monsite.net',
-            // $user->getEmail(),
-            //'Activation de votre compte sur le site e-commerce',
-            //'register',
-            //compact('user')
-            //);
 
-            $email = (new Email())
+
+            $email = (new TemplatedEmail())
 
                 ->from('amandinejeanjules@free.fr')
                 ->to($user->getEmail())
@@ -81,10 +66,7 @@ class RegistrationController extends AbstractController
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Bienvenue parmis nous!')
                 ->text('Cher Client,<br>Félicitations, vous êtes desormais inscrit sur notre application FitnessClub!')
-                ->html('<h2>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!</h2><br>
-        <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
-        <h3>Celui-ci fera également un point avec vous.</h3>
-        <h3>L\'équipe Fitness Club</h3>');
+                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
 
             $mailer->send($email);
 

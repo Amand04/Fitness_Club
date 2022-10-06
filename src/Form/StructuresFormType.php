@@ -7,6 +7,7 @@ use App\Entity\Structures;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,7 +37,7 @@ class StructuresFormType extends AbstractType
                         return " Identifiant n° " . $partners->getId();
                     },
                     'label' => 'Partner',
-                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+                    'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
             )
@@ -49,7 +50,7 @@ class StructuresFormType extends AbstractType
                         return $user->getId();
                     },
                     'label' => 'user_id',
-                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+                    'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
             );
