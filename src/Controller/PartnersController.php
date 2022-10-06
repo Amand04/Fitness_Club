@@ -19,13 +19,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class PartnersController extends AbstractController
 {
     /**
      * @Route("admin/registerPartner", name="app_registerPartner")
      */
-    public function registerPartner(Request $request, EntityManagerInterface $entityManager): Response
+    public function registerPartner(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $partner = new Partners();
 
@@ -37,7 +39,25 @@ class PartnersController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_adminPartnersIndex');
+            $email = (new Email())
+
+                ->from('amandinejeanjules@free.fr')
+                ->to($partner->getEmail())
+                ->cc('amandinejeanjules@free.fr')
+                //->bcc('amandinejeanjules@free.fr')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Bienvenue parmis nous!')
+                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!')
+                ->html('<h2>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!</h2><br>
+            <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
+            <h3>Celui-ci fera également un point avec vous.</h3>
+            <h3>Nous vous remercions de votre confiance et vous disons à trés bientôt!</h3>
+            <h3>L\'équipe Fitness Club</h3>');
+
+            $mailer->send($email);
+
+            return $this->render('/mailer/partner/index.html.twig');
         }
         return $this->renderForm('admin/registerPartner.html.twig', [
             'partner' => $partner,

@@ -2,9 +2,14 @@
 {% block title %}Votre Fiche détaillée chez FITNESS Club
 {% endblock %}
 {% block body %}
-	<section class="container my-3">
-		{% if is_granted('ROLE_PARTNER')  %}
+<section class="container my-3">
+	{% if is_granted('ROLE_PARTNER')  %}
+		{% if partners.active == 0 %}
+			<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
 
+				<h5 class="card-title m-3">Votre compte est désactivé, veuillez contacter votre administrateur.</h5>
+			</div>
+		{% else %}
 			<a class="nav-link" href="{{ path('app_welcomePage')}}">
 				<i class="fas fa-arrow-left fa-2x" id="arrow_icon"></i>
 			</a>
@@ -108,4 +113,4 @@
 			</div>
 		</div>
 	</div>
-{% endif %}</section>{% endblock %}
+{% endif %}{% endif %}</section>{% endblock %}

@@ -22,14 +22,11 @@
 					<th scope="col">Supprimer</th>
 				</tr>
 			</thead>
-			<tbody class="table-group-divider">
+			<tbody id="myTable">
+				{% for permission in permissions %}
+					<tr>
+						<th scope="row">{{ permission.partners.id }}</th>
 
-				<tr>
-					{#{% for partners in permissions.partners %}
-																																																																																						<td>{{ partners. }}</td>
-																																																																																					{% endfor %}#}
-					{% for permission in permissions %}
-						<td>{{ permission.partners.id }}</td>
 						<td>{{ permission.perms }}</td>
 						<td>
 							{% if permission.active == 1 %}
@@ -44,14 +41,54 @@
 							</a>
 						</td>
 						<td>
-							<a href="{{path('app_deletePermissions', {id: permission.id})}}">
-								<i class="fas fa-trash m-3" id="delete_icon"></i>
-							</a>
+
+							<button type="button" class="btn btn-danger" id="warning">
+								<i class="fas fa-trash fa-1x" id="delete_icon"></i>
+							</td>
 						</td>
 					</tr>
-				{% endfor %}
+				</button>
+
+				<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cette permission?
+					<a href="{{path('app_deletePermissions', {id: permission.id})}}" class="alert-link" id="alert">
+						Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>
+					</a>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">x</span>
+					</button>
+				</div>
 			</tbody>
-		</table>
-		{{ knp_pagination_render(permissions)}}
+		{% endfor %}
+	</table>
+	<!-- Modal -->
+	<div class="container">
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">Modifications</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+					</div>
+					<div class="modal-body">Etes-vous sur de vouloir enregistrer la modification apportée ?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="modalButton" data-dismiss="modal">Fermer</button>
+						<button type="submit" class="btn btn-primary" id="modalButton">Confirmer</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-{% endblock %}
+	{{ knp_pagination_render(permissions)}}</div>
+<script>
+	$('#modalButton').on('shown.bs.modal', function () {
+$('#myInput').trigger('focus')
+})
+</script>
+<script>
+	$('#warning').click(function (e) {
+e.preventDefault()
+$('.alert').show('#alert');
+});
+</script>{% endblock %}

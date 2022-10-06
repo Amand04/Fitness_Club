@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé!
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+		<a class="nav-link" href="{{ path('app_adminPartnersIndex')}}">
+			<i class="fas fa-arrow-left fa-2x" id="arrow_iconMail"></i>
+		</a>
+		<h5 class="card-title m-3">Un email vient de vous être envoyé aini qu'au Partenaire correspondant suite à sa création.</h5>
+	</div>
+{% endblock %}

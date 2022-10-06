@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Partners;
 use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
@@ -18,19 +19,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class StructuresController extends AbstractController
 {
     /**
      * @Route("admin/registerStructure", name="app_registerStructure")
      */
-    public function registerStructure(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
+    public function registerStructure(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine, MailerInterface $mailer): Response
     {
-
-
         $structure = new Structures();
-
-
 
         $form = $this->createForm(StructuresFormType::class, $structure);
         $form->handleRequest($request);
@@ -41,16 +41,33 @@ class StructuresController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
+            $email = (new Email())
+
+                ->from('amandinejeanjules@free.fr')
+                ->to($structure->getEmail())
+                ->cc('amandinejeanjules@free.fr')
+                //->bcc('bcc@example.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Votre nouvelle Structure!')
+                ->text('Cher Client,<br>Félicitations, votre Structure vient d\'être enregistrée et fait désormais partie de nos clients!')
+                ->html('<h2>Félicitations, votre Structure vient d\'être enregistrée et fait désormais partie de nos clients!</h2><br>
+                <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
+                <h3>Celui-ci fera également un point avec vous.</h3>
+                <h3>Nous vous remercions de votre confiance et vous disons à trés bientôt!</h3>
+                <h3>L\'équipe Fitness Club</h3>');
+
+            $mailer->send($email);
 
 
-
-            return $this->redirectToRoute('app_adminStructuresIndex');
+            return $this->render('/mailer/structure/index.html.twig');
         }
         return $this->renderForm('admin/registerStructure.html.twig', [
             'structure' => $structure,
             'form' => $form
         ]);
     }
+
 
     /**
      * @Route("admin/structures/index", name="app_adminStructuresIndex")
@@ -84,6 +101,7 @@ class StructuresController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $structure = $doctrine->getManager()->flush();
 
             return $this->redirectToRoute("app_adminStructuresIndex");
@@ -109,8 +127,16 @@ class StructuresController extends AbstractController
     /**
      * @Route("structures/detailsStructure/{id}", name="app_detailsStructure")
      */
-    public function read(PermissionsRepository $permissionsRepository, PartnersRepository $partnerRepository, Structures $structure): Response
+    public function read(PermissionsRepository $permissionsRepository, Request $request, PartnersRepository $partnerRepository, Structures $structure, ManagerRegistry $doctrine): Response
     {
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
+        $form = $this->createForm(StructuresFormType::class, $structure);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $structure = $doctrine->getManager()->flush();
+        }
         return $this->render(
             "admin/structures/detailsStructures.html.twig",
             [
@@ -118,6 +144,8 @@ class StructuresController extends AbstractController
                 "permissions" => $permissionsRepository->findAll(),
                 "partners" => $partnerRepository->findAll(),
                 "structure" => $structure,
+                "structures" => $structures,
+                "form" => $form,
 
             ]
         );

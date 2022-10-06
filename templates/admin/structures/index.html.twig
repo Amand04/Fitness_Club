@@ -36,17 +36,15 @@
 						<th scope="row">{{ structure.id }}</th>
 						<td>{{ structure.storeName }}</td>
 						<td>
-							<form id="target" method="post">
-								{% if structure.active == 1 %}
-									<p>
-										1
-									</p>
-								{% else %}
-									<p>
-										0
-									</p>
-								{% endif %}
-							</form>
+							{% if structure.active == 1 %}
+								<p>
+									1
+								</p>
+							{% else %}
+								<p>
+									0
+								</p>
+							{% endif %}
 
 						</td>
 						<td>{{ structure.email }}</td>

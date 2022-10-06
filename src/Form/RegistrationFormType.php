@@ -64,7 +64,9 @@ class RegistrationFormType extends AbstractType
                     'Partner' => 'ROLE_PARTNER',
                     'Structure' => 'ROLE_STRUCTURE',
                 ],
-            ]);
+            ])
+            ->add('created_at');
+
 
         // Data transformer
         $builder->get('Roles')

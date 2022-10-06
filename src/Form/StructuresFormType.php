@@ -33,7 +33,7 @@ class StructuresFormType extends AbstractType
                 [
                     'class' => Partners::class,
                     'choice_label' => function ($partners) {
-                        return " Identifiant n° " . $partners->getId(); //. implode(",", $partners->displayStructures()) . ")";
+                        return " Identifiant n° " . $partners->getId();
                     },
                     'label' => 'Partner',
                     'multiple' => false, 'expanded' => true, 'mapped' => true,

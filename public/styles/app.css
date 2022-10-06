@@ -151,9 +151,15 @@ body {
   color: #319da0;
 }
 #delete_icon {
-  color: #319da0;
+  color: #f8f3f3;
 }
 #eye_icon {
+  color: #319da0;
+}
+#confirm_icon {
+  color: #319da0;
+}
+#arrow_iconMail {
   color: #319da0;
 }
 #modalButton {

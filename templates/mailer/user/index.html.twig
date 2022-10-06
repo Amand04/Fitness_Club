@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email envoyé!
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+		<a class="nav-link" href="{{ path('app_welcomePage')}}">
+			<i class="fas fa-arrow-left fa-2x" id="arrow_iconMail"></i>
+		</a>
+		<h5 class="card-title m-3">Le compte utilisateur a bien été crée, un email vient d'être envoyé à l'utilisateur concerné.</p>
+	</div>
+{% endblock %}

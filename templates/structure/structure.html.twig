@@ -3,203 +3,210 @@
 {% endblock %}
 {% block body %}
 	<section class="container my-3">
-		{% if is_granted('ROLE_STRUCTURE')  %}
+		{% if is_granted('ROLE_STRUCTURE') %}
+			{% if structures.active == 0 %}
+				<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
 
-			<a class="nav-link" href="{{ path('app_welcomePage')}}">
-				<i class="fas fa-arrow-left fa-2x" id="arrow_icon"></i>
-			</a>
-			<div class="container-fluid d-flex flex-wrap justify-content-center">
-				<div class="card bg-light border-secondary m-3" style="width: 56rem; height: auto;" id="card_presentationStructures">
-					<div class="card-body m-1">
-						<div class="container m-4 ">
-							<h5 class="justify-content-center mt-5" id="title_category">Structure n°
-								{{ structures.id }}</h5>
+					<h5 class="card-title m-3">Votre compte est désactivé, veuillez contacter votre administrateur.</h5>
+				</div>
+			{% else %}
 
-							<div class="container-fluid d-flex flex-wrap justify-content-end" id="affiliate">
-								<p class="card-text">Affiliée au Partenaire n°{{ structures.partners.id }}</p>
-							</div>
+				<a class="nav-link" href="{{ path('app_welcomePage')}}">
+					<i class="fas fa-arrow-left fa-2x" id="arrow_icon"></i>
+				</a>
+				<div class="container-fluid d-flex flex-wrap justify-content-center">
+					<div class="card bg-light border-secondary m-3" style="width: 56rem; height: auto;" id="card_presentationStructures">
+						<div class="card-body m-1">
+							<div class="container m-4 ">
+								<h5 class="justify-content-center mt-5" id="title_category">Structure n°
+									{{ structures.id }}</h5>
 
-							<h5 class="justify-content-center" id="title_category">{{ structures.storeName }}</h5>
-							{% if structures.active == 1 %}
-								<div class="container">
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Actif</label>
-									</div>
-								{% else %}
+								<div class="container-fluid d-flex flex-wrap justify-content-end" id="affiliate">
+									<p class="card-text">Affiliée au Partenaire n°{{ structures.partners.id }}</p>
+								</div>
+
+								<h5 class="justify-content-center" id="title_category">{{ structures.storeName }}</h5>
+								{% if structures.active == 1 %}
 									<div class="container">
 										<div class="form-check form-switch">
-											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-											<label class="form-check-label" for="flexSwitchCheckDisabled">Inactif</label>
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Actif</label>
+										</div>
+									{% else %}
+										<div class="container">
+											<div class="form-check form-switch">
+												<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+												<label class="form-check-label" for="flexSwitchCheckDisabled">Inactif</label>
+											</div>
 										</div>
 									</div>
-								</div>
 
-							{% endif %}
-							<h5 class="card-title ms-3">
-								<i class="far fa-address-card ms-2 me-2" id="comment_icon"></i>
-								{{ structures.adress }}</h5>
-							<h5 class="card-title ms-3">
-								{{ structures.country }}</h5>
-							<h5 class="card-title ms-3">
-								<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
-								{{ structures.phone }}</h5>
-							<h5 class="card-title ms-3">
-								<i class="fas fa-at ms-2 me-2" id="at_icon"></i>
-								{{ structures.email }}</h5>
+								{% endif %}
+								<h5 class="card-title ms-3">
+									<i class="far fa-address-card ms-2 me-2" id="comment_icon"></i>
+									{{ structures.adress }}</h5>
+								<h5 class="card-title ms-3">
+									{{ structures.country }}</h5>
+								<h5 class="card-title ms-3">
+									<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+									{{ structures.phone }}</h5>
+								<h5 class="card-title ms-3">
+									<i class="fas fa-at ms-2 me-2" id="at_icon"></i>
+									{{ structures.email }}</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="container-fluid d-flex flex-wrap justify-content-center">
+					<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
+						<div class="card-body">
+							<div class="container m-1">
+								{% if structures.newsletter == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">newsletter</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">newsletter</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+
+							<div class="container m-1">
+								{% if structures.promote == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">promote</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">promote</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+
+							<div class="container m-1">
+								{% if structures.planning == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">planning</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">planning</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+
+							<div class="container m-1">
+								{% if structures.statistics == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">statistics</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">statistics</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+
+							<div class="container m-1">
+								{% if structures.products == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">products</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">products</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
+
+							<div class="container m-1">
+								{% if structures.digicode == 1 %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+											<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
+												<p class="card-text">digicode</p>
+											</label>
+										</div>
+									</div>
+								{% else %}
+									<div class="container ms-4">
+
+										<div class="form-check form-switch">
+											<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+											<label class="form-check-label" for="flexSwitchCheckDisabled">
+												<p class="card-text">digicode</p>
+											</label>
+										</div>
+									</div>
+								{% endif %}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="container-fluid d-flex flex-wrap justify-content-center">
-				<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
-					<div class="card-body">
-						<div class="container m-1">
-							{% if structures.newsletter == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">newsletter</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">newsletter</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="container m-1">
-							{% if structures.promote == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">promote</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">promote</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="container m-1">
-							{% if structures.planning == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">planning</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">planning</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="container m-1">
-							{% if structures.statistics == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">statistics</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">statistics</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="container m-1">
-							{% if structures.products == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">products</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">products</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-
-						<div class="container m-1">
-							{% if structures.digicode == 1 %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-										<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">
-											<p class="card-text">digicode</p>
-										</label>
-									</div>
-								</div>
-							{% else %}
-								<div class="container ms-4">
-
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-										<label class="form-check-label" for="flexSwitchCheckDisabled">
-											<p class="card-text">digicode</p>
-										</label>
-									</div>
-								</div>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		{% endif %}
 	{% endif %}
 {% endblock %}

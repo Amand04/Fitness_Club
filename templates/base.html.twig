@@ -52,15 +52,14 @@
 									<a class="nav-link" href="/admin/structures/index">Les Structures</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/register">Créer un compte utilisateur</a>
+									<a class="nav-link" href="/admin/users/index">Les utilisateurs</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="/admin/permissions/index">Les permissions</a>
 								</li>
 							{% endif %}
-							{% if is_granted('ROLE_STRUCTURE')  %}
+							{% if is_granted('ROLE_STRUCTURE') %}
 								<ul class="navbar-nav mr-auto" id="navbar-font">
-
 									<li class="nav-item">
 										{% for structure in structures %}
 											{% if structure.email == app.user.email %}
@@ -70,7 +69,7 @@
 									</li>
 								</ul>
 							{% endif %}
-							{% if is_granted('ROLE_PARTNER')  %}
+							{% if is_granted('ROLE_PARTNER') %}
 								<ul class="navbar-nav mr-auto" id="navbar-font">
 									<li class="nav-item">
 										{% for partner in partners %}
@@ -93,11 +92,6 @@
 				{% endif %}
 
 			</nav>
-		</div>
-		{% block body %}{% endblock %}
-		<footer>
-			<div class="container-fluid d-flex flex-wrap justify-content-center" id="footer">Fitness Club Copyright | 2022
-			</div>
-		</footer>
+		</body>
 	</body>
-</html></body></html></body></html>
+</html></body></html></div>{% block body %}{% endblock %}<footer><div class="container-fluid d-flex flex-wrap justify-content-center" id="footer">Fitness Club Copyright | 2022</div></footer></body></html></body></html></body></html>

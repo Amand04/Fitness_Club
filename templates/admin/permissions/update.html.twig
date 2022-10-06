@@ -13,10 +13,15 @@
 				<fieldset>
 					{{ form_start(form) }}
 					{{form_widget(form)}}
+
 				</fieldset>
 
 			</div>
-		</div><!-- Button trigger modal --><button type="button" class="btn btn-primary" id="modalButton" data-toggle="modal" data-target="#exampleModalCenter">
+		</div>
+
+		<!-- Button trigger modal -->
+
+		<button type="button" class="btn btn-primary" id="modalButton" data-toggle="modal" data-target="#exampleModalCenter">
 			Enregistrer</button><!-- Modal --><div class="container">
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
@@ -37,12 +42,10 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-{{form_end(form)}}
-<script>
-	$('#modalButton').on('shown.bs.modal', function () {
+			{{form_end(form)}}
+			<script>
+				$('#modalButton').on('shown.bs.modal', function () {
 $('#myInput').trigger('focus')
 })
-</script>{% endblock %}
+			</script>
+		{% endblock %}

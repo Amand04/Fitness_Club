@@ -46,10 +46,6 @@ class Structures
 
     /**
      * @ORM\Column(type="string", length=70)
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 5,
-     *      max = 70)
      */
     private $adress;
 
