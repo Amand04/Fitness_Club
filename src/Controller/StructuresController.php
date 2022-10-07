@@ -7,10 +7,7 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\StructuresFormType;
-use App\Repository\PartnersRepository;
 use App\Repository\PermissionsRepository;
-use App\Repository\StructuresRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,17 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class StructuresController extends AbstractController
 {
     /**
      * @Route("admin/registerStructure", name="app_registerStructure")
      */
-    public function registerStructure(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine, MailerInterface $mailer): Response
+    public function registerStructure(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $structure = new Structures();
 
@@ -41,7 +36,8 @@ class StructuresController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
-            $email = (new Email())
+            //instancie et paramètre les données du mail
+            $email = (new TemplatedEmail())
 
                 ->from('amandinejeanjules@free.fr')
                 ->to($structure->getEmail())
@@ -49,33 +45,34 @@ class StructuresController extends AbstractController
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Votre nouvelle Structure!')
-                ->text('Cher Client,<br>Félicitations, votre Structure vient d\'être enregistrée et fait désormais partie de nos clients!')
-                ->html('<h2>Félicitations, votre Structure vient d\'être enregistrée et fait désormais partie de nos clients!</h2><br>
-                <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
-                <h3>Celui-ci fera également un point avec vous.</h3>
-                <h3>Nous vous remercions de votre confiance et vous disons à trés bientôt!</h3>
-                <h3>L\'équipe Fitness Club</h3>');
+                ->subject('Bienvenue parmis nous!')
+                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
+                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
 
+            //envoi de l'email
             $mailer->send($email);
 
-
+            //renvoi au template
             return $this->render('/mailer/structure/index.html.twig');
         }
+        $permissions = $doctrine->getRepository(Permissions::class)->findAll();
+
         return $this->renderForm('admin/registerStructure.html.twig', [
             'structure' => $structure,
+            "permissions" => $permissions,
             'form' => $form
         ]);
     }
 
-
     /**
      * @Route("admin/structures/index", name="app_adminStructuresIndex")
      */
-    public function index(PartnersRepository $partnersRepository, Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
+        $partners = $doctrine->getRepository(Partners::class)->findAll();
 
+        //pagination//
         $structures = $paginator->paginate(
             $structures,
             $request->query->getInt('page', 1),
@@ -85,7 +82,7 @@ class StructuresController extends AbstractController
         return $this->renderForm(
             'admin/structures/index.html.twig',
             [
-                "partners" => $partnersRepository->findAll(),
+                "partners" => $partners,
                 "structures" => $structures,
             ]
         );
@@ -116,7 +113,7 @@ class StructuresController extends AbstractController
     /**
      * @Route("admin/structures/delete/{id}", name="app_deleteStructures")
      */
-    public function delete(Structures $structure, Request $request, ManagerRegistry $doctrine): Response
+    public function delete(Structures $structure, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($structure);
@@ -127,9 +124,11 @@ class StructuresController extends AbstractController
     /**
      * @Route("structures/detailsStructure/{id}", name="app_detailsStructure")
      */
-    public function read(PermissionsRepository $permissionsRepository, Request $request, PartnersRepository $partnerRepository, Structures $structure, ManagerRegistry $doctrine): Response
+    public function read(Request $request, Structures $structure, ManagerRegistry $doctrine): Response
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
+        $partners = $doctrine->getRepository(Partners::class)->findAll();
+
         $form = $this->createForm(StructuresFormType::class, $structure);
         $form->handleRequest($request);
 
@@ -140,13 +139,10 @@ class StructuresController extends AbstractController
         return $this->render(
             "admin/structures/detailsStructures.html.twig",
             [
-                "permission" => $permissionsRepository->findAll(),
-                "permissions" => $permissionsRepository->findAll(),
-                "partners" => $partnerRepository->findAll(),
+                "partners" => $partners,
                 "structure" => $structure,
                 "structures" => $structures,
                 "form" => $form,
-
             ]
         );
     }
@@ -154,14 +150,16 @@ class StructuresController extends AbstractController
     /**
      * @Route("structure/structure/{id}/", name="app_structure")
      */
-    public function readStructure(PermissionsRepository $permissionsRepository, UserRepository $userRepository, Structures $structures, ManagerRegistry $doctrine): Response
+    public function readStructure(ManagerRegistry $doctrine): Response
     {
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
         $user = $doctrine->getRepository(User::class)->findAll();
+        $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
         return $this->render(
             "structure/structure.html.twig",
             [
-                "permissions" => $permissionsRepository->findAll(),
+                "permissions" => $permissions,
                 "user" => $user,
                 "structures" => $structures
             ]
@@ -171,15 +169,17 @@ class StructuresController extends AbstractController
     /**
      * @Route("/welcomePage", name="app_welcomePage")
      */
-    public function welcome(PartnersRepository $partnersRepository, UserRepository $userRepository, Request $request, ManagerRegistry $doctrine)
+    public function welcome(ManagerRegistry $doctrine)
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
+        $partners = $doctrine->getRepository(Partners::class)->findAll();
+        $user = $doctrine->getRepository(User::class)->findAll();
 
         return $this->renderForm(
             'welcomePage.html.twig',
             [
-                "user" => $userRepository->findAll(),
-                "partners" => $partnersRepository->findAll(),
+                "user" => $user,
+                "partners" => $partners,
                 "structures" => $structures,
             ]
         );

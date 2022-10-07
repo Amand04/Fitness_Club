@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-
     /**
      * @Route("admin/users/index", name="app_adminUsersIndex")
      */
@@ -22,6 +21,7 @@ class UserController extends AbstractController
     {
         $users = $doctrine->getRepository(User::class)->findAll();
 
+        //pagination//
         $users = $paginator->paginate(
             $users,
             $request->query->getInt('page', 1),
@@ -39,7 +39,7 @@ class UserController extends AbstractController
     /**
      * @Route("admin/users/update/{id}", name="app_updateUser")
      */
-    public function update(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine): Response
+    public function update(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine, User $user): Response
     {
         $form = $this->createForm(UsersFormType::class, $user);
         $form->handleRequest($request);

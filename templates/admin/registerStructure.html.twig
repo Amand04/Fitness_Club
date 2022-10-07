@@ -6,12 +6,13 @@
 		<div class="row">
 			<div class="col">
 				<h3>Enregistrer une Structure</h3>
-
-				{{ form_start(form) }}
-				{{form_widget(form)}}
-			</fieldset>
-			<button type="submit" class="btn btn-primary btn-lg my-3" id="btn_login">Enregistrer</button>
+				<fieldset>
+					{{ form_start(form) }}
+					{{form_widget(form)}}
+				</fieldset>
+				<button type="submit" class="btn btn-primary btn-lg my-3" id="btn_login">Enregistrer</button>
+			</div>
+			{{ form_end(form) }}
 		</div>
-		{{ form_end(form) }}
 	</div>
-</div>{% endblock %}
+{% endblock %}

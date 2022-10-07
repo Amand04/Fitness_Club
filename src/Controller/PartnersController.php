@@ -7,9 +7,6 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\PartnersFormType;
-use App\Repository\PermissionsRepository;
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,9 +15,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class PartnersController extends AbstractController
 {
@@ -39,7 +35,8 @@ class PartnersController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
 
-            $email = (new Email())
+            //instancie et paramètre les données du mail
+            $email = (new TemplatedEmail())
 
                 ->from('amandinejeanjules@free.fr')
                 ->to($partner->getEmail())
@@ -48,15 +45,13 @@ class PartnersController extends AbstractController
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Bienvenue parmis nous!')
-                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!')
-                ->html('<h2>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!</h2><br>
-            <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
-            <h3>Celui-ci fera également un point avec vous.</h3>
-            <h3>Nous vous remercions de votre confiance et vous disons à trés bientôt!</h3>
-            <h3>L\'équipe Fitness Club</h3>');
+                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
+                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
 
+            //envoi de l'email
             $mailer->send($email);
 
+            //renvoi au template
             return $this->render('/mailer/partner/index.html.twig');
         }
         return $this->renderForm('admin/registerPartner.html.twig', [
@@ -73,12 +68,12 @@ class PartnersController extends AbstractController
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
+        //pagination
         $partners = $paginator->paginate(
             $partners,
             $request->query->getInt('page', 1),
             6
         );
-
         return $this->renderForm(
             'admin/partners/index.html.twig',
             [
@@ -103,7 +98,6 @@ class PartnersController extends AbstractController
 
             return $this->redirectToRoute("app_adminPartnersIndex");
         }
-
         return $this->renderForm("admin/partners/update.html.twig", [
             "form" => $form,
             "partner" => $partner
@@ -113,7 +107,7 @@ class PartnersController extends AbstractController
     /**
      * @Route("admin/partners/delete/{id}", name="app_deletePartner")
      */
-    public function delete(Partners $partner, Request $request, ManagerRegistry $doctrine): Response
+    public function delete(Partners $partner, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($partner);
@@ -125,11 +119,10 @@ class PartnersController extends AbstractController
      * @Route("admin/partners/detailsPartner/{id}", name="app_detailsPartner")
      *
      */
-    public function read(Partners $partner, Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
+    public function read(Partners $partner, Request $request, ManagerRegistry $doctrine): Response
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
-
 
         if ($request->isXmlHttpRequest()) {
 
@@ -148,16 +141,14 @@ class PartnersController extends AbstractController
                 "partner" => $partner,
                 "structures" => $structures,
                 "permissions" => $permissions,
-
             ]
         );
     }
 
-
     /**
      * @Route("partner/partner/{id}", name="app_partner")
      */
-    public function readPartner(PermissionsRepository $permissionsRepository, UserRepository $userRepository, Partners $partners, ManagerRegistry $doctrine): Response
+    public function readPartner(Partners $partners, ManagerRegistry $doctrine): Response
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $user = $doctrine->getRepository(User::class)->findAll();

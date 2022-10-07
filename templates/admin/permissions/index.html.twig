@@ -41,7 +41,6 @@
 						</td>
 					</tr>
 				</button>
-
 				<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cette permission?
 					<a href="{{path('app_deletePermissions', {id: permission.id})}}" class="alert-link" id="alert">
 						Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>
@@ -73,15 +72,4 @@
 			</div>
 		</div>
 	</div>
-	{{ knp_pagination_render(permissions)}}</div>
-<script>
-	$('#modalButton').on('shown.bs.modal', function () {
-$('#myInput').trigger('focus')
-})
-</script>
-<script>
-	$('#warning').click(function (e) {
-e.preventDefault()
-$('.alert').show('#alert');
-});
-</script>{% endblock %}
+	{{ knp_pagination_render(permissions)}}</div>{% endblock %}

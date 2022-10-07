@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Partners;
-use App\Entity\Permissions;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -15,7 +14,6 @@ class PartnersFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-
             ->add('email')
             ->add('name')
             ->add('active')

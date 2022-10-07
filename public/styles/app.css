@@ -2,6 +2,7 @@ body {
   background-color: #3d3d3d;
   color: #eee3f1;
 }
+/*NAVBAR*/
 .navbar-toggler-icon {
   width: 25px;
   height: 25px;
@@ -12,7 +13,7 @@ body {
   font-family: "Exo 2", sans-serif;
   padding: 0px;
 }
-
+/*CARTE DETAILS*/
 #card_presentationPartners {
   display: flex;
   justify-content: stretch;
@@ -35,53 +36,6 @@ body {
 #card {
   background-color: #f8f6f8;
 }
-#at_icon {
-  color: #ffa500;
-}
-#comment_icon {
-  color: #ffa500;
-}
-#mobile_icon {
-  color: #ffa500;
-}
-#building_icon {
-  color: #ffa500;
-}
-#title_category {
-  font-family: "Roboto", cursive;
-  font-style: italic;
-  font-weight: 600;
-  color: #319da0;
-  font-size: 25px;
-}
-#actif {
-  background-color: #319da0;
-  border: #319da0;
-  font-size: 20px;
-}
-#inactif {
-  background-color: #319da0;
-  border: #319da0;
-  font-size: 20px;
-}
-#container_table {
-  font-family: "Roboto", sans-serif;
-  margin: 15px;
-  background-color: #f8f6f8;
-  color: #319da0;
-}
-.table {
-  color: #525053;
-}
-#tableStructures {
-  background-color: #f8f6f8;
-}
-#tablePartners {
-  background-color: #f8f6f8;
-}
-#tablePermissions {
-  background-color: #f8f6f8;
-}
 .card-text {
   font-family: "Exo 2", sans-serif;
   font-size: 15px;
@@ -96,13 +50,18 @@ body {
   font-family: "Exo 2", sans-serif;
   font-size: 15px;
 }
-
-#update_font {
-  font-size: 15px;
-  height: auto;
+/*ICONES LOGOS*/
+#at_icon {
+  color: #ffa500;
 }
-#section_update {
-  color: #fbf9fc;
+#comment_icon {
+  color: #ffa500;
+}
+#mobile_icon {
+  color: #ffa500;
+}
+#building_icon {
+  color: #ffa500;
 }
 .logo {
   width: 210px;
@@ -113,12 +72,24 @@ body {
   width: 90px;
   height: 90px;
 }
-.register_div {
-  width: 650px;
+/*TITRES*/
+#title_category {
+  font-family: "Roboto", cursive;
+  font-style: italic;
+  font-weight: 600;
+  color: #319da0;
+  font-size: 25px;
 }
-.image_structure {
-  width: 225px;
-  height: 225px;
+/*BOUTONS*/
+#actif {
+  background-color: #319da0;
+  border: #319da0;
+  font-size: 20px;
+}
+#inactif {
+  background-color: #319da0;
+  border: #319da0;
+  font-size: 20px;
 }
 #btn_login {
   background-color: #319da0;
@@ -127,21 +98,6 @@ body {
 }
 #btn_plus {
   color: #319da0;
-}
-#connect_mail {
-  font-family: "Exo 2", sans-serif;
-}
-#deconnect_link {
-  color: #319da0;
-  font-weight: 800;
-  font-family: "Roboto", cursive;
-  font-style: italic;
-}
-#deconnect_link_mail {
-  color: rgb(145, 142, 142);
-}
-#div_login {
-  font-family: "Roboto", cursive;
 }
 #btn_register {
   background-color: #319da0;
@@ -179,15 +135,67 @@ body {
   background-color: #319da0;
   border: #319da0;
 }
+/*TABLEAU*/
+#container_table {
+  font-family: "Roboto", sans-serif;
+  margin: 15px;
+  background-color: #f8f6f8;
+  color: #319da0;
+}
+.table {
+  color: #525053;
+}
+#myTable {
+  background-color: #f8f6f8;
+}
+#tablePermissions {
+  background-color: #f8f6f8;
+}
+/*UPDATE*/
+#update_font {
+  font-size: 15px;
+  height: auto;
+}
+#section_update {
+  color: #fbf9fc;
+}
+/*REGISTER*/
+.register_div {
+  width: 650px;
+}
+.image_structure {
+  width: 225px;
+  height: 225px;
+}
+/*LINKS/LOGIN*/
+#connect_mail {
+  font-family: "Exo 2", sans-serif;
+}
+#deconnect_link {
+  color: #319da0;
+  font-weight: 800;
+  font-family: "Roboto", cursive;
+  font-style: italic;
+}
+#deconnect_link_mail {
+  color: rgb(145, 142, 142);
+}
+
+#div_login {
+  font-family: "Roboto", cursive;
+}
+/*MODAL*/
 .modal-title {
   color: #525053;
 }
 .modal-body {
   color: #525053;
 }
+/*FORM*/
 .form {
   color: green;
 }
+/*FOOTER*/
 #footer {
   margin-top: 950px;
 }

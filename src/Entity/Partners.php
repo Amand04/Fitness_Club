@@ -42,7 +42,6 @@ class Partners
     private $name;
 
 
-
     /**
      * @ORM\Column(type="string", length=150)
      * @Assert\NotBlank
@@ -96,8 +95,6 @@ class Partners
      */
     private $active;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=Structures::class, mappedBy="partners", orphanRemoval=true)
      */
@@ -119,9 +116,6 @@ class Partners
         $this->structures = new ArrayCollection();
         $this->permissions = new ArrayCollection();
     }
-
-
-
 
     public function getId(): ?int
     {
@@ -151,10 +145,6 @@ class Partners
 
         return $this;
     }
-
-
-
-
 
     public function getShortDescription(): ?string
     {
@@ -228,7 +218,6 @@ class Partners
         return $this;
     }
 
-
     //public function displayStructures()
     //{
     //  $partnersStructures = $this->structures;
@@ -251,7 +240,6 @@ class Partners
 
         return $this;
     }
-
 
     /**
      * @return Collection<int, Structures>

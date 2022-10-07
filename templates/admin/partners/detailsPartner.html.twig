@@ -57,26 +57,19 @@
 					<i class="fas fa-mobile-alt me-2" id="mobile_icon"></i>
 					{{ partner.commercialContact }}</h5>
 
-
 				{% if is_granted('ROLE_ADMIN')  %}
 					<div class="container-fluid d-flex flex-wrap justify-content-end">
 						<a href="{{path('app_updatePartner', {id: partner.id})}}">
 							<i class="fas fa-edit m-3 fa-1x" id="update_icon"></i>
 						</a>
-
-
 						<button type="button" class="btn btn-danger" id="warning">
 							<i class="fas fa-trash fa-1x" id="delete_icon"></i>
 
 						</div>
 					{% endif %}
-
 				</div>
-
 			</div>
-
 		</div>
-
 	</div>
 </div>
 <div class="container-fluid d-flex flex-wrap justify-content-center mt-3">

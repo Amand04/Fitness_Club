@@ -4,31 +4,19 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Repository\UserRepository;
-use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
-
 class RegistrationController extends AbstractController
 {
-    //private EmailVerifier $emailVerifier;
-
-    //public function __construct(EmailVerifier $emailVerifier)
-    //{
-    //    $this->emailVerifier = $emailVerifier;
-    //}
-
     /**
      * @Route("/register", name="app_register")
      */
@@ -50,12 +38,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-
-            // do anything else you need here, like send an email
-            //$mailer->send($email);
-
-
-
+            //instancie et paramètre les données du mail
             $email = (new TemplatedEmail())
 
                 ->from('amandinejeanjules@free.fr')
@@ -68,10 +51,11 @@ class RegistrationController extends AbstractController
                 ->text('Cher Client,<br>Félicitations, vous êtes desormais inscrit sur notre application FitnessClub!')
                 ->htmlTemplate('/mailer/user/firstConnection.html.twig');
 
+            //envoi de l'email
             $mailer->send($email);
 
+            //renvoi un template
             return $this->render('/mailer/user/index.html.twig');
-
 
             return $userAuthenticator->authenticateUser(
                 $user,
@@ -79,7 +63,6 @@ class RegistrationController extends AbstractController
                 $request
             );
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

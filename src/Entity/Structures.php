@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-
 use App\Repository\StructuresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,8 +15,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Structures
 {
-
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -63,39 +60,6 @@ class Structures
      */
     private $phone;
 
-
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $newsletter;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $promote;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $planning;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $statistics;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $products;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $digicode;
-
-
     /**
      * @ORM\Column(type="boolean")
      */
@@ -112,6 +76,36 @@ class Structures
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $newsletter;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $promote;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $planning;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $products;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $digicode;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statistics;
 
     public function getId(): ?int
     {
@@ -178,90 +172,6 @@ class Structures
         return $this;
     }
 
-    public function getNewsletter(): ?int
-    {
-        return $this->newsletter;
-    }
-
-    public function setNewsletter(int $newsletter): self
-    {
-        $this->newsletter = $newsletter;
-
-        return $this;
-    }
-
-    public function getPromote(): ?int
-    {
-        return $this->promote;
-    }
-
-    public function setPromote(int $promote): self
-    {
-        $this->promote = $promote;
-
-        return $this;
-    }
-
-    public function getPlanning(): ?int
-    {
-        return $this->planning;
-    }
-
-    public function setPlanning(int $planning): self
-    {
-        $this->planning = $planning;
-
-        return $this;
-    }
-
-    public function getStatistics(): ?int
-    {
-        return $this->statistics;
-    }
-
-    public function setStatistics(int $statistics): self
-    {
-        $this->statistics = $statistics;
-
-        return $this;
-    }
-
-    public function getProducts(): ?int
-    {
-        return $this->products;
-    }
-
-    public function setProducts(int $products): self
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-
-    public function getDigicode(): ?int
-    {
-        return $this->digicode;
-    }
-
-    public function setDigicode(int $digicode): self
-    {
-        $this->digicode = $digicode;
-
-        return $this;
-    }
-
-
-    //public function displayPartners()
-    // {
-    //   $permissionsPartners = $this->partners;
-    //  $partnersList = [];
-    //
-    //      foreach ($permissionsPartners as $partner) {
-    //        $partnersList = $partner->getId();
-    //  }
-    //return $partnersList;
-    //}
-
     public function isActive(): ?bool
     {
         return $this->active;
@@ -294,6 +204,78 @@ class Structures
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function isNewsletter(): ?bool
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(bool $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    public function isPromote(): ?bool
+    {
+        return $this->promote;
+    }
+
+    public function setPromote(bool $promote): self
+    {
+        $this->promote = $promote;
+
+        return $this;
+    }
+
+    public function isPlanning(): ?bool
+    {
+        return $this->planning;
+    }
+
+    public function setPlanning(bool $planning): self
+    {
+        $this->planning = $planning;
+
+        return $this;
+    }
+
+    public function isProducts(): ?bool
+    {
+        return $this->products;
+    }
+
+    public function setProducts(bool $products): self
+    {
+        $this->products = $products;
+
+        return $this;
+    }
+
+    public function isDigicode(): ?bool
+    {
+        return $this->digicode;
+    }
+
+    public function setDigicode(bool $digicode): self
+    {
+        $this->digicode = $digicode;
+
+        return $this;
+    }
+
+    public function isStatistics(): ?bool
+    {
+        return $this->statistics;
+    }
+
+    public function setStatistics(bool $statistics): self
+    {
+        $this->statistics = $statistics;
 
         return $this;
     }

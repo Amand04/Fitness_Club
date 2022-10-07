@@ -2,8 +2,11 @@
 {% block title %}Les Utilisateurs
 {% endblock %}
 {% block body %}
+
 	<div class="container md-3">
 		<h3 class="justify-content-center mt-5" id="title_category">Les Utilisateurs
+
+
 			{% if is_granted('ROLE_ADMIN')  %}
 				<a href="{{path('app_register')}}">
 					<i class="fas fa-plus m-3" id="btn_plus"></i>
@@ -27,7 +30,7 @@
 		class="text" id="container_table">
 		{#<input class="form-control" id="myInputUsers" type="text" placeholder="Chercher..">#}
 		<input class="zoneSaisie" type="text" placeholder="Recherche sur les noms et prénoms..." id="maRecherche" onkeyup="filtrer()">
-		<table class="table table-striped table-hover table-bordered" id="myTableUsers">
+		<table class="table table-striped table-hover table-bordered" id="myTable">
 
 			<thead>
 				<tr>
@@ -58,67 +61,4 @@
 		</table>
 		{{ knp_pagination_render(users)}}
 	</div>
-	<script>
-		$(document).ready(function () {
-$("#actif").on("click", function () {
-let value = $(this).val();
-$("#myTableStructures tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value - 1) < 1)
-});
-});
-});
-	</script>
-	<script>
-		$(document).ready(function () {
-$("#inactif").on("click", function () {
-let value = $(this).val();
-$("#myTableStructures tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value) > 1)
-});
-});
-});
-	</script>
-	<script>
-		$(document).ready(function () {
-$("#myInputUsers").on("keyup", function () {
-let value = $(this).val().toLowerCase();
-$("#myTableUsers tr").filter(function () {
-$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-});
-});
-});
-	</script>
-	<script>
-		$('#warning').click(function (e) {
-e.preventDefault()
-$('.alert').show('#alert');
-});
-	</script>
-
-	<script>
-		function filtrer() {
-let filtre,
-table,
-ligne,
-cellule,
-i,
-texte;
-
-filtre = document.getElementById("maRecherche").value.toUpperCase();
-table = document.getElementById("myTableUsers");
-ligne = table.getElementsByTagName("tr");
-
-for (i = 0; i < ligne.length; i++) {
-cellule = ligne[i].getElementsByTagName("td")[0];
-if (cellule) {
-texte = cellule.innerText;
-if (texte.toUpperCase().indexOf(filtre) > -1) {
-ligne[i].style.display = "";
-} else {
-ligne[i].style.display = "none";
-}
-}
-}
-}
-	</script>
 {% endblock %}

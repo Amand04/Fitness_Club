@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Partners;
 use App\Entity\Permissions;
+use App\Entity\Structures;
 use App\Form\PermissionFormType;
-use App\Repository\PermissionsRepository;
-use App\Repository\StructuresRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -14,13 +13,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PermissionsController extends AbstractController
 {
-
-
     /**
      * @Route("admin/registerPermission", name="app_registerPermission")
      */
@@ -33,7 +29,6 @@ class PermissionsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $form->getData();
             $entityManager->persist($permissions);
             $entityManager->flush();
@@ -41,22 +36,22 @@ class PermissionsController extends AbstractController
             return $this->redirectToRoute("app_adminPermissionsIndex");
         }
 
-
         return $this->renderForm('admin/registerPermission.html.twig', [
             'permissions' => $permissions,
             'form' => $form
         ]);
     }
 
-
     /**
      * @Route("admin/permissions/index", name="app_adminPermissionsIndex")
      */
-    public function index(StructuresRepository $structuresRepository, PermissionsRepository $permissionsRepository, Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
+        $structures = $doctrine->getRepository(Structures::class)->findAll();
 
+        //pagination
         $permissions = $paginator->paginate(
             $permissions,
             $request->query->getInt('page', 1),
@@ -66,7 +61,7 @@ class PermissionsController extends AbstractController
         return $this->renderForm(
             'admin/permissions/index.html.twig',
             [
-                "structures" => $structuresRepository->findAll(),
+                "structures" => $structures,
                 "partners" => $partners,
                 "permissions" => $permissions,
             ]
@@ -120,7 +115,7 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/permissions/delete/{id}", name="app_deletePermissions")
      */
-    public function delete(Permissions $permission, Request $request, ManagerRegistry $doctrine): Response
+    public function delete(Permissions $permission, ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($permission);
