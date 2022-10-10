@@ -46,10 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastname;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $firstname;
+
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -66,6 +63,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Partners::class, mappedBy="user")
      */
     private $partners;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $name;
 
     public function getId(): ?int
     {
@@ -168,18 +170,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
@@ -248,6 +238,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $partner->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
