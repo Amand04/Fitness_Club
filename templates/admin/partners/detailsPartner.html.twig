@@ -6,8 +6,9 @@
 {% block body %}
 {% if is_granted('ROLE_ADMIN')  %}
 	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
-		<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationPartners">
-
+		<div
+			class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationPartners">
+			{# FENETRE ALERT EN CAS DE SUPPRESSION AVEC LIEN DE CONFIRMATION #}
 			<div class="alert alert-danger alert-dismissible fade show " role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer ce partenaire?
 				<a href="{{path('app_deletePartner', {id: partner.id})}}" class="alert-link" id="alert">
 					Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>
@@ -46,8 +47,6 @@
 				<h5 class="card-title ms-3">
 					<i class="far fa-comment me-2" id="comment_icon"></i>
 					{{ partner.longDescription }}</h5>
-				<h5 class="card-title ms-5">
-					{{ partner.logo }}</h5>
 				<h5 class="card-title ms-5">
 					{{ partner.url }}</h5>
 				<h5 class="card-title ms-3">
@@ -106,13 +105,14 @@
 <div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
 	<div class="card-body">
 		<div class="container m-1">
-			<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
-			{% for structure in structures %}
+			{% for structures in partner.structures %}
+				<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la Structure</h5>
+
 				<h5 class="card-title ms-3">
-					<i class="far fa-building ms-2 me-2" id="building_icon"></i>Structure
-					{{structure.storename}},
-					{{structure.adress}},
-					{{structure.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+					<i class="far fa-building ms-2 me-2" id="building_icon"></i>
+					{{structures.id}},
+					{{structures.adress}},
+					{{structures.country}}<a href="{{path('app_detailsStructure', {id: structures.id})}}">
 						<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
 					</a>
 				</h5>

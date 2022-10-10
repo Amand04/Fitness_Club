@@ -5,8 +5,9 @@
 {% block body %}
 
 	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
-		<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
-
+		<div
+			class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
+			{# FENETRE ALERT EN CAS DE SUPPRESSION AVEC LIEN DE CONFIRMATION #}
 			<div class="alert alert-danger alert-dismissible fade show " role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cette structure?
 				<a href="{{path('app_deleteStructures', {id: structure.id})}}" class="alert-link" id="alert">
 					Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>

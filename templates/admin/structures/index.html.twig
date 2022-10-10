@@ -11,10 +11,12 @@
 			{% endif %}
 		</h3>
 	</div>
+	{# BOUTON DE TRI ACTIF OU NON #}
 	<div class="container">
 		<button class="btn btn-primary btn-lg m-2" id="actif" type="submit" value="1" placeholder="Search..">Actif</button>
 		<button class="btn btn-primary btn-lg m-2" id="inactif" type="submit" value="0" placeholder="Search..">Inactif</button>
 	</div>
+	{# BARRE DE RECHERCHE #}
 	<div class="text" id="container_table">
 		<input class="form-control" id="myInputStructures" type="text" placeholder="Chercher..">
 		<input class="zoneSaisie" type="text" placeholder="Recherche sur les noms et prénoms..." id="maRecherche" onkeyup="filtrer()">

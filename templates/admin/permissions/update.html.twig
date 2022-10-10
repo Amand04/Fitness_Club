@@ -2,7 +2,9 @@
 {% block title %}Les Permissions
 {% endblock %}
 {% block body %}
-	<section class="container my-3" id="update_font">
+	<section
+		class="container my-3" id="update_font">
+		{# FENETRE ALERT EN CAS DE SUPPRESSION AVEC LIEN DE CONFIRMATION #}
 		<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cette structure?
 			<a href="{{path('app_deletePermissions', {id: permission.id})}}" class="alert-link" id="alert">
 				Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>
@@ -29,12 +31,10 @@
 		<button type="button" class="btn btn-danger" id="btn_perm">
 			<i class="fas fa-trash fa-1x ms-2 me-2" id="delete_iconPerm"></i>
 		</button>
-		<!-- Button trigger modal -->
-
+		{# BOUTON MODAL #}
 		<button type="button" class="btn btn-primary" id="modalButton" data-toggle="modal" data-target="#exampleModalCenter">
 			Enregistrer</button>
-
-		<!-- Modal -->
+		{# FENETRE MODAL #}
 		<div class="container">
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">

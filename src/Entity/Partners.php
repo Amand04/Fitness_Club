@@ -73,11 +73,6 @@ class Partners
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $logo;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $url;
 
     /**
@@ -166,18 +161,6 @@ class Partners
     public function setLongDescription(string $long_description): self
     {
         $this->long_description = $long_description;
-
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(?string $logo): self
-    {
-        $this->logo = $logo;
 
         return $this;
     }

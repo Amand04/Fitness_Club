@@ -6,7 +6,6 @@
 	<div class="container md-3">
 		<h3 class="justify-content-center mt-5" id="title_category">Les Utilisateurs
 
-
 			{% if is_granted('ROLE_ADMIN')  %}
 				<a href="{{path('app_register')}}">
 					<i class="fas fa-plus m-3" id="btn_plus"></i>
@@ -14,24 +13,11 @@
 			{% endif %}
 		</h3>
 	</div>
-
-
-	{% for user in users %}
-		<div class="alert alert-danger alert-dismissible fade show " role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cette structure?
-			<a href="{{path('app_deleteUser', {id: user.id})}}" class="alert-link" id="alert">
-				Oui<i class="far fa-check-circle m-2 fa-2x" id="confirm_icon"></i>
-			</a>
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">x</span>
-			</button>
-		</div>
-	{% endfor %}
 	<div
 		class="text" id="container_table">
 		{#<input class="form-control" id="myInputUsers" type="text" placeholder="Chercher..">#}
 		<input class="zoneSaisie" type="text" placeholder="Recherche sur les noms et prénoms..." id="maRecherche" onkeyup="filtrer()">
-		<table class="table table-striped table-hover table-bordered" id="myTable">
-
+		<table class=" sort table table-striped table-hover table-bordered" id="myTable">
 			<thead>
 				<tr>
 					<th scope="col">id</th>
@@ -41,7 +27,6 @@
 					<th scope="col">Détails</th>
 				</tr>
 			</thead>
-
 			<tbody id="myTableUsers">
 				{% for user in users %}
 					<tr>

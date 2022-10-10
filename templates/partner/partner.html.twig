@@ -2,7 +2,9 @@
 {% block title %}Votre Fiche détaillée chez FITNESS Club
 {% endblock %}
 {% block body %}
-<section class="container my-3">
+<section
+	class="container my-3">
+	{# CONDITION SI L UTILISATEUR EST ACTIF OU NON #}
 	{% if is_granted('ROLE_PARTNER')  %}
 		{% if partners.active == 0 %}
 			<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
@@ -42,52 +44,19 @@
 						<h5 class="card-title ms-3">
 							<i class="far fa-address-card ms-2 me-2" id="comment_icon"></i>
 							{{ partners.longDescription }}</h5>
-						<h5 class="card-title ms-3">
-							{{ partners.logo }}
-						</h5>
-						<h5 class="card-title ms-3">
-							{{ partners.url }}
-						</h5>
-						<h5 class="card-title ms-3">
-							<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
-							{{ partners.technicalContact }}
-						</h5>
-						<h5 class="card-title ms-3">
-							<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
-							{{ partners.commercialContact }}
-						</h5>
-					</div>
+					</h5>
+					<h5 class="card-title ms-3">
+						{{ partners.url }}
+					</h5>
+					<h5 class="card-title ms-3">
+						<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+						{{ partners.technicalContact }}
+					</h5>
+					<h5 class="card-title ms-3">
+						<i class="fas fa-mobile-alt ms-2 me-2" id="mobile_icon"></i>
+						{{ partners.commercialContact }}
+					</h5>
 				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
-		<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
-			<div class="card-body">
-				<div class="container m-1">
-					{% for partner in permissions %}
-						{% if partner.active == 1 %}
-							<div class="container ms-4">
-								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-									<label class="form-check-label" for="flexSwitchCheckChecked">
-										<p class="card-text">{{partner.perms}}</p>
-									</label>
-								</div>
-							</div>
-						{% else %}
-							<div class="container ms-4">
-
-								<div class="form-check form-switch">
-									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-									<label class="form-check-label" for="flexSwitchChecked">
-										<p class="card-text">{{partner.perms}}</p>
-									</label>
-								</div>
-							</div>
-						{% endif %}
-					{% endfor %}
-				</h5>
 			</div>
 		</div>
 	</div>
@@ -96,17 +65,45 @@
 	<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
 		<div class="card-body">
 			<div class="container m-1">
-				<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
-				{% for structure in structures %}
-					<h5 class="card-title ms-3">Structure
-						{{structure.storename}},
-						{{structure.adress}},
-						{{structure.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
-							<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
-						</a>
-					</h5>
+				{% for partner in permissions %}
+					{% if partner.active == 1 %}
+						<div class="container ms-4">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
+								<label class="form-check-label" for="flexSwitchCheckChecked">
+									<p class="card-text">{{partner.perms}}</p>
+								</label>
+							</div>
+						</div>
+					{% else %}
+						<div class="container ms-4">
+
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
+								<label class="form-check-label" for="flexSwitchChecked">
+									<p class="card-text">{{partner.perms}}</p>
+								</label>
+							</div>
+						</div>
+					{% endif %}
 				{% endfor %}
-			</div>
+			</h5>
 		</div>
 	</div>
-{% endif %}{% endif %}</section>{% endblock %}
+</div></div><div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
+<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
+	<div class="card-body">
+		<div class="container m-1">
+			<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
+			{% for structure in structures %}
+				<h5 class="card-title ms-3">Structure
+					{{structure.storename}},
+					{{structure.adress}},
+					{{structure.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+						<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
+					</a>
+				</h5>
+			{% endfor %}
+		</div>
+	</div>
+</div>{% endif %}{% endif %}</section>{% endblock %}

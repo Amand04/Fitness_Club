@@ -9,6 +9,7 @@ use App\Form\PermissionFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/registerPermission", name="app_registerPermission")
      */
-    public function register(Request $request, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $permissions = new Permissions();
 
@@ -33,7 +34,23 @@ class PermissionsController extends AbstractController
             $entityManager->persist($permissions);
             $entityManager->flush();
 
-            return $this->redirectToRoute("app_adminPermissionsIndex");
+            //instancie et paramètre les données du mail
+            $email = (new TemplatedEmail())
+
+                ->from('amandinejeanjules@free.fr')
+                ->to($permissions->getPartners()->getEmail())
+                ->cc()
+                //->bcc('amandinejeanjules@free.fr')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Bienvenue parmis nous!')
+                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
+                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
+
+            //envoi de l'email
+            $mailer->send($email);
+
+            return $this->render("/mailer/partner/index.html.twig");
         }
 
         return $this->renderForm('admin/registerPermission.html.twig', [
