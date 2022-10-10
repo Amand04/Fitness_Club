@@ -13,8 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"email"}, message="Un compte utilise déjà cette adresse email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -46,10 +44,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $lastname;
 
-
-
-
-
     /**
      * @ORM\OneToMany(targetEntity=Structures::class, mappedBy="user")
      */
@@ -59,10 +53,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=Partners::class, mappedBy="user")
      */
     private $partners;
-
-
-
-
 
     public function getId(): ?int
     {
