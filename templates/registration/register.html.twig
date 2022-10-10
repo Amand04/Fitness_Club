@@ -2,9 +2,6 @@
 {% block title %}Créer un compte Utilisateur
 {% endblock %}
 {% block body %}
-{% for flash_error in app.flashes('verify_email_error') %}
-	<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-{% endfor %}
 <div class="container-fluid d-flex flex-wrap justify-content-center mt-2">
 	<div class="col-8">
 		<h3 class="justify-content-center mt-4" id="title_category">Créer un compte</h3>
