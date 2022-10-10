@@ -22,7 +22,6 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('lastname')
-            ->add('firstname')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -57,8 +56,7 @@ class RegistrationFormType extends AbstractType
                     'Partner' => 'ROLE_PARTNER',
                     'Structure' => 'ROLE_STRUCTURE',
                 ],
-            ])
-            ->add('created_at');
+            ]);
 
 
         // Data transformer
