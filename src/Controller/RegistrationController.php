@@ -38,6 +38,12 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            return $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $request
+            );
+
             //instancie et paramètre les données du mail
             $email = (new TemplatedEmail())
 
@@ -56,12 +62,6 @@ class RegistrationController extends AbstractController
 
             //renvoi un template
             return $this->render('/mailer/user/index.html.twig');
-
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
         }
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
