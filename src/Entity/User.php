@@ -60,10 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $partners;
 
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $firstname;
+
 
 
 
@@ -224,18 +221,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $partner->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
 
         return $this;
     }
