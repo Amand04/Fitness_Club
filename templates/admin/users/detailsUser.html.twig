@@ -24,11 +24,19 @@
 						{{ user.id }}</h5>
 					<p class="card-text">{{ user.lastname }}
 					</p>
-					<p class="card-text">{{ user.firstname }}
-					</p>
 					<p class="card-text">{{ user.email }}
 					</p>
-					<p class="card-text">{{ user.createdAt|date('Y-m-d') }}
+					<p class="card-text">
+						<i class="far fa-user me-2" id="comment_icon"></i>
+						{% for roles in user.roles %}
+							{% if roles == "ROLE_ADMIN" %}
+								Administrateur
+							{% elseif roles == "ROLE_STRUCTURE" %}
+								Structure
+							{% elseif roles == "ROLE_PARTNER" %}
+								Partenaire
+							{% endif %}
+						{% endfor %}
 					</p>
 				</div>
 				{% if is_granted('ROLE_ADMIN')  %}

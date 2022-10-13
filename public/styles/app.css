@@ -148,7 +148,7 @@ body {
 #myTable {
   background-color: #f8f6f8;
 }
-#tablePermissions {
+.table {
   background-color: #f8f6f8;
 }
 /*UPDATE*/
@@ -190,6 +190,10 @@ body {
 }
 .modal-body {
   color: #525053;
+}
+#initPasswordLink {
+  color: #319da0;
+  font-size: 20px;
 }
 /*FORM*/
 .form {

@@ -50,7 +50,7 @@ class PermissionsController extends AbstractController
             //envoi de l'email
             $mailer->send($email);
 
-            return $this->render("/mailer/partner/index.html.twig");
+            return $this->render("/mailer/permissions/index.html.twig");
         }
 
         return $this->renderForm('admin/registerPermission.html.twig', [

@@ -34,8 +34,7 @@ class UsersFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('lastname')
-            ->add('firstname');
+            ->add('lastname');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
