@@ -46,9 +46,9 @@ class StructuresFormType extends AbstractType
                 [
                     'class' => User::class,
                     'choice_label' => function ($user) {
-                        return $user->getId();
+                        return " Identifiant n° " .  $user->getId();
                     },
-                    'label' => 'user_id',
+                    'label' => 'Compte utilisateur',
                     'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]

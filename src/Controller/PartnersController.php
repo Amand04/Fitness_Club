@@ -35,24 +35,8 @@ class PartnersController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
 
-            //instancie et paramètre les données du mail
-            $email = (new TemplatedEmail())
-
-                ->from('amandinejeanjules@free.fr')
-                ->to($partner->getEmail())
-                ->cc('amandinejeanjules@free.fr')
-                //->bcc('amandinejeanjules@free.fr')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Bienvenue parmis nous!')
-                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
-                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
-
-            //envoi de l'email
-            $mailer->send($email);
-
             //renvoi au template
-            return $this->render('/mailer/partner/index.html.twig');
+            return $this->render('/mailer/user/confirmRegisterEntity.html.twig');
         }
         return $this->renderForm('admin/registerPartner.html.twig', [
             'partner' => $partner,
@@ -72,7 +56,7 @@ class PartnersController extends AbstractController
         $partners = $paginator->paginate(
             $partners,
             $request->query->getInt('page', 1),
-            6
+            10
         );
         return $this->renderForm(
             'admin/partners/index.html.twig',

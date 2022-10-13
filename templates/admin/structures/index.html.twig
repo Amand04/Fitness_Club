@@ -11,14 +11,7 @@
 			{% endif %}
 		</h3>
 	</div>
-	{# BOUTON DE TRI ACTIF OU NON #}
-	<div class="container">
-		<button class="btn btn-primary btn-lg m-2" id="actif" type="submit" value="1" placeholder="Search..">Actif</button>
-		<button class="btn btn-primary btn-lg m-2" id="inactif" type="submit" value="0" placeholder="Search..">Inactif</button>
-	</div>
-	{# BARRE DE RECHERCHE #}
 	<div class="text" id="container_table">
-		<input class="zoneSaisie" type="text" placeholder="Recherche sur les noms et prénoms..." id="maRecherche" onkeyup="filtrer()">
 		<table class="table table-striped table-hover table-bordered" id="myTable">
 			<thead>
 				<tr>
@@ -37,7 +30,7 @@
 					<tr>
 						<th scope="row">{{ structure.id }}</th>
 						<td>{{ structure.storeName }}</td>
-						<td>
+						<td id="tri">
 							{% if structure.active == 1 %}
 								<p>1</p>
 							{% else %}
@@ -56,27 +49,13 @@
 					{% endfor %}
 				</tr>
 			</tbody>
-		</table>
-		{{ knp_pagination_render(structures)}}
-	</div>
-	<script>
-		$(document).ready(function () {
-$("#actif").on("click", function () {
-let value = $(this).val();
-$("#myTable tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value - 1) < 1)
+		</tbody>
+	</table>
+</div>
+{{ knp_pagination_render(structures)}}
+<script>
+
+	$(document).ready(function () {
+$('#myTable').DataTable();
 });
-});
-});
-	</script>
-	<script>
-		$(document).ready(function () {
-$("#inactif").on("click", function () {
-let value = $(this).val();
-$("#myTable tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value) > 1)
-});
-});
-});
-	</script>
-{% endblock %}
+</script>{% endblock %}

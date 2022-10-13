@@ -11,13 +11,8 @@
 			{% endif %}
 		</h3>
 	</div>
-	<div class="container">
-		<button class="btn btn-primary btn-lg m-2" id="actif" type="submit" value="1" placeholder="Search..">Actif</button>
-		<button class="btn btn-primary btn-lg m-2" id="inactif" type="submit" value="0" placeholder="Search..">Inactif</button>
-	</div>
 	<div class="text" id="container_table">
-		<input class="zoneSaisie" type="text" placeholder="Recherche sur les noms et prénoms..." id="maRecherche" onkeyup="filtrer()">
-		<table class=" sort table table-striped table-hover table-bordered" id="myTable">
+		<table class="table table-striped table-hover table-bordered" id="myTable">
 			<thead>
 				<tr>
 					<th scope="col">id</th>
@@ -56,26 +51,11 @@
 			</tbody>
 		</tbody>
 	</table>
-
 </div>
 {{ knp_pagination_render(partners)}}
 <script>
+
 	$(document).ready(function () {
-$("#actif").on("click", function () {
-let value = $(this).val();
-$("#myTable tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value - 1) < 1)
-});
-});
-});
-</script>
-<script>
-	$(document).ready(function () {
-$("#inactif").on("click", function () {
-let value = $(this).val();
-$("#myTable tr").filter(function () {
-$(this).toggle($(this).text().indexOf(value) > 1)
-});
-});
+$('#myTable').DataTable();
 });
 </script>{% endblock %}

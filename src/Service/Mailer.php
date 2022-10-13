@@ -20,7 +20,7 @@ class Mailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmail($email, $token)
+    public function sendEmailActivateAccount($email, $token)
     {
 
         //instancie et paramètre les données du mail

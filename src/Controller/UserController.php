@@ -37,7 +37,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("admin/users/update/{id}", name="app_updateUser")
+     * @Route("admin/users/update/{token}", name="app_updateUser")
      */
     public function update(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine, User $user): Response
     {

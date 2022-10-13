@@ -7,7 +7,6 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\StructuresFormType;
-use App\Repository\PermissionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -15,15 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\MailerInterface;
 
 class StructuresController extends AbstractController
 {
     /**
      * @Route("admin/registerStructure", name="app_registerStructure")
      */
-    public function registerStructure(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function registerStructure(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
         $structure = new Structures();
 
@@ -36,24 +33,8 @@ class StructuresController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
-            //instancie et paramètre les données du mail
-            $email = (new TemplatedEmail())
-
-                ->from('amandinejeanjules@free.fr')
-                ->to($structure->getEmail())
-                ->cc('amandinejeanjules@free.fr')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Bienvenue parmis nous!')
-                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
-                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
-
-            //envoi de l'email
-            $mailer->send($email);
-
             //renvoi au template
-            return $this->render('/mailer/structure/index.html.twig');
+            return $this->render('/mailer/user/confirmRegisterEntity.html.twig');
         }
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
@@ -76,7 +57,7 @@ class StructuresController extends AbstractController
         $structures = $paginator->paginate(
             $structures,
             $request->query->getInt('page', 1),
-            6
+            10
         );
 
         return $this->renderForm(

@@ -34,23 +34,7 @@ class PermissionsController extends AbstractController
             $entityManager->persist($permissions);
             $entityManager->flush();
 
-            //instancie et paramètre les données du mail
-            $email = (new TemplatedEmail())
-
-                ->from('amandinejeanjules@free.fr')
-                ->to($permissions->getPartners()->getEmail())
-                ->cc()
-                //->bcc('amandinejeanjules@free.fr')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Bienvenue parmis nous!')
-                ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application!')
-                ->htmlTemplate('/mailer/user/firstConnection.html.twig');
-
-            //envoi de l'email
-            $mailer->send($email);
-
-            return $this->render("/mailer/permissions/index.html.twig");
+            return $this->render("/mailer/user/confirmRegisterEntity.html.twig");
         }
 
         return $this->renderForm('admin/registerPermission.html.twig', [
@@ -72,7 +56,7 @@ class PermissionsController extends AbstractController
         $permissions = $paginator->paginate(
             $permissions,
             $request->query->getInt('page', 1),
-            6
+            10
         );
 
         return $this->renderForm(
