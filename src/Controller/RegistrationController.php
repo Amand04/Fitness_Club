@@ -58,9 +58,6 @@ class RegistrationController extends AbstractController
                 'registrationForm' => $form->createView()
             ]);
 
-
-
-
             return $userAuthenticator->authenticateUser(
                 $user,
                 $authenticator,

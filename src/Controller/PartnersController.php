@@ -21,7 +21,7 @@ class PartnersController extends AbstractController
     /**
      * @Route("admin/registerEntity/registerPartner", name="app_registerPartner")
      */
-    public function registerPartner(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function registerPartner(Request $request, EntityManagerInterface $entityManager): Response
     {
         $partner = new Partners();
 

@@ -8,11 +8,9 @@ use App\Entity\Structures;
 use App\Form\PermissionFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PermissionsController extends AbstractController
@@ -20,7 +18,7 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/registerEntity/registerPermission", name="app_registerPermission")
      */
-    public function register(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
+    public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
         $permissions = new Permissions();
 
@@ -67,7 +65,7 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/permissions/update/{id}", name="app_updatePermissions")
      */
-    public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine, MailerInterface $mailer): Response
+    public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine): Response
     {
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
@@ -77,26 +75,6 @@ class PermissionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $permission = $doctrine->getManager()->flush();
-
-            // $partners = $doctrine->$this->getEmail();
-
-            //    $email = (new Email())
-            //
-            //              ->from('amandinejeanjules@free.fr')
-            //            ->to($partners)
-            //          ->cc('amandinejeanjules@free.fr')
-            //        //->bcc('amandinejeanjules@free.fr')
-            //        //->replyTo('fabien@example.com')
-            //        //->priority(Email::PRIORITY_HIGH)
-            //        ->subject('Bienvenue parmis nous!')
-            //        ->text('Cher Client,<br>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!')
-            //        ->html('<h2>Félicitations, vous êtes desormais enregistré dans notre application et faites désormais parti de nos clients!</h2><br>
-            //    <h3>Les identitfiants nécessaires à votre connexion vous seront communiqués très prochainement par télephone par votre administrateur. </h3>
-            //    <h3>Celui-ci fera également un point avec vous.</h3>
-            //    <h3>Nous vous remercions de votre confiance et vous disons à trés bientôt!</h3>
-            //    <h3>L\'équipe Fitness Club</h3>');
-
-            //   $mailer->send($email);
 
             return $this->render('/mailer/permissions/index.html.twig');
         }
