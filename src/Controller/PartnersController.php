@@ -39,7 +39,7 @@ class PartnersController extends AbstractController
             //renvoi au template
             return $this->render('admin/confirmRegister/entity.html.twig');
         }
-        return $this->renderForm('admin/registerEntity/registerPartner.html.twig', [
+        return $this->renderForm('admin/registerEntity/partner.html.twig', [
             'partner' => $partner,
             'form' => $form
         ]);

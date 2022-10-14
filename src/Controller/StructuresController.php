@@ -51,7 +51,7 @@ class StructuresController extends AbstractController
         }
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
-        return $this->renderForm('admin/registerEntity/registerStructure.html.twig', [
+        return $this->renderForm('admin/registerEntity/structure.html.twig', [
             'structure' => $structure,
             "permissions" => $permissions,
             'form' => $form

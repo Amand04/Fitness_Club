@@ -39,7 +39,7 @@ class PermissionsController extends AbstractController
             return $this->render('admin/confirmRegister/entity.html.twig');
         }
 
-        return $this->renderForm('admin/registerEntity/registerPermission.html.twig', [
+        return $this->renderForm('admin/registerEntity/permission.html.twig', [
             'permissions' => $permissions,
             'form' => $form
         ]);
