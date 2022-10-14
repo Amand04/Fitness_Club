@@ -146,7 +146,7 @@ class RegistrationController extends AbstractController
             $this->mailer->sendEmailPassword($user->getEmail(), $user->getResetToken());
 
             // On crée le message flash
-            $this->addFlash('message', 'Un e-mail de réinitialisation de mot de passe vous a été envoyé');
+            $this->addFlash('message', 'Un email de réinitialisation de mot de passe vous a été envoyé');
 
             return $this->redirectToRoute('app_login');
         }

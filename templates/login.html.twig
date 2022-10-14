@@ -47,17 +47,13 @@
 							</div>
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 							<button class="btn btn mt-4" id="btn_login" type="submit">Se connecter</button>
-
+							<h5 class="mt-1">
+								<a href=" {{ absolute_url(path('app_forgottenPassword')) }} " id="initPasswordLink">Mot de passe oublié</a>
+							</h5>
 						</form>
 					</div>
 				</div>
-
 			</div>
-		</div>
-		<div class="container-fluid d-flex flex-wrap justify-content-center ">
-			<h5 class="mt-3 ms-4">
-				<a href=" {{ absolute_url(path('app_forgottenPassword')) }} " id="initPasswordLink">Veuillez suivre ce lien si vous souhaitez initialiser votre mot de passe ou si vous l'avez oublié</a>
-			</h5>
 		</div>
 	{% endif %}
 {% endblock %}
