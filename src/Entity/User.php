@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -63,11 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reset_token;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $confirm_token;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -259,18 +255,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetToken(?string $reset_token): self
     {
         $this->reset_token = $reset_token;
-
-        return $this;
-    }
-
-    public function getConfirmToken(): ?string
-    {
-        return $this->coonfirm_token;
-    }
-
-    public function setConfirmToken(?string $coonfirm_token): self
-    {
-        $this->coonfirm_token = $coonfirm_token;
 
         return $this;
     }

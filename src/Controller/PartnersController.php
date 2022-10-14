@@ -9,13 +9,11 @@ use App\Entity\User;
 use App\Form\PartnersFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 
 class PartnersController extends AbstractController
@@ -35,8 +33,11 @@ class PartnersController extends AbstractController
             $entityManager->persist($partner);
             $entityManager->flush();
 
+            // On envoie un message flash
+            $this->addFlash('message', 'Demande enregistrée avec succès');
+
             //renvoi au template
-            return $this->render('/mailer/user/confirmRegisterEntity.html.twig');
+            return $this->render('admin/confirmRegister/entity.html.twig');
         }
         return $this->renderForm('admin/registerPartner.html.twig', [
             'partner' => $partner,
@@ -47,17 +48,11 @@ class PartnersController extends AbstractController
     /**
      * @Route("admin/partners/index", name="app_adminPartnersIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine)
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
-        //pagination
-        $partners = $paginator->paginate(
-            $partners,
-            $request->query->getInt('page', 1),
-            10
-        );
         return $this->renderForm(
             'admin/partners/index.html.twig',
             [

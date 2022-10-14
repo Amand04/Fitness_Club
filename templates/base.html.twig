@@ -52,10 +52,10 @@
 									<a class="nav-link" href="/admin/structures/index">Les Structures</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/admin/users/index">Les utilisateurs</a>
+									<a class="nav-link" href="/admin/users/index">Les Utilisateurs</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/admin/permissions/index">Les permissions</a>
+									<a class="nav-link" href="/admin/permissions/index">Les Permissions</a>
 								</li>
 							{% endif %}
 
@@ -75,7 +75,6 @@
 								<ul class="navbar-nav mr-auto" id="navbar-font">
 									<li class="nav-item">
 										{% for partner in partners %}
-
 											{% if partner.email == app.user.email %}
 												<a class="nav-link" href="{{ path('app_partner', {'id': partner.id}) }}">Votre fiche Partenaire</a>
 											{% endif %}
@@ -90,9 +89,9 @@
 								<a href="{{ path('app_logout') }}" id="deconnect_link">Déconnexion</a>
 							</li>
 						</ul>
-					</div>
-				{% endif %}
+					{% endif %}
+				</div>
 			</nav>
-		</body>
+		</div>
 	</body>
-</html></body></html></body></html></div>{% block body %}{% endblock %}<footer><div class="container-fluid d-flex flex-wrap justify-content-center" id="footer">Fitness Club Copyright | 2022</div></footer></body></html></body></html> </body></html>
+</html></body></html>{% block body %}{% endblock %}<footer><div class="container-fluid d-flex flex-wrap justify-content-center" id="footer">Fitness Club Copyright | 2022</div></footer></body></html>

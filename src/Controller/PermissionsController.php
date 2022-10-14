@@ -8,7 +8,6 @@ use App\Entity\Structures;
 use App\Form\PermissionFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +33,10 @@ class PermissionsController extends AbstractController
             $entityManager->persist($permissions);
             $entityManager->flush();
 
-            return $this->render("/mailer/user/confirmRegisterEntity.html.twig");
+            // On envoie un message flash
+            $this->addFlash('message', 'Demande enregistrée avec succès');
+
+            return $this->render('admin/confirmRegister/entity.html.twig');
         }
 
         return $this->renderForm('admin/registerPermission.html.twig', [
@@ -46,18 +48,11 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/permissions/index", name="app_adminPermissionsIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine)
     {
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
         $structures = $doctrine->getRepository(Structures::class)->findAll();
-
-        //pagination
-        $permissions = $paginator->paginate(
-            $permissions,
-            $request->query->getInt('page', 1),
-            10
-        );
 
         return $this->renderForm(
             'admin/permissions/index.html.twig',

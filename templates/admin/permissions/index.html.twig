@@ -39,12 +39,13 @@
 								<i class="fas fa-edit m-3" id="update_icon"></i>
 							</a>
 						</td>
-					</tr>
-				</tbody>
+					{% endfor %}
+				</tr>
 			</tbody>
-		{% endfor %}
+		</tbody>
+
 	</table>
-	{{ knp_pagination_render(permissions)}}</div>
+</div>
 <script>
 
 	$(document).ready(function () {

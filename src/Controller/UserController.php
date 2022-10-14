@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UsersFormType;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,16 +16,9 @@ class UserController extends AbstractController
     /**
      * @Route("admin/users/index", name="app_adminUsersIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine)
     {
         $users = $doctrine->getRepository(User::class)->findAll();
-
-        //pagination//
-        $users = $paginator->paginate(
-            $users,
-            $request->query->getInt('page', 1),
-            6
-        );
 
         return $this->renderForm(
             'admin/users/index.html.twig',
@@ -37,7 +29,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("admin/users/update/{token}", name="app_updateUser")
+     * @Route("admin/users/update/{id}", name="app_updateUser")
      */
     public function update(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $doctrine, User $user): Response
     {
@@ -69,9 +61,15 @@ class UserController extends AbstractController
      */
     public function delete(User $user, Request $request, ManagerRegistry $doctrine): Response
     {
+
+
+
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
+
+        $this->addFlash('message', 'L\'utilisateur a bien été supprimé ');
+
         return $this->redirectToRoute("app_adminUsersIndex");
     }
 

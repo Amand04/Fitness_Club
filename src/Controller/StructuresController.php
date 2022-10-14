@@ -7,9 +7,9 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\StructuresFormType;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StructuresController extends AbstractController
 {
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     /**
      * @Route("admin/registerStructure", name="app_registerStructure")
      */
@@ -33,8 +43,11 @@ class StructuresController extends AbstractController
             $entityManager->persist($structure);
             $entityManager->flush();
 
+            // On envoie un message flash
+            $this->addFlash('message', 'Demande enregistrée avec succès');
+
             //renvoi au template
-            return $this->render('/mailer/user/confirmRegisterEntity.html.twig');
+            return $this->render('admin/confirmRegister/entity.html.twig');
         }
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
@@ -48,17 +61,10 @@ class StructuresController extends AbstractController
     /**
      * @Route("admin/structures/index", name="app_adminStructuresIndex")
      */
-    public function index(Request $request, ManagerRegistry $doctrine, PaginatorInterface $paginator)
+    public function index(Request $request, ManagerRegistry $doctrine)
     {
         $structures = $doctrine->getRepository(Structures::class)->findAll();
         $partners = $doctrine->getRepository(Partners::class)->findAll();
-
-        //pagination//
-        $structures = $paginator->paginate(
-            $structures,
-            $request->query->getInt('page', 1),
-            10
-        );
 
         return $this->renderForm(
             'admin/structures/index.html.twig',
@@ -129,7 +135,7 @@ class StructuresController extends AbstractController
     }
 
     /**
-     * @Route("structure/structure/{id}/", name="app_structure")
+     * @Route("structure/structure/{id}", name="app_structure")
      */
     public function readStructure(ManagerRegistry $doctrine): Response
     {
