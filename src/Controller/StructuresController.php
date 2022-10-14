@@ -28,7 +28,7 @@ class StructuresController extends AbstractController
     }
 
     /**
-     * @Route("admin/registerStructure", name="app_registerStructure")
+     * @Route("admin/registerEntity/registerStructure", name="app_registerStructure")
      */
     public function registerStructure(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
@@ -51,7 +51,7 @@ class StructuresController extends AbstractController
         }
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
-        return $this->renderForm('admin/registerStructure.html.twig', [
+        return $this->renderForm('admin/registerEntity/registerStructure.html.twig', [
             'structure' => $structure,
             "permissions" => $permissions,
             'form' => $form

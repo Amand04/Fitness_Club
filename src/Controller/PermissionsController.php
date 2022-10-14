@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PermissionsController extends AbstractController
 {
     /**
-     * @Route("admin/registerPermission", name="app_registerPermission")
+     * @Route("admin/registerEntity/registerPermission", name="app_registerPermission")
      */
     public function register(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
@@ -39,7 +39,7 @@ class PermissionsController extends AbstractController
             return $this->render('admin/confirmRegister/entity.html.twig');
         }
 
-        return $this->renderForm('admin/registerPermission.html.twig', [
+        return $this->renderForm('admin/registerEntity/registerPermission.html.twig', [
             'permissions' => $permissions,
             'form' => $form
         ]);

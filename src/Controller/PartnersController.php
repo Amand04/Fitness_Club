@@ -19,7 +19,7 @@ use Symfony\Component\Mailer\MailerInterface;
 class PartnersController extends AbstractController
 {
     /**
-     * @Route("admin/registerPartner", name="app_registerPartner")
+     * @Route("admin/registerEntity/registerPartner", name="app_registerPartner")
      */
     public function registerPartner(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
@@ -39,7 +39,7 @@ class PartnersController extends AbstractController
             //renvoi au template
             return $this->render('admin/confirmRegister/entity.html.twig');
         }
-        return $this->renderForm('admin/registerPartner.html.twig', [
+        return $this->renderForm('admin/registerEntity/registerPartner.html.twig', [
             'partner' => $partner,
             'form' => $form
         ]);
