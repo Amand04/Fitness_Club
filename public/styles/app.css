@@ -1,5 +1,5 @@
 body {
-  background-color: #3d3d3d;
+  background-color: #6638cf;
   color: #eee3f1;
 }
 /*NAVBAR*/
@@ -73,7 +73,14 @@ body {
   font-family: "Roboto", cursive;
   font-style: italic;
   font-weight: 600;
-  color: #319da0;
+  color: #fbfcfc;
+  font-size: 20px;
+}
+#title_details {
+  font-family: "Roboto", cursive;
+  font-style: italic;
+  font-weight: 600;
+  color: #1f2222;
   font-size: 20px;
 }
 /*BOUTONS*/
@@ -145,10 +152,14 @@ body {
 .table {
   color: #525053;
   background-color: #f8f6f8;
+  width: 5px;
 }
 #myTable {
   background-color: #f8f6f8;
   font-size: 14px;
+}
+#email_input {
+  width: 2px;
 }
 /*UPDATE*/
 #update_font {
@@ -180,6 +191,7 @@ body {
 }
 #navLink {
   color: #319da0;
+  font-weight: 500;
 }
 /*MODAL*/
 .modal-title {

@@ -19,7 +19,7 @@ class Mailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmailActivateAccount($email, $token)
+    public function sendEmailActivateAccount($email, $token, $user)
     {
 
         //instancie et paramètre les données du mail
@@ -32,16 +32,12 @@ class Mailer
             ->text('Cher Client,<br>Félicitations, vous êtes desormais inscrit sur notre application FitnessClub!')
             ->htmlTemplate('mailer/user/firstConnection.html.twig')
             ->context([
-                'token' => $token
+                'token' => $token,
+                'user' => $user
             ]);
 
         //envoi de l'email
-        try {
-            $this->mailer->send($email);
-        } catch (TransportExceptionInterface $e) {
-            // some error prevented the email sending; display an
-            // error message or try to resend the message
-        }
+        $this->mailer->send($email);
     }
 
     public function sendEmailPassword($email, $token)

@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->mailer->sendEmailActivateAccount($user->getEmail(), $user->getActivationToken());
+            $this->mailer->sendEmailActivateAccount($user->getEmail(), $user->getActivationToken(), $user->getLastname());
 
             //renvoi un template
             return $this->render('mailer/user/index.html.twig', [
