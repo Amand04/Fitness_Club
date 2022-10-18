@@ -6,6 +6,7 @@ use App\Entity\Partners;
 use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Form\PermissionFormType;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,21 +16,36 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PermissionsController extends AbstractController
 {
+
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     /**
      * @Route("admin/registerEntity/registerPermission", name="app_registerPermission")
      */
-    public function register(Request $request, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
         $permissions = new Permissions();
+
 
         $form = $this->createForm(PermissionFormType::class, $permissions);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $form->getData();
             $entityManager->persist($permissions);
             $entityManager->flush();
+
+
 
             // On envoie un message flash
             $this->addFlash('message', 'Demande enregistrée avec succès');
@@ -39,6 +55,7 @@ class PermissionsController extends AbstractController
 
         return $this->renderForm('admin/registerEntity/permission.html.twig', [
             'permissions' => $permissions,
+
             'form' => $form
         ]);
     }
@@ -65,8 +82,13 @@ class PermissionsController extends AbstractController
     /**
      * @Route("admin/permissions/update/{id}", name="app_updatePermissions")
      */
-    public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine): Response
+    public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine, int $id): Response
     {
+
+
+        $partner = $doctrine->getRepository(Partners::class)->find($id);
+
+
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
         $form = $this->createForm(PermissionFormType::class, $permission);
@@ -75,14 +97,16 @@ class PermissionsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $permission = $doctrine->getManager()->flush();
+            $this->mailer->sendEmailPermissionsPartners($partner->getEmail());
 
             return $this->render('/mailer/permissions/index.html.twig');
         }
 
         return $this->renderForm("admin/permissions/update.html.twig", [
-            "form" => $form,
-            "permission" => $permission,
-            "partners" => $partners
+            'form' => $form,
+            'permission' => $permission,
+            'partners' => $partners,
+            'partner' => $partner
         ]);
     }
 

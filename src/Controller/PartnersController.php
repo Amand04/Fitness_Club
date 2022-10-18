@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\MailerInterface;
 
 class PartnersController extends AbstractController
 {
@@ -103,16 +102,14 @@ class PartnersController extends AbstractController
         $structures = $doctrine->getRepository(Structures::class)->findAll();
         $permissions = $doctrine->getRepository(Permissions::class)->findAll();
 
-        if ($request->isXmlHttpRequest()) {
+        $form = $this->createForm(PartnersFormType::class, $partner);
+        $form->handleRequest($request);
 
-            $id = $_POST["id"];
-            $active = $_POST["active"];
-            $partner = $_POST["id"] + $_POST["active"];
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $partner = $doctrine->getManager()->flush();
-
-            return new JsonResponse([$id => 'id', $active => 'active']);
         }
+
 
         return $this->render(
             "admin/partners/detailsPartner.html.twig",

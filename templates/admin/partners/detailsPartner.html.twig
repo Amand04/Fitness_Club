@@ -7,7 +7,7 @@
 {% if is_granted('ROLE_ADMIN')  %}
 	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
 		<div
-			class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationPartners">
+			class="card bg-light border-secondary" style="width: 30rem; height: auto;" id="card_presentationPartners">
 			{# FENETRE ALERT EN CAS DE SUPPRESSION AVEC LIEN DE CONFIRMATION #}
 			<div class="alert alert-danger alert-dismissible fade show " role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer ce partenaire?
 				<a href="{{path('app_deletePartner', {id: partner.id})}}" class="alert-link" id="alert">
@@ -18,9 +18,14 @@
 				</button>
 			</div>
 			<div class="card-body">
-				<div class="container">
-					<h5 class="justify-content-center mt-1" id="title_category">Partenaire n°
+				<div class="container-fluid">
+					<h5 class="justify-content-center mt-1" id="title_category">
+						<a class="nav-link" href="{{ path('app_adminPartnersIndex')}}">
+							<i class="fas fa-arrow-left fa-1x" id="arrow_iconReturn"></i>
+						</a>Partenaire n°
 						{{ partner.id }}</h5>
+					<h5 class="justify-content-center mt-5" id="title_category">
+						{{ partner.name }}</h5>
 				</div>
 
 				<div class="container m-1">
@@ -28,14 +33,14 @@
 						<div class="container m-4 ">
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
-								<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">{{ partner.name }}</label>
+								<label class="form-check-label" for="flexSwitchCheckCheckedDisabled">Actif</label>
 							</div>
 						{% else %}
 
 							<div class="container m-4">
 								<div class="form-check form-switch">
 									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
-									<label class="form-check-label" for="flexSwitchCheckDisabled">{{ partner.name }}</p>
+									<label class="form-check-label" for="flexSwitchCheckDisabled">Inactif</p>
 								</label>
 							</div>
 						</div>

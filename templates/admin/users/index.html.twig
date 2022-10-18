@@ -7,12 +7,12 @@
 			{{ message }}
 		</div>
 	{% endfor %}
-	<div class="container md-3">
+	<div class="container md-2">
 		<h3 class="justify-content-center mt-5" id="title_category">Les Utilisateurs
 
 			{% if is_granted('ROLE_ADMIN')  %}
 				<a href="{{path('app_register')}}">
-					<i class="fas fa-plus m-3" id="btn_plus"></i>
+					<i class="fas fa-plus-circle m-3" id="btn_plus"></i>
 				</a>
 			{% endif %}
 		</h3>
@@ -20,18 +20,16 @@
 	<div class="text" id="container_table">
 		<table class="table table-striped table-hover table-bordered" id="myTable">
 			<thead>
-				<tr>
-					<th scope="col">id</th>
-					<th scope="col">Nom</th>
-					<th scope="col">Email</th>
-					<th scope="col">Détails</th>
+				<tr class="line_table">
+					<th scope="col" class="btn_table">id</th>
+					<th scope="col" class="btn_table">Email</th>
+					<th scope="col" class="btn_table">Détails</th>
 				</tr>
 			</thead>
 			<tbody id="myTable">
 				{% for user in users %}
 					<tr>
 						<th scope="row">{{ user.id }}</th>
-						<td>{{ user.lastname }}</td>
 						<td>{{ user.email }}</td>
 						<td>
 							<a href="{{path('app_detailsUser', {id: user.id})}}">

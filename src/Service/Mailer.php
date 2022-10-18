@@ -59,4 +59,21 @@ class Mailer
         //envoi de l'email
         $this->mailer->send($email);
     }
+
+    public function sendEmailPermissionsPartners($email)
+    {
+
+        //instancie et paramètre les données du mail
+        $email = (new TemplatedEmail())
+
+            ->from('amandinejeanjules@free.fr')
+            ->to(new Address($email))
+            ->cc('amandinejeanjules@free.fr')
+            ->subject('Bienvenue parmis nous!')
+            ->text('Cher Client,<br>Pour initialiser votre mot de passe suivez ce lien:!')
+            ->htmlTemplate('mailer/permissions/index.html.twig');
+
+        //envoi de l'email
+        $this->mailer->send($email);
+    }
 }

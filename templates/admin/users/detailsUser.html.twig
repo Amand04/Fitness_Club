@@ -7,7 +7,7 @@
 
 	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
 		<div
-			class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
+			class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationStructures">
 			{# FENETRE ALERT EN CAS DE SUPPRESSION AVEC LIEN DE CONFIRMATION #}
 			<div class="alert alert-danger alert-dismissible fade show " role="alert" id="alert" style="display: none;">Etes-vous sur de vouloir supprimer cet utilisateur?
 				<a href="{{path('app_deleteUser', {id: user.id})}}" class="alert-link" id="alert">
@@ -20,7 +20,10 @@
 
 			<div class="card-body m-1" id="card">
 				<div class="container">
-					<h5 class="justify-content-center mt-3" id="title_category">Utilisateur n°
+					<h5 class="justify-content-center mt-3" id="title_category">
+						<a class="nav-link" href="{{ path('app_adminUsersIndex')}}">
+							<i class="fas fa-arrow-left fa-1x" id="arrow_iconReturn"></i>
+						</a>Utilisateur n°
 						{{ user.id }}</h5>
 					<p class="card-text">{{ user.lastname }}
 					</p>

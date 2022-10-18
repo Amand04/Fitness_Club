@@ -6,6 +6,7 @@ use App\Entity\Partners;
 use App\Entity\Permissions;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,7 @@ class PermissionFormType extends AbstractType
                 'perms',
                 ChoiceType::class,
                 [
-                    'label' => 'Permission',
+                    'label' => 'Permission à créer',
                     'choices' => [
                         'Newsletter' => 'Newsletter',
                         'Promote' =>  'Promote',
@@ -38,10 +39,10 @@ class PermissionFormType extends AbstractType
                 [
                     'class' => Partners::class,
                     'choice_label' => function ($partner) {
-                        return $partner->getId();
+                        return $partner->getId() . " (" . $partner->getName() . ")";
                     },
-                    'label' => 'Partenaire',
-                    'multiple' => false, 'expanded' => true, 'mapped' => true,
+                    'label' => 'Partenaire à associer',
+                    'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
             );

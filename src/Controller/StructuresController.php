@@ -7,6 +7,8 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\StructuresFormType;
+use App\Repository\PartnersRepository;
+use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +18,24 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StructuresController extends AbstractController
 {
+
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+
+    public function __construct(Mailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     /**
      * @Route("admin/registerEntity/registerStructure", name="app_registerStructure")
      */
     public function registerStructure(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
     {
         $structure = new Structures();
+
 
         $form = $this->createForm(StructuresFormType::class, $structure);
         $form->handleRequest($request);
@@ -31,6 +45,7 @@ class StructuresController extends AbstractController
             $form->getData();
             $entityManager->persist($structure);
             $entityManager->flush();
+
 
             // On envoie un message flash
             $this->addFlash('message', 'Demande enregistrée avec succès');
@@ -69,20 +84,28 @@ class StructuresController extends AbstractController
      */
     public function update(Structures $structure, Request $request, ManagerRegistry $doctrine): Response
     {
+
+
+
         $form = $this->createForm(StructuresFormType::class, $structure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
 
+
+
             $structure = $doctrine->getManager()->flush();
+
+
 
             return $this->redirectToRoute("app_adminStructuresIndex");
         }
 
         return $this->renderForm("admin/structures/update.html.twig", [
             "form" => $form,
-            "structure" => $structure
+            "structure" => $structure,
+
         ]);
     }
 

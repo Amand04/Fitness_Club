@@ -15,18 +15,13 @@ body {
 }
 /*CARTE DETAILS*/
 #card_presentationPartners {
-  display: flex;
-  justify-content: stretch;
   font-size: 15px;
+  background-color: #eee3f1;
   border-color: #eee3f1;
   border-radius: 5px;
   color: #525053;
 }
 #card_presentationStructures {
-  display: flex;
-  justify-content: stretch;
-  width: auto;
-  height: auto;
   font-size: 15px;
   background-color: #eee3f1;
   border-color: #eee3f1;
@@ -68,9 +63,10 @@ body {
   height: 80px;
   margin-top: 35px;
 }
-#logo_partners {
-  width: 90px;
-  height: 90px;
+#logo {
+  width: 115px;
+  height: 40px;
+  margin-top: 5px;
 }
 /*TITRES*/
 #title_category {
@@ -78,19 +74,9 @@ body {
   font-style: italic;
   font-weight: 600;
   color: #319da0;
-  font-size: 25px;
+  font-size: 20px;
 }
 /*BOUTONS*/
-#actif {
-  background-color: #319da0;
-  border: #319da0;
-  font-size: 20px;
-}
-#inactif {
-  background-color: #319da0;
-  border: #319da0;
-  font-size: 20px;
-}
 #btn_login {
   background-color: #319da0;
   color: #fbf9fc;
@@ -102,6 +88,14 @@ body {
 #btn_register {
   background-color: #319da0;
   border: #319da0;
+}
+.line_table {
+  background-color: #319da0;
+}
+.btn_table {
+  color: #fafdfd;
+  border-radius: 10px;
+  font-size: 14px;
 }
 #update_icon {
   color: #319da0;
@@ -124,9 +118,15 @@ body {
 #btn_perm {
   color: #f80828;
 }
+#add_icon {
+  color: #525053;
+}
+#icon_exit {
+  color: #319da0;
+}
 #warning {
-  background-color: #fdfcfd;
-  border: #fdfcfd;
+  background-color: #f8f6f8;
+  border: #f8f6f8;
 }
 #arrow_iconMail {
   color: #319da0;
@@ -138,18 +138,17 @@ body {
 /*TABLEAU*/
 #container_table {
   font-family: "Roboto", sans-serif;
-  margin: 15px;
   background-color: #f8f6f8;
   color: #319da0;
+  margin: 5px;
 }
 .table {
   color: #525053;
+  background-color: #f8f6f8;
 }
 #myTable {
   background-color: #f8f6f8;
-}
-.table {
-  background-color: #f8f6f8;
+  font-size: 14px;
 }
 /*UPDATE*/
 #update_font {
@@ -162,10 +161,6 @@ body {
 /*REGISTER*/
 .register_div {
   width: 650px;
-}
-.image_structure {
-  width: 225px;
-  height: 225px;
 }
 /*LINKS/LOGIN*/
 #connect_mail {
@@ -180,9 +175,11 @@ body {
 #deconnect_link_mail {
   color: rgb(145, 142, 142);
 }
-
 #div_login {
   font-family: "Roboto", cursive;
+}
+#navLink {
+  color: #319da0;
 }
 /*MODAL*/
 .modal-title {

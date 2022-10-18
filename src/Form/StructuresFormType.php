@@ -7,6 +7,9 @@ use App\Entity\Structures;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,12 +18,12 @@ class StructuresFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('store_name')
+            ->add('store_name', TextType::class, ['label' => 'Nom de la structure'])
             ->add('active')
-            ->add('email')
-            ->add('adress')
-            ->add('country')
-            ->add('phone')
+            ->add('email', EmailType::class, ['label' => 'Email'])
+            ->add('adress', TextType::class, ['label' => 'Adresse'])
+            ->add('country', TextType::class, ['label' => 'Pays'])
+            ->add('phone', TextType::class, ['label' => 'Numéro de téléphone'])
             ->add('newsletter')
             ->add('promote')
             ->add('planning')
@@ -33,9 +36,9 @@ class StructuresFormType extends AbstractType
                 [
                     'class' => Partners::class,
                     'choice_label' => function ($partners) {
-                        return " Identifiant n° " . $partners->getId();
+                        return $partners->getId() . " (" . $partners->getName() . ")";
                     },
-                    'label' => 'Partner',
+                    'label' => 'Partenaire affilié',
                     'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
@@ -46,9 +49,9 @@ class StructuresFormType extends AbstractType
                 [
                     'class' => User::class,
                     'choice_label' => function ($user) {
-                        return " Identifiant n° " .  $user->getId();
+                        return "Identifiant n° " .  $user->getId() . " (" . $user->getEmail() . ")";
                     },
-                    'label' => 'Compte utilisateur',
+                    'label' => 'Compte utilisateur de la structure',
                     'multiple' => false, 'expanded' => false, 'mapped' => true,
 
                 ]
