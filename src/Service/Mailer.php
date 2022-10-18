@@ -19,7 +19,7 @@ class Mailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmailActivateAccount($email, $token, $user)
+    public function sendEmailActivateAccount($email, $token)
     {
 
         //instancie et paramètre les données du mail
@@ -33,7 +33,6 @@ class Mailer
             ->htmlTemplate('mailer/user/firstConnection.html.twig')
             ->context([
                 'token' => $token,
-                'user' => $user
             ]);
 
         //envoi de l'email
