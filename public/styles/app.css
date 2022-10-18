@@ -2,11 +2,14 @@ body {
   background-color: #6638cf;
   color: #eee3f1;
 }
+#body_color {
+  background-color: #22252e;
+}
 /*NAVBAR*/
 .navbar-toggler-icon {
   width: 25px;
   height: 25px;
-  box-shadow: 3px 3px 3px rgb(145, 142, 142);
+  color: #f8f6f8;
 }
 #navbar_font {
   font-size: large;
@@ -209,8 +212,4 @@ body {
 /*FORM*/
 .form {
   color: green;
-}
-/*FOOTER*/
-#footer {
-  margin-top: 950px;
 }
