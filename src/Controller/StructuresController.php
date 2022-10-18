@@ -7,8 +7,6 @@ use App\Entity\Permissions;
 use App\Entity\Structures;
 use App\Entity\User;
 use App\Form\StructuresFormType;
-use App\Repository\PartnersRepository;
-use App\Service\Mailer;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,17 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StructuresController extends AbstractController
 {
-
-    /**
-     * @var Mailer
-     */
-    private $mailer;
-
-    public function __construct(Mailer $mailer)
-    {
-        $this->mailer = $mailer;
-    }
-
     /**
      * @Route("admin/registerEntity/registerStructure", name="app_registerStructure")
      */

@@ -3,10 +3,9 @@
 namespace App\Service;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
-use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class Mailer
 {
@@ -33,11 +32,16 @@ class Mailer
             ->text('Cher Client,<br>Félicitations, vous êtes desormais inscrit sur notre application FitnessClub!')
             ->htmlTemplate('mailer/user/firstConnection.html.twig')
             ->context([
-                'token' => $token,
+                'token' => $token
             ]);
 
         //envoi de l'email
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            // some error prevented the email sending; display an
+            // error message or try to resend the message
+        }
     }
 
     public function sendEmailPassword($email, $token)
