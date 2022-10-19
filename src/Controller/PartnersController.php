@@ -90,6 +90,9 @@ class PartnersController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($partner);
         $entityManager->flush();
+
+        $this->addFlash('message', 'Suppression réalisée avec succès');
+
         return $this->redirectToRoute("app_adminPartnersIndex");
     }
 

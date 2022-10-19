@@ -2,6 +2,11 @@
 {% block title %}Les Partenaires
 {% endblock %}
 {% block body %}
+	{% for message in app.flashes('message') %}
+		<div class="alert alert-success" role="alert">
+			{{ message }}
+		</div>
+	{% endfor %}
 	<div class="container md-2">
 		<h3 class="justify-content-center mt-5" id="title_category">Les Partenaires
 			{% if is_granted('ROLE_ADMIN')  %}

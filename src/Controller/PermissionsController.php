@@ -117,6 +117,8 @@ class PermissionsController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($permission);
         $entityManager->flush();
+        $this->addFlash('message', 'Suppression réalisée avec succès');
+
         return $this->redirectToRoute("app_adminPermissionsIndex");
     }
 }

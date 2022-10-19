@@ -81,7 +81,7 @@
 		<div class="card-body">
 
 			<div class="container m-1">
-				<h5 class="justify-content-center mt-1" id="title_category">Permissions</h5>
+				<h5 class="justify-content-center mt-1" id="title_details">Permissions</h5>
 				{% for permissions in partner.permissions %}
 					{% if permissions.active == 1 %}
 						<div class="container ms-4">
@@ -117,7 +117,7 @@
 	<div class="card-body">
 		<div class="container m-1">
 
-			<h5 class="justify-content-center mt-2" id="title_category">Structures affilliées</h5>
+			<h5 class="justify-content-center mt-2" id="title_details">Structures affilliées</h5>
 			{% for structures in partner.structures %}
 				{% if structures.id == true %}
 					<h5 class="card-title ms-3">

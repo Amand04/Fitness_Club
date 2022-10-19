@@ -104,6 +104,9 @@ class StructuresController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($structure);
         $entityManager->flush();
+
+        $this->addFlash('message', 'Suppression réalisée avec succès');
+
         return $this->redirectToRoute("app_adminStructuresIndex");
     }
 
