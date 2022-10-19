@@ -69,7 +69,7 @@ class Mailer
             ->to(new Address($email))
             ->cc('amandinejeanjules@free.fr')
             ->subject('Bienvenue parmis nous!')
-            ->text('Cher Client,<br>Pour initialiser votre mot de passe suivez ce lien:!')
+            ->text('Cher Client,<br>Vos permissions ont été modifiées')
             ->htmlTemplate('mailer/permissions/index.html.twig');
 
         //envoi de l'email

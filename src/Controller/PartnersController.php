@@ -10,7 +10,6 @@ use App\Form\PartnersFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,6 +90,7 @@ class PartnersController extends AbstractController
         $entityManager->remove($partner);
         $entityManager->flush();
 
+        // On envoie un message flash
         $this->addFlash('message', 'Suppression réalisée avec succès');
 
         return $this->redirectToRoute("app_adminPartnersIndex");

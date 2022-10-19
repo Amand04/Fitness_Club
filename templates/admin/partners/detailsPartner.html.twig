@@ -2,7 +2,6 @@
 {% block title %}Détails du Partenaire
 	{{ partner.id }}
 {% endblock %}
-
 {% block body %}
 {% if is_granted('ROLE_ADMIN')  %}
 	<div class="container-fluid d-flex flex-wrap justify-content-center mt-3">
@@ -116,7 +115,6 @@
 <div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
 	<div class="card-body">
 		<div class="container m-1">
-
 			<h5 class="justify-content-center mt-2" id="title_details">Structures affilliées</h5>
 			{% for structures in partner.structures %}
 				{% if structures.id == true %}

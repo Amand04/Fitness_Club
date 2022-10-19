@@ -62,12 +62,11 @@ class UserController extends AbstractController
     public function delete(User $user, Request $request, ManagerRegistry $doctrine): Response
     {
 
-
-
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
 
+        // On envoie un message flash
         $this->addFlash('message', 'Suppression réalisée avec succès ');
 
         return $this->redirectToRoute("app_adminUsersIndex");
@@ -90,7 +89,6 @@ class UserController extends AbstractController
             [
                 "user" => $user,
                 "form" => $form,
-
             ]
         );
     }

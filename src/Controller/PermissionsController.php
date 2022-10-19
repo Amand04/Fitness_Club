@@ -33,18 +33,14 @@ class PermissionsController extends AbstractController
     {
         $permissions = new Permissions();
 
-
         $form = $this->createForm(PermissionFormType::class, $permissions);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
             $form->getData();
             $entityManager->persist($permissions);
             $entityManager->flush();
-
-
 
             // On envoie un message flash
             $this->addFlash('message', 'Demande enregistrée avec succès');
@@ -83,11 +79,7 @@ class PermissionsController extends AbstractController
      */
     public function update(Permissions $permission, Request $request, ManagerRegistry $doctrine, int $id): Response
     {
-
-
         $partner = $doctrine->getRepository(Partners::class)->find($id);
-
-
         $partners = $doctrine->getRepository(Partners::class)->findAll();
 
         $form = $this->createForm(PermissionFormType::class, $permission);
@@ -117,6 +109,8 @@ class PermissionsController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($permission);
         $entityManager->flush();
+
+        // On envoie un message flash
         $this->addFlash('message', 'Suppression réalisée avec succès');
 
         return $this->redirectToRoute("app_adminPermissionsIndex");

@@ -72,19 +72,12 @@ class StructuresController extends AbstractController
     public function update(Structures $structure, Request $request, ManagerRegistry $doctrine): Response
     {
 
-
-
         $form = $this->createForm(StructuresFormType::class, $structure);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-
-
             $structure = $doctrine->getManager()->flush();
-
-
 
             return $this->redirectToRoute("app_adminStructuresIndex");
         }
@@ -105,6 +98,7 @@ class StructuresController extends AbstractController
         $entityManager->remove($structure);
         $entityManager->flush();
 
+        // On envoie un message flash
         $this->addFlash('message', 'Suppression réalisée avec succès');
 
         return $this->redirectToRoute("app_adminStructuresIndex");

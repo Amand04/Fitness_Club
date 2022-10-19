@@ -95,8 +95,6 @@ class RegistrationController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
-
-
         // On envoie un message flash
         $this->addFlash('message', 'Vous avez bien activé votre compte');
 
