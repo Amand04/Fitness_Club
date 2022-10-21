@@ -15,14 +15,14 @@
 						<div class="card bg-light border-secondary m-3" style="width: 56rem; height: auto;" id="card_presentationStructures">
 							<div class="card-body m-1">
 								<div class="container m-4 ">
-									<h5 class="justify-content-center mt-5" id="title_category">Structure n°
+									<h5 class="justify-content-center mt-5" id="title_details">Structure n°
 										{{ structure.id }}</h5>
 
 									<div class="container-fluid d-flex flex-wrap justify-content-end" id="affiliate">
 										<p class="card-text">Affiliée au Partenaire n°{{ structure.partners.id }}</p>
 									</div>
 
-									<h5 class="justify-content-center" id="title_category">{{ structure.storeName }}</h5>
+									<h5 class="justify-content-center" id="title_details">{{ structure.storeName }}</h5>
 									{% if structure.active == 1 %}
 										<div class="container">
 											<div class="form-check form-switch">

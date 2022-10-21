@@ -19,9 +19,9 @@
 				<div class="card bg-light border-secondary" style="width: 56rem; height: auto;" id="card_presentationStructures">
 					<div class="card-body m-1" id="card">
 						<div class="container">
-							<h5 class="justify-content-center mt-3" id="title_category">Identifiant n°
+							<h5 class="justify-content-center mt-3" id="title_details">Identifiant n°
 								{{ partners.id }}</h5>
-							<h5 class="justify-content-center mt-5" id="title_category">{{ partners.name }}</h5>
+							<h5 class="justify-content-center mt-5" id="title_details">{{ partners.name }}</h5>
 							<div class="container m-1">
 								{% if partners.active == 1 %}
 									<div class="container m-4 ">
@@ -94,7 +94,7 @@
 <div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
 	<div class="card-body">
 		<div class="container m-1">
-			<h5 class="justify-content-center mt-2" id="title_category">Ce partenaire possède la</h5>
+			<h5 class="justify-content-center mt-2" id="title_details">Ce partenaire possède la</h5>
 			{% for structures in partners.structures %}
 				{% if structures.id == true %}
 					<h5 class="card-title ms-3">Structure
