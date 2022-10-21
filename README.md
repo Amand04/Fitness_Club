@@ -60,7 +60,8 @@ Pour vous rendre sur l'application suivez ce lien
 -	Sur FLY.IO : [https://fitness-club-cl.fly.dev/]
 
 **Pour crer une entité:**
-Attention! Pour créer un partenaire ou une structure, il est nécessaire de créer un compte utilisateur en amont à chaque fois pour chaque nouvelle entrée.
+
+:warning:Attention! Pour créer un partenaire ou une structure, il est nécessaire de créer un compte utilisateur en amont à chaque fois pour chaque nouvelle entrée.
 Le compte utilisateur et le compte Partenaire devront avoir la même adresse email, idem pour le compte Structure et son compte utilisateur dépendant.
 
 L'ordre à respecter est le suivant:
