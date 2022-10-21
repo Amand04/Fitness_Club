@@ -1,7 +1,7 @@
 # Fitness_Club
 Fitness_Club_Fake_Evaluation en Cours de Formation : réaliser une application, interface, qui permette au commanditaire, grande marque de salles de sport, de gérer les droits d'accès de ses partenaires franchisés qui possèdent des salles de sport et de permettre à ceux-ci ainsi que leurs structures dépendantes de consulter leurs pr
 
-## Guide de déploiement
+## Guide de déploiement :computer:
 
 Avoir en amont déposé son code sur GITHUB dans un référentiel.
 Créez un compte HEROKU.
@@ -52,7 +52,7 @@ Tapez la commande
 
 
 
-## Manuel d'utilisation
+## Manuel d'utilisation :book:
 
 Pour vous rendre sur l'application suivez ce lien 
 
