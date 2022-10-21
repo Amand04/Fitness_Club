@@ -37,7 +37,7 @@
 					{#FORMULAIRE DE CONNEXION #}
 					<div class="container-fluid d-flex flex-wrap justify-content-center " id="div_logo">
 						<img src="logoFITNESS3.png" alt="image of fitness-club logo" class="logo m-5">
-						<div class="col-12">
+						<div class="container-fluid">
 							<form method="post">
 								<div class="form-group">
 									<label for="inputEmail">Email</label>
@@ -48,7 +48,7 @@
 									<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 								</div>
 								<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-								<button class="btn btn mt-4" id="btn_login" type="submit">Se connecter</button>
+								<button class="btn btn" id="btn_login" type="submit">Se connecter</button>
 								<h5 class="mt-1">
 									<a href=" {{ absolute_url(path('app_forgottenPassword')) }} " id="initPasswordLink">Mot de passe oublié ?</a>
 								</h5>
