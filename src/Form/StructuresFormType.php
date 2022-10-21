@@ -21,7 +21,7 @@ class StructuresFormType extends AbstractType
             ->add('active')
             ->add('email', EmailType::class, ['label' => 'Email'])
             ->add('adress', TextType::class, ['label' => 'Adresse'])
-            ->add('country', TextType::class, ['label' => 'Pays'])
+            ->add('country', TextType::class, ['label' => 'Ville'])
             ->add('phone', TextType::class, ['label' => 'Numéro de téléphone'])
             ->add('newsletter')
             ->add('promote')
