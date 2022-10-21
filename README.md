@@ -73,11 +73,10 @@ Si une Structure veut être ajoutée à un Partenaire (celui-ci doit déjà êtr
 
 L'ordre global est donc:
 - Utilisateur
-- Partenaire
+- Partenaire 
 - Structure
 - Permission
 
-Pour la suppression, l'ordre à respecter est la Permission, la St
 
 1/ Créez le compte utilisateur 
   Rendez-vous sur l'onglet Utilisateur puis cliquez sur le bouton +
@@ -87,4 +86,12 @@ Pour la suppression, l'ordre à respecter est la Permission, la St
   
 2/ Créez le Partenaire 
   Rendez-vous sur l'onglet Partenaire puis cliquez sur le bouton +
-  Rentrez les informations puis validez.
+  Rentrez les informations en indiquant la même adresse email que le compte utilisateur créee précédemment, puis validez.
+  
+3/ Créez le compte utilisateur
+
+4/ Créez la Structure 
+  Rendez-vous sur l'onglet Structure puis cliquez sur le bouton +
+  Rentrez les informations en indiquant la même adresse email que le compte utilisateur créee précédemment, puis validez.
+  
+Pour la suppression, l'ordre à respecter est la Structure, le Partenaire puis les comptes Utilisateurs correspondants.
