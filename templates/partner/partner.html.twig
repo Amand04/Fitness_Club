@@ -65,13 +65,15 @@
 	<div class="card bg-light border-secondary" style="width: 25rem; height: auto;" id="card_presentationPartners">
 		<div class="card-body">
 			<div class="container m-1">
-				{% for partner in permissions %}
-					{% if partner.active == 1 %}
+				<h5 class="justify-content-center mt-1" id="title_details">Permissions</h5>
+				{% for permissions in partners.permissions %}
+					{% if permissions.active == 1 %}
 						<div class="container ms-4">
+
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckCheckedDisabled" checked disabled>
 								<label class="form-check-label" for="flexSwitchCheckChecked">
-									<p class="card-text">{{partner.perms}}</p>
+									<p class="card-text">{{permissions.perms}}</p>
 								</label>
 							</div>
 						</div>
@@ -81,11 +83,15 @@
 							<div class="form-check form-switch">
 								<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDisabled" disabled>
 								<label class="form-check-label" for="flexSwitchChecked">
-									<p class="card-text">{{partner.perms}}</p>
+									<p class="card-text">{{permissions.perms}}</p>
 								</label>
 							</div>
 						</div>
 					{% endif %}
+				{% else %}
+					<tr>
+						<p class="card-text">Aucune permission pour le moment</p>
+					</tr>
 				{% endfor %}
 			</h5>
 		</div>
@@ -100,7 +106,7 @@
 					<h5 class="card-title ms-3">Structure
 						{{structures.storename}},
 						{{structures.adress}},
-						{{structures.country}}<a href="{{path('app_detailsStructure', {id: structure.id})}}">
+						{{structures.country}}<a href="{{path('app_detailsStructure', {id: structures.id})}}">
 							<i class="fas fa-eye m-2 fa-1x" id="eye_icon"></i>
 						</a>
 					</h5>
