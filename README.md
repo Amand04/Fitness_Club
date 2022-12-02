@@ -15,7 +15,8 @@ Connectez-vous via le terminal de commande à HEROKU par la commande:
 confirmez l'ouverture de la fenêtre de connexion,
 une fenêtre s'ouvre dans votre explorateur internet et confirmez la connexion.
 Vous pouvez fermer cette fenêtre.
-Dans le terminal de commande, tapez la commande
+Dans le terminal de commande, tapez la commande:
+
 <i>heroku create nomDeVotreApplication --region eu</i>
 
 Cette commande vous crée un espace reservé à votre application sur Heroku.
